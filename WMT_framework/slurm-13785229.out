@@ -1,0 +1,228 @@
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+(7, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(6, 31, 1400, 1575)
+Vtransform=2
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+(1400, 1575, 32)
+salt and z_rho shape: (1400, 1575) [1400 1575]
+Alpha/beta shapes: (12, 31, 1400, 1575) (12, 31, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+(12, 1400, 1575)
+completed, size:  (12, 40, 1400, 1575)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:32: RuntimeWarning: Mean of empty slice
+  temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:33: RuntimeWarning: Mean of empty slice
+  salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:34: RuntimeWarning: Mean of empty slice
+  shflux_tmp = np.nanmean(ds.variables["shflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:35: RuntimeWarning: Mean of empty slice
+  ssflux_tmp = np.nanmean(ds.variables["ssflux"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:36: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:50: RuntimeWarning: Mean of empty slice
+  z_rho_avg = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py:51: RuntimeWarning: Mean of empty slice
+  z_w_avg = np.nanmean(z_w_tmp,axis=0)
+Traceback (most recent call last):
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/WMT_framework/WAOM4extend_shflim_S_0.25Q_WMTmaps_Full_decomposition_iceshelf_save_maps.py", line 289, in <module>
+    salt_net_tmp[mm,:] = Fs_rate_delta_net_vint_shelf_mm[mm,irho,:]*Dt/(dx*dy)
+NameError: name 'Fs_rate_delta_net_vint_shelf_mm' is not defined
+srun: error: r07c68: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=13785229.0

@@ -1,0 +1,138 @@
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:77: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:100: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:123: RuntimeWarning: Mean of empty slice
+  m_tmp = np.nanmean(ds.variables["m"], axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:219: RuntimeWarning: Mean of empty slice
+  cy=plt.pcolormesh(lon_rho_10km,lat_rho_10km,np.nanmean(m_10km, axis=0)*86400*365.25, transform=ccrs.PlateCarree(), cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:235: RuntimeWarning: Mean of empty slice
+  cy=plt.pcolormesh(lon_rho_4km,lat_rho_4km,np.nanmean(m_4km, axis=0)*86400*365.25, transform=ccrs.PlateCarree(), cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+Print lon/lat_rho shapes (560, 630) (560, 630)
+Print lon/lat_rho shapes (559, 629) (559, 629)
+(7, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(6, 31, 560, 630)
+(7, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(6, 31, 1400, 1575)
+(7, 31, 2800, 3150)
+(6, 31, 2800, 3150)
+(5, 31, 2800, 3150)
+(7, 31, 2800, 3150)
+(6, 31, 2800, 3150)
+(5, 31, 2800, 3150)
+(7, 31, 2800, 3150)
+(6, 31, 2800, 3150)
+(5, 31, 2800, 3150)
+(7, 31, 2800, 3150)
+(6, 31, 2800, 3150)
+(5, 31, 2800, 3150)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py:251: RuntimeWarning: Mean of empty slice
+  cy=plt.pcolormesh(lon_rho_2km,lat_rho_2km,np.nanmean(m_2km, axis=0)*86400*365.25, transform=ccrs.PlateCarree(), cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+Traceback (most recent call last):
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/Meltrate_comparison_Susheel.py", line 275, in <module>
+    gl.yformatter = LATITUDE_FORMATTE
+NameError: name 'LATITUDE_FORMATTE' is not defined
+srun: error: r06c63: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=14825991.0

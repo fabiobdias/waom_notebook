@@ -1,0 +1,49 @@
+[I 10:44:48.341 NotebookApp] The port 8888 is already in use, trying another port.
+[I 10:44:48.346 NotebookApp] Serving notebooks from local directory: /users/boeiradi/COLD_project/postprocessing/waom_notebook
+[I 10:44:48.346 NotebookApp] Jupyter Notebook 6.4.12 is running at:
+[I 10:44:48.347 NotebookApp] http://localhost:8889/?token=7dbd40ca4e98d7744aa0294a3dad8c3a3ede8874124a979f
+[I 10:44:48.347 NotebookApp]  or http://127.0.0.1:8889/?token=7dbd40ca4e98d7744aa0294a3dad8c3a3ede8874124a979f
+[I 10:44:48.347 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 10:44:48.368 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///users/boeiradi/.local/share/jupyter/runtime/nbserver-7593-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8889/?token=7dbd40ca4e98d7744aa0294a3dad8c3a3ede8874124a979f
+     or http://127.0.0.1:8889/?token=7dbd40ca4e98d7744aa0294a3dad8c3a3ede8874124a979f
+[I 10:45:35.877 NotebookApp] 302 GET /?token=7dbd40ca4e98d7744aa0294a3dad8c3a3ede8874124a979f (127.0.0.1) 0.480000ms
+[I 10:45:44.998 NotebookApp] Kernel started: 5030218f-e77b-4426-b1bf-8c25b6b88b44, name: python3
+[IPKernelApp] ERROR | No such comm target registered: jupyter.widget.control
+[IPKernelApp] WARNING | No such comm: 807aed07-3be4-4899-9707-35df1486e5ad
+[I 10:47:44.882 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 10:49:45.178 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 10:53:44.884 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 10:55:44.882 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 10:57:44.885 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 10:59:45.011 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 11:01:44.884 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 11:03:44.900 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 11:13:44.899 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 11:17:45.515 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 12:01:27.692 NotebookApp] Kernel interrupted: 5030218f-e77b-4426-b1bf-8c25b6b88b44
+[I 12:01:44.935 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 12:03:45.194 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 12:14:27.091 NotebookApp] Kernel interrupted: 5030218f-e77b-4426-b1bf-8c25b6b88b44
+[I 12:14:27.209 NotebookApp] Kernel interrupted: 5030218f-e77b-4426-b1bf-8c25b6b88b44
+[I 12:14:27.346 NotebookApp] Kernel interrupted: 5030218f-e77b-4426-b1bf-8c25b6b88b44
+[I 12:14:27.510 NotebookApp] Kernel interrupted: 5030218f-e77b-4426-b1bf-8c25b6b88b44
+[I 12:14:29.433 NotebookApp] Starting buffering for 5030218f-e77b-4426-b1bf-8c25b6b88b44:4f8463afb97c49ad8d87fb3d75af4237
+[I 12:14:32.233 NotebookApp] Kernel restarted: 5030218f-e77b-4426-b1bf-8c25b6b88b44
+[I 12:14:32.270 NotebookApp] Restoring connection for 5030218f-e77b-4426-b1bf-8c25b6b88b44:4f8463afb97c49ad8d87fb3d75af4237
+[I 12:14:33.282 NotebookApp] Replaying 3 buffered messages
+[I 12:15:45.211 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 12:23:45.217 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 12:25:45.046 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 12:33:44.927 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:06:27.252 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:49:43.045 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:49:45.003 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:50:29.522 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:50:48.994 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:51:22.843 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb
+[I 14:51:45.011 NotebookApp] Saving file at /Maps_validations/Meltrate_comparison_Rignot.ipynb

@@ -1,0 +1,6 @@
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/Floats/grid_points_to_spherical.py", line 18
+    %matplotlib inline
+    ^
+SyntaxError: invalid syntax
+srun: error: r08m03: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=12040069.0

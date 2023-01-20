@@ -1,0 +1,10 @@
+# index for eta var sections (mer)
+xi_pt = [1088]
+eta_sec_ini = [100]
+eta_sec_end = [275]
+# index for xi var sections (dar, pry, bar, sha, vin)
+xi_sec_ini = [1150, 1150, 1250, 1300, 1300]
+xi_sec_end = [1538, 1538, 1550, 1550, 1500]
+eta_pt = [950, 920, 863, 675, 500]
+# length of the section
+sec_len = [388, 388, 300, 250, 200, 175]

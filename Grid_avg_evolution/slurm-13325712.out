@@ -1,0 +1,6 @@
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4extend_shflim_S_0.25Q_OHC+OSC+MKE_evolution_shelf.py", line 313
+    plt.show() E4_SST_havg_shelf, E4_SSS_havg_shelf, E4_ohc_hintn_shelf, E4_salt_hintn_shelf, E4_MKE_havg_shelf = read_roms_ts_4km(path_ECCO2_4km)
+               ^
+SyntaxError: invalid syntax
+srun: error: r02c47: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=13325712.0

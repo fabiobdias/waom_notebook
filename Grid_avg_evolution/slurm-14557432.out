@@ -1,0 +1,404 @@
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:347: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:348: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_Wed[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_Wed), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:349: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_Mau[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_Mau), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:350: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_EAnt[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_EAnt), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:351: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_Ros[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_Ros), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:352: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_WAnt[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_WAnt), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:211: RuntimeWarning: Mean of empty slice
+  salt_ann = np.nanmean(np.stack((salt_ann,np.expand_dims(salt_tmp_ann, axis=0)), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:212: RuntimeWarning: Mean of empty slice
+  z_w_ann = np.nanmean(np.stack((z_w_ann,np.expand_dims(z_w_tmp_ann, axis=0)), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:213: RuntimeWarning: Mean of empty slice
+  z_rho_ann = np.nanmean(np.stack((z_rho_ann,np.expand_dims(z_rho_tmp_ann, axis=0)), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:221: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann_4thdim = np.nanmean(np.stack((salt_tmp_a_4thdim,salt_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:226: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann_4thdim = np.nanmean(np.stack((z_w_tmp_a_4thdim,z_w_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:231: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann_4thdim = np.nanmean(np.stack((z_rho_tmp_a_4thdim,z_rho_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:221: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann_4thdim = np.nanmean(np.stack((salt_tmp_a_4thdim,salt_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:226: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann_4thdim = np.nanmean(np.stack((z_w_tmp_a_4thdim,z_w_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:231: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann_4thdim = np.nanmean(np.stack((z_rho_tmp_a_4thdim,z_rho_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:221: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann_4thdim = np.nanmean(np.stack((salt_tmp_a_4thdim,salt_tmp_b_4thdim), axis=0), axis=0)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (2, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (2, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (3, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (3, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (4, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (4, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (5, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (5, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (6, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (6, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (7, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (7, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (8, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (8, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (9, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (9, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (10, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (10, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (11, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (11, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (12, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (12, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (13, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (13, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (14, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (14, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (15, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (15, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (16, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (16, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (17, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (17, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (18, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (18, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (19, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (19, 1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size salt_tmp_ann =  (31, 1400, 1575)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (20, 31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (20, 1400, 1575, 32) (1400, 1575, 32)
+Annual salt, z_w, z_rho sizes =  (20, 31, 1400, 1575) (20, 1400, 1575, 32) (20, 1400, 1575, 31)
+size dz =  (20, 1400, 1575, 31)
+sizes salt_ann, salt_dz, salt_vertint =  (20, 31, 1400, 1575) (20, 31, 1400, 1575) (20, 1400, 1575)
+size area =  (1400, 1575)
+salt_area_shelf_Wed shape: (20, 1400, 1575)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (1, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (1, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (1, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (1, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (1, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (1, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (2, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (2, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (2, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (2, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (3, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (3, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (3, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (3, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (4, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (4, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (4, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (4, 2800, 3150, 32) (2800, 3150, 32)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size salt_tmp_ann =  (31, 2800, 3150)
+Vtransform=2
+Annual salt and annual tmp temp sizes =  (5, 31, 2800, 3150) (31, 2800, 3150)
+Annual z_w and annual tmp z_w sizes =  (5, 2800, 3150, 32) (2800, 3150, 32)
+Annual salt, z_w, z_rho sizes =  (5, 31, 2800, 3150) (5, 2800, 3150, 32) (5, 2800, 3150, 31)
+size dz =  (5, 2800, 3150, 31)
+sizes salt_ann, salt_dz, salt_vertint =  (5, 31, 2800, 3150) (5, 31, 2800, 3150) (5, 2800, 3150)
+size area =  (2800, 3150)
+salt_area_shelf_Wed shape: (5, 2800, 3150)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:226: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann_4thdim = np.nanmean(np.stack((z_w_tmp_a_4thdim,z_w_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:231: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann_4thdim = np.nanmean(np.stack((z_rho_tmp_a_4thdim,z_rho_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:167: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:181: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:185: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:221: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann_4thdim = np.nanmean(np.stack((salt_tmp_a_4thdim,salt_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:226: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann_4thdim = np.nanmean(np.stack((z_w_tmp_a_4thdim,z_w_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:231: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann_4thdim = np.nanmean(np.stack((z_rho_tmp_a_4thdim,z_rho_tmp_b_4thdim), axis=0), axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:347: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:348: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_Wed[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_Wed), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:349: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_Mau[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_Mau), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:350: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_EAnt[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_EAnt), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:351: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_Ros[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_Ros), axis=1),axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py:352: RuntimeWarning: Mean of empty slice
+  SSS_havg_shelf_WAnt[tt] = np.nanmean(np.nanmean((salt_ann[tt,-1,:,:]*mask_shelf*mask_WAnt), axis=1),axis=0)

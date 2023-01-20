@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM10x4x2extend_shflim_S_0.25Q_OHC+OSC+MKE_evolution_shelf.py", line 23, in <module>
+    import iris
+ModuleNotFoundError: No module named 'iris'
+srun: error: r14c35: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=12696166.0

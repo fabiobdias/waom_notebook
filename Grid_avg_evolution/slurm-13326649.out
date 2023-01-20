@@ -1,0 +1,6 @@
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4extend_shflim_S_0.25Q_OHC+OSC+MKE_evolution_shelf.py", line 233
+    exec(' '.join(['salt_area_shelf_'+ sec +' = np.empty((10,1400,1575))']))
+                                                                           ^
+TabError: inconsistent use of tabs and spaces in indentation
+srun: error: r07c55: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=13326649.0

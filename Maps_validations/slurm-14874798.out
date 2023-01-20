@@ -1,0 +1,234 @@
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:87: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:88: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:107: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:108: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:116: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:130: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:134: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:176: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:177: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:196: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:197: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:205: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:219: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:223: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:176: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:177: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:196: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:197: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:205: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:219: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:223: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:176: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:177: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:196: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:197: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:205: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:219: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:223: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:176: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:177: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:196: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:197: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:205: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:219: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:223: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:273: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:274: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:293: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:294: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:304: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:318: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:322: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:273: RuntimeWarning: Mean of empty slice
+  temp_tmp_ann = np.nanmean(temp_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:274: RuntimeWarning: Mean of empty slice
+  salt_tmp_ann = np.nanmean(salt_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:293: RuntimeWarning: Mean of empty slice
+  ugeo_ann_tmp = np.nanmean(ugeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:294: RuntimeWarning: Mean of empty slice
+  vgeo_ann_tmp = np.nanmean(vgeo, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:304: RuntimeWarning: Mean of empty slice
+  V_anom_ann = np.nanmean(V_anom_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:318: RuntimeWarning: Mean of empty slice
+  z_rho_tmp_ann = np.nanmean(z_rho_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:322: RuntimeWarning: Mean of empty slice
+  z_w_tmp_ann = np.nanmean(z_w_tmp, axis=0)
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:333: RuntimeWarning: Mean of empty slice
+  temp_ann = np.squeeze(np.nanmean(np.stack((temp_ann,np.expand_dims(temp_tmp_ann, axis=0)), axis=0), axis=0))
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:334: RuntimeWarning: Mean of empty slice
+  salt_ann = np.squeeze(np.nanmean(np.stack((salt_ann,np.expand_dims(salt_tmp_ann, axis=0)), axis=0), axis=0))
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:335: RuntimeWarning: Mean of empty slice
+  z_w_ann = np.squeeze(np.nanmean(np.stack((z_w_ann,np.expand_dims(z_w_tmp_ann, axis=0)), axis=0), axis=0))
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:336: RuntimeWarning: Mean of empty slice
+  z_rho_ann = np.squeeze(np.nanmean(np.stack((z_rho_ann,np.expand_dims(z_rho_tmp_ann, axis=0)), axis=0), axis=0))
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:337: RuntimeWarning: Mean of empty slice
+  MKE_ann = np.squeeze(np.nanmean(np.stack((MKE_ann,np.expand_dims(MKE_tmp, axis=0)), axis=0), axis=0))
+/users/boeiradi/COLD_project/postprocessing/waom_notebook/Maps_validations/WAOM10x4x2extend_shflim_S_0.25Q_MKExEKE_bottomTS.py:338: RuntimeWarning: Mean of empty slice
+  EKE_ann = np.squeeze(np.nanmean(np.stack((EKE_ann,np.expand_dims(EKE_tmp, axis=0)), axis=0), axis=0))
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/pyresample/kd_tree.py:384: UserWarning: Possible more than 4 neighbours within 30000 m for some data points
+  warnings.warn(('Possible more than %s neighbours '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn('The .ylabels_right attribute is deprecated. Please '
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+/CSC_CONTAINER/miniconda/envs/env1/lib/python3.8/site-packages/cartopy/mpl/geoaxes.py:1797: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  result = matplotlib.axes.Axes.pcolormesh(self, *args, **kwargs)
+Print lon/lat_rho shapes (560, 630) (560, 630)
+Print lon/lat_rho shapes (559, 629) (559, 629)
+size temp and time length:  (12, 31, 560, 630) 12
+size temp_tmp_ann =  (31, 560, 630)
+Size MKE_tmp (559, 629)
+Size EKE_tmp (559, 629)
+Vtransform=2
+size temp and time length:  (12, 31, 1400, 1575) 12
+size temp_tmp_ann =  (31, 1400, 1575)
+Size MKE_tmp (1399, 1574)
+Size EKE_tmp (1399, 1574)
+Vtransform=2
+Annual temp and annual tmp temp sizes =  (31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size temp_tmp_ann =  (31, 1400, 1575)
+Size MKE_tmp (1399, 1574)
+Size EKE_tmp (1399, 1574)
+Vtransform=2
+Annual temp and annual tmp temp sizes =  (31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (1400, 1575, 32) (1400, 1575, 32)
+Annual temp, salt, z_w, z_rho sizes =  (31, 1400, 1575) (31, 1400, 1575) (1400, 1575, 32) (1400, 1575, 31)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size temp_tmp_ann =  (31, 1400, 1575)
+Size MKE_tmp (1399, 1574)
+Size EKE_tmp (1399, 1574)
+Vtransform=2
+Annual temp and annual tmp temp sizes =  (31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (1400, 1575, 32) (1400, 1575, 32)
+size temp and time length:  (12, 31, 1400, 1575) 12
+size temp_tmp_ann =  (31, 1400, 1575)
+Size MKE_tmp (1399, 1574)
+Size EKE_tmp (1399, 1574)
+Vtransform=2
+Annual temp and annual tmp temp sizes =  (31, 1400, 1575) (31, 1400, 1575)
+Annual z_w and annual tmp z_w sizes =  (1400, 1575, 32) (1400, 1575, 32)
+Annual temp, salt, z_w, z_rho sizes =  (31, 1400, 1575) (31, 1400, 1575) (1400, 1575, 32) (1400, 1575, 31)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size temp_tmp_ann =  (31, 2800, 3150)
+Size MKE_tmp (2799, 3149)
+Size EKE_tmp (2799, 3149)
+Vtransform=2
+Annual temp and annual tmp temp sizes =  (1, 31, 2800, 3150) (31, 2800, 3150)
+size temp and time length:  (6, 31, 2800, 3150) 6
+size temp_tmp_ann =  (31, 2800, 3150)
+Size MKE_tmp (2799, 3149)
+Size EKE_tmp (2799, 3149)
+Vtransform=2
+Annual temp and annual tmp temp sizes =  (31, 2800, 3150) (31, 2800, 3150)
+Print temp, MKE, EKE shapes = (31, 560, 630) (559, 629) (559, 629)
+lat_rho_2km shape (2800, 3150)
+lon_rho_2km shape (2800, 3150)
+temp_ann_2km (squeezed) shape (2800, 3150)
+temp_ann_2km shape (31, 2800, 3150)

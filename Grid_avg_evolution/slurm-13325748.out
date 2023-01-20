@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4extend_shflim_S_0.25Q_OHC+OSC+MKE_evolution_shelf.py", line 109, in <module>
+    rs.SouthPolarStereo()
+NameError: name 'rs' is not defined
+srun: error: r02c47: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=13325748.0
