@@ -27,7 +27,7 @@ import gsw
 
 # load ROMS avg output
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    ds = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/ocean_avg_00' + mm + '.nc')
+    ds = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/ocean_avg_00' + mm + '.nc')
     print(ds.variables["temp"].shape)
     temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
     salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
@@ -88,7 +88,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
     
 sigma_t_sfc = gsw.rho(salt[:,-1,:,:],temp[:,-1,:,:],0) - 1000
 
-di = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/ocean_avg_0001.nc')
+di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/ocean_avg_0001.nc')
 ice_draft = di.variables["zice"]
 h = di.variables["h"]
 mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
@@ -106,7 +106,7 @@ for tt in np.arange(0,12):
     dz_inv[tt,:,:,:] = np.diff(z_w_sorted,axis=2)
     dz[tt,:,:,:] = dz_inv[tt,:,:,::-1]
 
-dg = xr.open_dataset("/scratch/project_2000789/boeiradi/waom4_frc/waom4extend_grd.nc")
+dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
 
 lat_rho = dg.variables["lat_rho"]
 lon_rho = dg.variables["lon_rho"]
@@ -134,7 +134,7 @@ cy=plt.pcolor(mask_zice)#, transform=ccrs.PlateCarree())
 plt.colorbar(cy)
 plt.clim(0.,1.)
 
-dx = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/MLD_vint_vars_for_WMT.nc')
+dx = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/MLD_vint_vars_for_WMT_m.s-1.nc')
 print(dx.variables["sfc_mld"].shape)
 sfc_mld = dx.variables["sfc_mld"]
 # - variables across ML base
@@ -153,23 +153,25 @@ salt_hdia_adv_mld_vint = dx.variables["salt_hdia_adv_mld_vint"]
 temp_tend_mld_vint = dx.variables["temp_tend_avg_mld_vint"]
 salt_tend_mld_vint = dx.variables["salt_tend_avg_mld_vint"]
 
-sigma_t = gsw.rho(salt_avg_mld,temp_avg_mld,0) - 1000
+sigma_t = gsw.rho(salt[:,-1,:,:],temp[:,-1,:,:],0) - 1000
 
 dx.close()
 
 # obtain thermal expansion (alpha) & salinity contraction (beta) coefficients:
-SA_avg_mld = np.empty(salt_avg_mld.shape)
+SA = np.empty(salt.shape)
 # neet Absolute Salinity, converting from Pratical Salinity:
+print('salt and z_rho shape:', np.squeeze(salt[0,0,:,:]).shape,np.squeeze(z_rho[0,:,:,0].shape))
 for mm in np.arange(0,12):
-    SA_tmp =gsw.SA_from_SP(np.squeeze(salt_avg_mld[mm,:,:]),0,lon_rho,lat_rho)
-    SA_avg_mld[mm,:,:] = SA_tmp
-    del SA_tmp
+    for kk in np.arange(0,31):
+        SA_tmp =gsw.SA_from_SP(np.squeeze(salt[mm,kk,:,:]),np.squeeze(z_rho[mm,:,:,kk]),lon_rho,lat_rho)
+        SA[mm,kk,:,:] = SA_tmp
+        del SA_tmp
 
 # gsw.alpha/gsw.beta
 #alpha = gsw_alpha(SA,CT,p)
-[specvol_mld, alpha_mld, beta_mld] = gsw.specvol_alpha_beta(SA_avg_mld,temp_avg_mld,0)
+[specvol, alpha, beta] = gsw.specvol_alpha_beta(SA,temp,z_rho.transpose(0,3,1,2))
 
-print(alpha_mld.shape)
+print('Alpha/beta shapes:', alpha.shape, beta.shape)
 
 # calculate the LHS term in Pellichero et al (2018):
 # ps: Diffusion (R_s, R_t) terms already include the sfc fluxes
@@ -178,32 +180,21 @@ print(alpha_mld.shape)
 rho0 = 1025 #1000
 Cp = 3985
 
-# convert salt convergenvces to equivalent FW
-fwf_sfc = (np.divide(beta_mld*ssflux*rho0*dz[:,:,:,-1], -salt[:,-1,:,:]))*specvol_mld
-
-fwf_hdia_adv_mld_vint = np.divide(salt_hdia_adv_mld_vint*rho0, -salt_avg_mld[:,:,:])*specvol_mld
-fwf_vdia_adv_mld_vint = np.divide(salt_vdia_adv_mld_vint*rho0, -salt_avg_mld[:,:,:])*specvol_mld
-fwf_hdia_diff_mld_vint = np.divide(salt_hdia_diff_mld_vint*rho0, -salt_avg_mld[:,:,:])*specvol_mld
-fwf_vdia_diff_mld_vint = np.divide(salt_vdia_diff_mld_vint*rho0, -salt_avg_mld[:,:,:])*specvol_mld
-
 # total diffusion terms:
-R_s_vint = beta_mld*(salt_hdia_diff_mld_vint + salt_vdia_diff_mld_vint)
-R_t_vint = alpha_mld*(temp_hdia_diff_mld_vint + temp_vdia_diff_mld_vint)
-R_f_vint = fwf_hdia_diff_mld_vint + fwf_vdia_diff_mld_vint
+R_s_vint = (salt_hdia_diff_mld_vint + salt_vdia_diff_mld_vint)
+R_t_vint = (temp_hdia_diff_mld_vint + temp_vdia_diff_mld_vint)
 
 # surface flux terms:
-salt_sfc = beta_mld*(ssflux)
-temp_sfc = alpha_mld*(np.divide(shflux, rho0*Cp))
+salt_sfc = beta[:,-1,:,:]*(ssflux)
+temp_sfc = alpha[:,-1,:,:]*(np.divide(shflux, rho0*Cp))
 
 # advection terms:
-salt_adv_mld_vint = beta_mld*(salt_hdia_adv_mld_vint + salt_vdia_adv_mld_vint)
-temp_adv_mld_vint = alpha_mld*(temp_hdia_adv_mld_vint + temp_vdia_adv_mld_vint)
-fwf_adv_mld_vint = fwf_hdia_adv_mld_vint + fwf_vdia_adv_mld_vint
+salt_adv_mld_vint = (salt_hdia_adv_mld_vint + salt_vdia_adv_mld_vint)
+temp_adv_mld_vint = (temp_hdia_adv_mld_vint + temp_vdia_adv_mld_vint)
 
 # net tendencies
-salt_net_mld_vint = beta_mld*salt_tend_mld_vint
-temp_net_mld_vint = alpha_mld*temp_tend_mld_vint
-fwf_net_mld_vint = (np.divide(salt_tend_mld_vint*rho0, -salt_avg_mld[:,:,:]))*specvol_mld
+salt_net_mld_vint = salt_tend_mld_vint
+temp_net_mld_vint = temp_tend_mld_vint
 
 # ML budget equation: 
 # salt:
@@ -216,7 +207,9 @@ fwf_net_mld_vint = (np.divide(salt_tend_mld_vint*rho0, -salt_avg_mld[:,:,:]))*sp
 
 # rho grid for binning:
 #rho_grid=np.arange(35.5,37.4,0.1) # for sigma-2
-rho_grid=np.arange(24.4,29.1,0.1) # for sigma-0
+#rho_grid=np.arange(24.4,29.1,0.1) # for sigma-0
+rho_grid=np.arange(26.,28.,0.05) # for sigma-0
+
 len_rho_grid=len(rho_grid)
 
 dx = np.divide(1,pm)
@@ -245,16 +238,16 @@ def wmt(var_int, dx, dy,var_type):
         for irho in np.arange(0,len_rho_grid):
     
             #print(irho)
-            F_rate_tmp = ma.masked_where(np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.1/2)),sigma_tmp > (rho_grid[irho]+(0.1/2))), F_rate_var_vint[mm,:,:])
+            F_rate_tmp = ma.masked_where(np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.05/2)),sigma_tmp > (rho_grid[irho]+(0.05/2))), F_rate_var_vint[mm,:,:])
 
             if irho == 0:
                 F_rate_delta = F_rate_tmp.copy()
-                F_rate_delta[np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.1/2)),sigma_tmp > (rho_grid[irho]+(0.1/2)))] = np.nan
+                F_rate_delta[np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.05/2)),sigma_tmp > (rho_grid[irho]+(0.05/2)))] = np.nan
             elif irho == 1:
-                F_rate_tmp[np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.1/2)),sigma_tmp > (rho_grid[irho]+(0.1/2)))] = np.nan
+                F_rate_tmp[np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.05/2)),sigma_tmp > (rho_grid[irho]+(0.05/2)))] = np.nan
                 F_rate_delta = np.stack((F_rate_delta,F_rate_tmp), axis=0)
             else:
-                F_rate_tmp[np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.1/2)),sigma_tmp > (rho_grid[irho]+(0.1/2)))] = np.nan
+                F_rate_tmp[np.logical_or(sigma_tmp <= (rho_grid[irho]-(0.05/2)),sigma_tmp > (rho_grid[irho]+(0.05/2)))] = np.nan
                 F_rate_extradim = np.expand_dims(F_rate_tmp, axis=0)
                 F_rate_delta = np.concatenate((F_rate_delta,F_rate_extradim), axis=0)
             del F_rate_tmp
@@ -282,16 +275,14 @@ Fs_rate_delta_sfc_shelf_mm = wmt(salt_sfc*mask_shelf, dx, dy,'sfc_frc')
 #Fh_rate_delta_net_vint_shelf_mm = wmt(temp_net_mld_vint*mask_shelf, dx, dy,'budget')
 #Fh_rate_delta_sfc_shelf_mm = wmt(temp_sfc*mask_shelf, dx, dy,'sfc_frc')
 
-Fm_rate_delta_sfc_shelf_mm = wmt(beta_mld*m*mask_shelf, dx, dy,'sfc_frc')
-
 # figures
-fig_path = '/users/boeiradi/COLD_project/postprocessing/figs/WMT/'
+fig_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/WMT/'
 
 # plot with bars
 width=.023
 
 # convert to rate per year:
-Dt = rho0
+Dt = 1000/0.05
 
 ### plot maps
 import matplotlib.path as mpath
@@ -315,7 +306,7 @@ proj = ccrs.SouthPolarStereo()
 # EXAMPLE:                                   
 #    ax4 = fig.add_subplot(224, projection=proj)
 #    plt.title('Total, $\sigma_{\Theta}$ = ' + str(rho_grid[irho]))
-#    cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(Fh_rate_delta_net_vint_shelf_mm[:,irho,:], axis=0)*rho0/(dx*dy)+np.nanmean(Fs_rate_delta_net_vint_shelf_mm[:,irho,:], axis=0)*rho0/(dx*dy), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm)
+#    cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(Fh_rate_delta_net_vint_shelf_mm[:,irho,:], axis=0)*Dt/(dx*dy)+np.nanmean(Fs_rate_delta_net_vint_shelf_mm[:,irho,:], axis=0)*Dt/(dx*dy), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm)
 #    plt.colorbar(cy)
 #    ax4.gridlines() # draw_labels=True,linewidth=2, color='white', alpha=0.5, linestyle='--')
 #    lonlat_labels(ax4)
@@ -331,15 +322,16 @@ proj = ccrs.SouthPolarStereo()
 # 1) annual mean
 
 print
-for irho in np.arange(29,33): # 27.3:27.8 kg m-3
+#for irho in np.arange(29,33): # 27.3:27.8 kg m-3
 #for irho in np.arange(31,32): # 27.5 kg m-3
-#    salt_net_tmp = np.nanmean(Fs_rate_delta_net_vint_shelf_mm[:,irho,:], axis=0)*rho0/(dx*dy)
+for irho in np.arange(26,37): # 27.3:27.8 kg m-3 for sigma interval 0.05
+#    salt_net_tmp = np.nanmean(Fs_rate_delta_net_vint_shelf_mm[:,irho,:], axis=0)*Dt/(dx*dy)
     #salt_net_tmp = Fs_rate_delta_net_vint_shelf_mm[:,irho,:]
     salt_net_tmp = np.empty((12,1400,1575))
     for mm in np.arange(0,12):
-        salt_net_tmp[mm,:] = Fs_rate_delta_net_vint_shelf_mm[mm,irho,:]*rho0/(dx*dy)
+        salt_net_tmp[mm,:] = Fs_rate_delta_net_vint_shelf_mm[mm,irho,:]*Dt/(dx*dy)
     salt_net_tmp = np.expand_dims(salt_net_tmp, axis=0)
-    if irho >= 30:
+    if irho >= 27:
         salt_net = np.concatenate((salt_net,salt_net_tmp), axis=0)
     else:
         salt_net = salt_net_tmp
@@ -348,9 +340,9 @@ for irho in np.arange(29,33): # 27.3:27.8 kg m-3
     #salt_adv_tmp = Fs_rate_delta_adv_vint_shelf_mm[:,irho,:]
     salt_adv_tmp = np.empty((12,1400,1575))
     for mm in np.arange(0,12):
-        salt_adv_tmp[mm,:] = Fs_rate_delta_adv_vint_shelf_mm[mm,irho,:]*rho0/(dx*dy)
+        salt_adv_tmp[mm,:] = Fs_rate_delta_adv_vint_shelf_mm[mm,irho,:]*Dt/(dx*dy)
     salt_adv_tmp = np.expand_dims(salt_adv_tmp, axis=0)
-    if irho >= 30:
+    if irho >= 27:
         salt_adv = np.concatenate((salt_adv,salt_adv_tmp), axis=0)
     else:
         salt_adv = salt_adv_tmp
@@ -359,9 +351,9 @@ for irho in np.arange(29,33): # 27.3:27.8 kg m-3
     #salt_diff_tmp = Fs_rate_delta_diff_vint_shelf_mm[:,irho,:]
     salt_diff_tmp = np.empty((12,1400,1575))
     for mm in np.arange(0,12):
-        salt_diff_tmp[mm,:] = Fs_rate_delta_diff_vint_shelf_mm[mm,irho,:]*rho0/(dx*dy)
+        salt_diff_tmp[mm,:] = Fs_rate_delta_diff_vint_shelf_mm[mm,irho,:]*Dt/(dx*dy)
     salt_diff_tmp = np.expand_dims(salt_diff_tmp, axis=0)
-    if irho >= 30:
+    if irho >= 27:
         salt_diff = np.concatenate((salt_diff,salt_diff_tmp), axis=0)
     else:
         salt_diff = salt_diff_tmp
@@ -370,9 +362,9 @@ for irho in np.arange(29,33): # 27.3:27.8 kg m-3
     #salt_sfc_tmp = Fs_rate_delta_sfc_shelf_mm[:,irho,:]
     salt_sfc_tmp = np.empty((12,1400,1575))
     for mm in np.arange(0,12):
-        salt_sfc_tmp[mm,:] = Fs_rate_delta_sfc_shelf_mm[mm,irho,:]*rho0/(dx*dy)
+        salt_sfc_tmp[mm,:] = Fs_rate_delta_sfc_shelf_mm[mm,irho,:]*Dt/(dx*dy)
     salt_sfc_tmp = np.expand_dims(salt_sfc_tmp, axis=0)
-    if irho >= 30:
+    if irho >= 27:
         salt_sfc = np.concatenate((salt_sfc,salt_sfc_tmp), axis=0)
     else:
         salt_sfc = salt_sfc_tmp
@@ -396,53 +388,53 @@ proj = ccrs.SouthPolarStereo()
 fig = plt.figure(figsize=(20,16))
 
 ax1 = fig.add_subplot(3,4,5, projection=proj)
-plt.title('Salt tendency, $\sigma_{\Theta}$ = ' + str(np.around(rho_grid[29],decimals=2)) + ':'  + str(np.around(rho_grid[32],decimals=2)), fontsize=14)
-cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_net_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-1.5e-6, vmax=1.5e-6)
+#plt.title('Salt tendency, $\sigma_{\Theta}$ = ' + str(np.around(rho_grid[29],decimals=2)) + ':'  + str(np.around(rho_grid[32],decimals=2)), fontsize=14)
+plt.title('E) Salt tendency', fontsize=16)
+cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_net_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-2e-5, vmax=2e-5)
 ax1.gridlines()
 ax1.set_extent([-85, -30, -84, -74], crs=ccrs.PlateCarree())
 ax1.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
-ax1.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+ax1.add_feature(bathym, zorder=4, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],ice_draft[xlimit,ylimit],levels=[-.1],linestyles='dashed', transform=ccrs.PlateCarree(), cmap=plt.cm.binary)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],h[xlimit,ylimit],levels=(200,400,600,800,1000), transform=ccrs.PlateCarree(), colors='grey')
 ax1.set_ylabel('WAOM4',fontsize=14)
 
 ax2 = fig.add_subplot(3,4,6, projection=proj)
-plt.title('Salt advection, $\sigma_{\Theta}$ = ' + str(np.around(rho_grid[29],decimals=2)) + ':'  + str(np.around(rho_grid[32],decimals=2)), fontsize=14)
-cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_adv_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-1.5e-6, vmax=1.5e-6)
+plt.title('F) Salt advection', fontsize=16)
+cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_adv_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-2e-5, vmax=2e-5)
 ax2.gridlines()
 ax2.set_extent([-85, -30, -84, -74], crs=ccrs.PlateCarree())
 ax2.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
-ax2.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+ax2.add_feature(bathym, zorder=4, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],ice_draft[xlimit,ylimit],levels=[-.1],linestyles='dashed', transform=ccrs.PlateCarree(), cmap=plt.cm.binary)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],h[xlimit,ylimit],levels=(200,400,600,800,1000), transform=ccrs.PlateCarree(), colors='grey')
 
 ax3 = fig.add_subplot(3,4,7, projection=proj)
-plt.title('Salt diffusion, $\sigma_{\Theta}$ = ' + str(np.around(rho_grid[29],decimals=2)) + ':'  + str(np.around(rho_grid[32],decimals=2)), fontsize=14)
-cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_diff_sum, axis=0)-np.nanmean(salt_sfc_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-1.5e-6, vmax=1.5e-6)
+plt.title('G) Salt diffusion', fontsize=16)
+cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_diff_sum, axis=0)-np.nanmean(salt_sfc_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-2e-5, vmax=2e-5)
 ax3.gridlines()
 ax3.set_extent([-85, -30, -84, -74], crs=ccrs.PlateCarree())
 ax3.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
-ax3.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+ax3.add_feature(bathym, zorder=4, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],ice_draft[xlimit,ylimit],levels=[-.1],linestyles='dashed', transform=ccrs.PlateCarree(), cmap=plt.cm.binary)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],h[xlimit,ylimit],levels=(200,400,600,800,1000), transform=ccrs.PlateCarree(), colors='grey')
 
 ax4 = fig.add_subplot(3,4,8, projection=proj)
-plt.title('Salt sfc flux, $\sigma_{\Theta}$ = ' + str(np.around(rho_grid[29],decimals=2)) + ':'  + str(np.around(rho_grid[32],decimals=2)), fontsize=14)
-cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_sfc_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-1.5e-6, vmax=1.5e-6)
+plt.title('H) Surface salt flux', fontsize=16)
+cy=plt.pcolormesh(lon_rho,lat_rho,np.nanmean(salt_sfc_sum, axis=0), transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-2e-5, vmax=2e-5)
 ax4.gridlines()
 ax4.set_extent([-85, -30, -84, -74], crs=ccrs.PlateCarree())
 ax4.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
-ax4.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+ax4.add_feature(bathym, zorder=4, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],ice_draft[xlimit,ylimit],levels=[-.1],linestyles='dashed', transform=ccrs.PlateCarree(), cmap=plt.cm.binary)
 plt.contour(lon_rho[xlimit,ylimit], lat_rho[xlimit,ylimit],h[xlimit,ylimit],levels=(200,400,600,800,1000), transform=ccrs.PlateCarree(), colors='grey')
 # set colorbar
 cbar_ax1 = fig.add_axes([0.92, 0.1, 0.01, 0.8])
 fig.colorbar(cy, cax=cbar_ax1, orientation='vertical')
-cbar_ax1.set_xlabel('Transformation rates (Sv)')#, labelpad=-35)
+cbar_ax1.set_xlabel('Transformation rates (Sv)', fontsize=17)#, labelpad=-35)
+cbar_ax1.tick_params(labelsize=15)
 
-
-#name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_salt_budget_annual_yr10_shelf_RFIS_27.5kgm-3.png"
-name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_salt_budget_annual_yr10_shelf_RFIS_27.3-27.6kgm-3.png"
+name_fig="waom4extend_shflim_S_0.25Q_notides_WMTmaps_salt_budget_annual_yr10_shelf_RFIS_27.3-27.8kgm-3.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -500,8 +492,8 @@ for mm in np.arange(0,12):
     fig.colorbar(cy, cax=cbar_ax1, orientation='vertical')
     cbar_ax1.set_xlabel('Transformation rates (Sv)')#, labelpad=-35)
     
-#    name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_salt_budget_annual_yr10_shelf_mm=" + str(mm) + "_RFIS_27.5kgm-3.png"
-    name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_salt_budget_annual_yr10_shelf_mm=" + str(mm) + "_RFIS_27.3-27.6kgm-3.png"
+#    name_fig="waom4extend_shflim_S_0.25Q_notides_WMTmaps_salt_budget_annual_yr10_shelf_mm=" + str(mm) + "_RFIS_27.5kgm-3.png"
+    name_fig="waom4extend_shflim_S_0.25Q_notides_WMTmaps_salt_budget_annual_yr10_shelf_mm=" + str(mm) + "_RFIS_27.3-27.6kgm-3.png"
     plt.savefig(fig_path + name_fig, dpi=300)
     plt.close()
 

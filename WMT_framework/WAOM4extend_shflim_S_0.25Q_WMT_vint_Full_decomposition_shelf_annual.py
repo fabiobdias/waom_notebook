@@ -27,7 +27,7 @@ import gsw
 
 # load ROMS avg output
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    ds = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_00' + mm + '.nc')
+    ds = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr20/ocean_avg_00' + mm + '.nc')
     print(ds.variables["temp"].shape)
     temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
     salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
@@ -88,7 +88,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
     
 sigma_t_sfc = gsw.rho(salt[:,-1,:,:],temp[:,-1,:,:],0) - 1000
 
-di = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_0001.nc')
+di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr20/ocean_avg_0001.nc')
 ice_draft = di.variables["zice"]
 
 mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
@@ -106,7 +106,7 @@ for tt in np.arange(0,12):
     dz_inv[tt,:,:,:] = np.diff(z_w_sorted,axis=2)
     dz[tt,:,:,:] = dz_inv[tt,:,:,::-1]
 
-dg = xr.open_dataset("/scratch/project_2000789/boeiradi/waom4_frc/waom4extend_grd.nc")
+dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
 
 lat_rho = dg.variables["lat_rho"]
 lon_rho = dg.variables["lon_rho"]
@@ -144,7 +144,7 @@ cy=plt.pcolor(mask_zice)#, transform=ccrs.PlateCarree())
 plt.colorbar(cy)
 plt.clim(0.,1.)
 
-dx = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_diag/Full_vint_vars_for_WMT_m.s-1.nc')
+dx = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr20/Full_vint_vars_for_WMT_m.s-1.nc')
 
 # - variables integrated throughout the ML; multiply by -1 b/c dz is negative.
 temp_vdia_diff_full_vint = dx.variables["temp_vdia_diff_full_vint"]
@@ -165,6 +165,7 @@ dx.close()
 # obtain thermal expansion (alpha) & salinity contraction (beta) coefficients:
 SA = np.empty(salt.shape)
 # neet Absolute Salinity, converting from Pratical Salinity:
+print('salt and z_rho shape:', np.squeeze(salt[0,0,:,:]).shape,np.squeeze(z_rho[0,:,:,0].shape))
 for mm in np.arange(0,12):
     for kk in np.arange(0,31):
         SA_tmp =gsw.SA_from_SP(np.squeeze(salt[mm,kk,:,:]),np.squeeze(z_rho[mm,:,:,kk]),lon_rho,lat_rho)
@@ -211,7 +212,6 @@ len_rho_grid=len(rho_grid)
 
 dx = np.divide(1,pm)
 dy = np.divide(1,pn)
-dt = 86400#30#/12 #why divide by 12?
 
 def wmt(var_int, dx, dy,var_type):
     # var_type: 'budget' or 'sfc_frc'
@@ -260,29 +260,17 @@ def wmt(var_int, dx, dy,var_type):
 # Salt: m/s -> m3/s
 # Fwf: Kg.m-2.s-1 = Kg/s
 
-# Shelf only: excluding open ocean
+# Shelf only: excluding open ocean & ice shelves
 
 Fs_rate_delta_adv_vint_shelf_mm = wmt(salt_adv_full_vint*mask_shelf, dx, dy,'budget')
 Fs_rate_delta_diff_vint_shelf_mm = wmt(R_s_vint*mask_shelf, dx, dy,'budget')
 Fs_rate_delta_net_vint_shelf_mm = wmt(salt_net_full_vint*mask_shelf, dx, dy,'budget')
 Fs_rate_delta_sfc_shelf_mm = wmt(salt_sfc*mask_shelf, dx, dy,'sfc_frc')
 
-# decomponsing vert/horiz components:
-Fs_rate_delta_vadv_vint_shelf_mm = wmt(salt_vdia_adv_full_vint*mask_shelf, dx, dy,'budget')
-Fs_rate_delta_hadv_vint_shelf_mm = wmt(salt_hdia_adv_full_vint*mask_shelf, dx, dy,'budget')
-Fs_rate_delta_vdiff_vint_shelf_mm = wmt(salt_vdia_diff_full_vint*mask_shelf, dx, dy,'budget')
-Fs_rate_delta_hdiff_vint_shelf_mm = wmt(salt_hdia_diff_full_vint*mask_shelf, dx, dy,'budget')
-
 Fh_rate_delta_adv_vint_shelf_mm = wmt(temp_adv_full_vint*mask_shelf, dx, dy,'budget')
 Fh_rate_delta_diff_vint_shelf_mm = wmt(R_t_vint*mask_shelf, dx, dy,'budget')
 Fh_rate_delta_net_vint_shelf_mm = wmt(temp_net_full_vint*mask_shelf, dx, dy,'budget')
 Fh_rate_delta_sfc_shelf_mm = wmt(temp_sfc*mask_shelf, dx, dy,'sfc_frc')
-
-# decomponsing vert/horiz components:
-Fh_rate_delta_vadv_vint_shelf_mm = wmt(temp_vdia_adv_full_vint*mask_shelf, dx, dy,'budget')
-Fh_rate_delta_hadv_vint_shelf_mm = wmt(temp_hdia_adv_full_vint*mask_shelf, dx, dy,'budget')
-Fh_rate_delta_vdiff_vint_shelf_mm = wmt(temp_vdia_diff_full_vint*mask_shelf, dx, dy,'budget')
-Fh_rate_delta_hdiff_vint_shelf_mm = wmt(temp_hdia_diff_full_vint*mask_shelf, dx, dy,'budget')
 
 # development mask for density classes:
 sigma_sept = sigma_t[8,0:50,0:50]
@@ -317,14 +305,6 @@ Fh_rate_diff_vint_shelf_mm_int = np.empty((len(rho_grid),12))
 Fs_rate_net_vint_shelf_mm_int = np.empty((len(rho_grid),12))
 Fh_rate_net_vint_shelf_mm_int = np.empty((len(rho_grid),12))
 
-Fs_rate_vadv_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_vadv_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fs_rate_vdiff_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_vdiff_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fs_rate_hadv_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_hadv_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fs_rate_hdiff_vint_shelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_hdiff_vint_shelf_mm_int = np.empty((len(rho_grid),12))
 
 for irho in np.arange(0,len(rho_grid)):   
     for mm in np.arange(0,12):
@@ -334,25 +314,16 @@ for irho in np.arange(0,len(rho_grid)):
         
         Fs_rate_adv_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_adv_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
         Fh_rate_adv_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_adv_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-
-        Fs_rate_vadv_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_vadv_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_vadv_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_vadv_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-        Fs_rate_hadv_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_hadv_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_hadv_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_hadv_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
         
         Fs_rate_diff_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_diff_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
         Fh_rate_diff_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_diff_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
         
-        Fs_rate_vdiff_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_vdiff_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_vdiff_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_vdiff_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-        Fs_rate_hdiff_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_hdiff_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_hdiff_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_hdiff_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
-
         Fs_rate_net_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_net_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
         Fh_rate_net_vint_shelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_net_vint_shelf_mm[mm,irho,:], axis=1), axis=0)
 
+
 # figures
-fig_path = '/users/boeiradi/COLD_project/postprocessing/figs/WMT/'
+fig_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/WMT/'
 
 # plot with bars
 width=.023
@@ -373,11 +344,9 @@ F_sig_sfc_shelf = -Fs_sig_sfc_shelf + Fh_sig_sfc_shelf
 
 # plots:
 
-
 fig = plt.figure(figsize=(12,10))
 
-
-ax3 = fig.add_subplot(223)
+ax3 = fig.add_subplot(221)
 plt.title('Continental shelf')
 cf=plt.plot(rho_grid,-Fs_sig_sfc_shelf,'--b',label='WMT due to sfc salt flux')
 ch=plt.plot(rho_grid,Fh_sig_sfc_shelf,'r',label='WMT due to sfc heat flux')
@@ -388,7 +357,7 @@ plt.grid(True)
 plt.text(26.6,1.5,'Buoyancy loss')
 plt.text(26.6,-1.5,'Buoyancy gain')
 
-name_fig="waom4extend_shflim_S_0.25Q_WMT_Full_sfc_fluxes_annual_shelf.png"
+name_fig="waom4extend_shflim_S_0.25Q_yr20_WMT_Full_sfc_fluxes_annual_shelf_comparison.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 
 # ADV (vint)
@@ -398,21 +367,7 @@ F_sig_adv_vint_shelf_mm = -Fs_sig_adv_vint_shelf_mm + Fh_sig_adv_vint_shelf_mm
 # - calculate the anual average of the monthly ars:
 Fs_sig_adv_vint_shelf =  np.nanmean(Fs_sig_adv_vint_shelf_mm, axis=1)
 Fh_sig_adv_vint_shelf =  np.nanmean(Fh_sig_adv_vint_shelf_mm, axis=1)
-F_sig_adv_vint_shelf = -Fs_sig_adv_vint_shelf + Fh_sig_adv_vint_shelf
-
-# Vert adv
-Fs_sig_vadv_vint_shelf_mm = -Fs_rate_vadv_vint_shelf_mm_int*Dt/1e6
-Fh_sig_vadv_vint_shelf_mm = -Fh_rate_vadv_vint_shelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_vadv_vint_shelf =  np.nanmean(Fs_sig_vadv_vint_shelf_mm, axis=1)
-Fh_sig_vadv_vint_shelf =  np.nanmean(Fh_sig_vadv_vint_shelf_mm, axis=1)
-
-# Horz adv
-Fs_sig_hadv_vint_shelf_mm = -Fs_rate_hadv_vint_shelf_mm_int*Dt/1e6
-Fh_sig_hadv_vint_shelf_mm = -Fh_rate_hadv_vint_shelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_hadv_vint_shelf =  np.nanmean(Fs_sig_hadv_vint_shelf_mm, axis=1)
-Fh_sig_hadv_vint_shelf =  np.nanmean(Fh_sig_hadv_vint_shelf_mm, axis=1)
+F_sig_adv_vint_shelf = Fs_sig_adv_vint_shelf + Fh_sig_adv_vint_shelf
 
 # DIFF
 Fs_sig_diff_vint_shelf_mm = -Fs_rate_diff_vint_shelf_mm_int*Dt/1e6 
@@ -423,20 +378,6 @@ Fs_sig_diff_vint_shelf =  np.nanmean(Fs_sig_diff_vint_shelf_mm, axis=1)
 Fh_sig_diff_vint_shelf =  np.nanmean(Fh_sig_diff_vint_shelf_mm, axis=1)
 F_sig_diff_vin_shelft = -Fs_sig_diff_vint_shelf + Fh_sig_diff_vint_shelf
 
-# vert diff
-Fs_sig_vdiff_vint_shelf_mm = -Fs_rate_vdiff_vint_shelf_mm_int*Dt/1e6
-Fh_sig_vdiff_vint_shelf_mm = -Fh_rate_vdiff_vint_shelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_vdiff_vint_shelf =  np.nanmean(Fs_sig_vdiff_vint_shelf_mm, axis=1)
-Fh_sig_vdiff_vint_shelf =  np.nanmean(Fh_sig_vdiff_vint_shelf_mm, axis=1)
-
-# horz diff
-Fs_sig_hdiff_vint_shelf_mm = -Fs_rate_hdiff_vint_shelf_mm_int*Dt/1e6
-Fh_sig_hdiff_vint_shelf_mm = -Fh_rate_hdiff_vint_shelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_hdiff_vint_shelf =  np.nanmean(Fs_sig_hdiff_vint_shelf_mm, axis=1)
-Fh_sig_hdiff_vint_shelf =  np.nanmean(Fh_sig_hdiff_vint_shelf_mm, axis=1)
-
 # NET
 Fs_sig_net_vint_shelf_mm = -Fs_rate_net_vint_shelf_mm_int*Dt/1e6 
 Fh_sig_net_vint_shelf_mm = -Fh_rate_net_vint_shelf_mm_int*Dt/1e6 
@@ -445,12 +386,6 @@ F_sig_net_vint_shelf_mm = -Fs_sig_net_vint_shelf_mm + Fh_sig_net_vint_shelf_mm
 Fs_sig_net_vint_shelf =  np.nanmean(Fs_sig_net_vint_shelf_mm, axis=1)
 Fh_sig_net_vint_shelf =  np.nanmean(Fh_sig_net_vint_shelf_mm, axis=1)
 F_sig_net_vint_shelf = -Fs_sig_net_vint_shelf + Fh_sig_net_vint_shelf
-
-# obs (16.6.21): salt budget has opposite effect to buoyancy than fw budget,
-#  so term are inverted (x-1) to plot the transformation rates. This seems to agree
-#  better with the surface fluxes.
-# obs (21.6.21): only inverted sign is not correct. Need to do full conversion as done from 
-#  salt flux to fw flux, i.e. multiply by -1000 (fw density) and divide by salinity (avg in the MLD)
 
 fig = plt.figure(figsize=(16,10))
 ax1 = fig.add_subplot(222)
@@ -462,8 +397,7 @@ plt.legend()
 plt.ylabel('Transformation rate (Sv)')
 plt.xlim(26.5,28),plt.ylim(-5,5)
 plt.grid(True)
-plt.text(26.6,1.5,'Buoyancy loss')
-plt.text(26.6,-1.5,'Buoyancy gain')
+
 ax1 = fig.add_subplot(223)
 plt.title('Heat budget')
 ch=plt.plot(rho_grid,Fh_sig_net_vint_shelf,'r',label='WMT due to heat tend')
@@ -489,13 +423,14 @@ plt.title('Net tendencies')
 cs=plt.plot(rho_grid,-Fs_sig_net_vint_shelf,'-b',label='WMT tendency due to salt sfc')
 ch=plt.plot(rho_grid,Fh_sig_net_vint_shelf,'-r',label='WMT tendency due to heat sfc')
 ct=plt.plot(rho_grid,Fh_sig_net_vint_shelf-Fs_sig_net_vint_shelf,'k',label='WMT tendency total')
-plt.legend()
+#plt.legend()
 plt.ylabel('Transformation rate (Sv)')
 plt.xlim(26.5,28),plt.ylim(-5,5)
 plt.grid(True)
-plt.title('Total tendencies')
+plt.text(26.6,1.5,'Buoyancy loss')
+plt.text(26.6,-1.5,'Buoyancy gain')
 
-name_fig="waom4extend_shflim_S_0.25Q_WMT_Full_heat-salt_vint_annual_shelf.png"
+name_fig="waom4extend_shflim_S_0.25Q_yr20_WMT_Full_heat-salt_vint_annual_shelf.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 
 ### plot some maps
@@ -518,6 +453,8 @@ def lonlat_labels(ax):
 proj = ccrs.SouthPolarStereo()
 
 # plot maps for 27.5 kg.m-3 isopycnal
+#Fs_rate_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_mm[mm,irho,:], axis=1), axis=0)*Dt/0.1
+#Fh_rate_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_mm[mm,irho,:], axis=1), axis=0)*Dt/0.1
 print(Fs_rate_delta_net_vint_shelf_mm.shape)
 
 for irho in np.arange(29,35):#15,37):
@@ -565,7 +502,7 @@ for irho in np.arange(29,35):#15,37):
     ax4.add_feature(cfeature.LAND, zorder=1, edgecolor='black', facecolor='white') 
     plt.clim(-5e-5,5e-5)
                                                 
-    name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_Full_annual_yr10_l" + str(irho)  + "_shelf.png"
+    name_fig="waom4extend_shflim_S_0.25Q_yr20_WMTmaps_Full_annual_yr10_l" + str(irho)  + "_shelf.png"
     plt.savefig(fig_path + name_fig, dpi=300)
     plt.close()
 
@@ -616,27 +553,23 @@ ax4.set_extent([-180, 180, -90, -60], crs=ccrs.PlateCarree())
 ax4.add_feature(cfeature.LAND, zorder=1, edgecolor='black', facecolor='white') 
 plt.clim(-5e-5,5e-5)
                                                 
-name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_Full_annual_yr10_shelf.png"
+name_fig="waom4extend_shflim_S_0.25Q_yr20_WMTmaps_Full_annual_yr10_shelf.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
 # --- Save transformation arrays:
-npy_path = '/users/boeiradi/COLD_project/postprocessing/tmp_files/'
+npy_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/tmp_files/'
 
 print('Saving files .....')
 
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_sfc_total',rho_grid = rho_grid, F_sig_sfc_shelf = F_sig_sfc_shelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_sfc_salt',rho_grid = rho_grid, Fs_sig_sfc_shelf = Fs_sig_sfc_shelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_sfc_heat',rho_grid = rho_grid, Fh_sig_sfc_shelf = Fh_sig_sfc_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_sfc_total',rho_grid = rho_grid, F_sig_sfc_shelf = F_sig_sfc_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_sfc_salt',rho_grid = rho_grid, Fs_sig_sfc_shelf = Fs_sig_sfc_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_sfc_heat',rho_grid = rho_grid, Fh_sig_sfc_shelf = Fh_sig_sfc_shelf)
 
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_vint_salt_net',rho_grid = rho_grid, Fs_sig_net_vint_shelf = Fs_sig_net_vint_shelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_vint_salt_diff',rho_grid = rho_grid, Fs_sig_diff_vint_shelf = Fs_sig_diff_vint_shelf,\
-        Fs_sig_vdiff_vint_shelf = Fs_sig_vdiff_vint_shelf, Fs_sig_hdiff_vint_shelf = Fs_sig_hdiff_vint_shelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_vint_salt_adv',rho_grid = rho_grid, Fs_sig_adv_vint_shelf = Fs_sig_adv_vint_shelf,\
-        Fs_sig_vadv_vint_shelf = Fs_sig_vadv_vint_shelf, Fs_sig_hadv_vint_shelf = Fs_sig_hadv_vint_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_vint_salt_net',rho_grid = rho_grid, Fs_sig_net_vint_shelf = Fs_sig_net_vint_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_vint_salt_diff',rho_grid = rho_grid, Fs_sig_diff_vint_shelf = Fs_sig_diff_vint_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_vint_salt_adv',rho_grid = rho_grid, Fs_sig_adv_vint_shelf = Fs_sig_adv_vint_shelf)
 
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_vint_heat_net', rho_grid = rho_grid, Fh_sig_net_vint_shelf = Fh_sig_net_vint_shelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_vint_heat_diff', rho_grid = rho_grid, Fh_sig_diff_vint_shelf = Fh_sig_diff_vint_shelf,\
-        Fh_sig_vdiff_vint_shelf = Fh_sig_vdiff_vint_shelf, Fh_sig_hdiff_vint_shelf = Fh_sig_hdiff_vint_shelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_shelf_vint_heat_adv', rho_grid = rho_grid, Fh_sig_adv_vint_shelf = Fh_sig_adv_vint_shelf,\
-        Fh_sig_vadv_vint_shelf = Fh_sig_vadv_vint_shelf, Fh_sig_hadv_vint_shelf = Fh_sig_hadv_vint_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_vint_heat_net', rho_grid = rho_grid, Fh_sig_net_vint_shelf = Fh_sig_net_vint_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_vint_heat_diff', rho_grid = rho_grid, Fh_sig_diff_vint_shelf = Fh_sig_diff_vint_shelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_shelf_vint_heat_adv', rho_grid = rho_grid, Fh_sig_adv_vint_shelf = Fh_sig_adv_vint_shelf)

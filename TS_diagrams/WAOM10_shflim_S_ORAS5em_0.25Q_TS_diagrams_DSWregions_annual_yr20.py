@@ -24,7 +24,8 @@ import iris.plot as iplt
 import gsw
 
 # load ROMS avg output
-ds = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10_shflim_S_ORAS5em_0.25Q/output_01-20yr/ocean_avg_0020.nc")
+#ds = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10_shflim_S_ORAS5em_0.25Q/output_01-20yr/ocean_avg_0020.nc")
+ds = xr.open_dataset("/scratch/gh9/fbd581/ROMS/waom10_shflim_S_ORAS5em_0.25Q/output_01-20yr/ocean_avg_0020.nc")
 
 #print(output.variables.keys()) # get all variable names
 

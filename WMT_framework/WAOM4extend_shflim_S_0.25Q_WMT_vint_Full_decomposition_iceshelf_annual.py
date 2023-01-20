@@ -19,11 +19,15 @@ from netCDF4 import num2date, date2num
 from matplotlib.ticker import NullFormatter
 from matplotlib.colors import LinearSegmentedColormap   # for custom colormaps
 
+#import iris
+#import iris.iterate
+#import iris.coords
+#import iris.plot as iplt
 import gsw
 
 # load ROMS avg output
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    ds = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_00' + mm + '.nc')
+    ds = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr20/ocean_avg_00' + mm + '.nc')
     print(ds.variables["temp"].shape)
     temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
     salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
@@ -38,7 +42,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
         print("Vtransform=1")
     elif ds.Vtransform == 2:
         Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * ds.h) / (ds.hc + ds.h)
-        z_rho_tmp = ds.zeta + (ds.zeta + ds.h) * Zo_rho  + ds.zice
+        z_rho_tmp = ds.zeta + (ds.zeta + ds.h) * Zo_rho + ds.zice
         print("Vtransform=2")
         Zo_w = (ds.hc * ds.s_w + ds.Cs_w * ds.h) / (ds.hc + ds.h)
         z_w_tmp = ds.zeta + (ds.zeta + ds.h) * Zo_w + ds.zice
@@ -84,7 +88,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
     
 sigma_t_sfc = gsw.rho(salt[:,-1,:,:],temp[:,-1,:,:],0) - 1000
 
-di = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_0001.nc')
+di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr20/ocean_avg_0001.nc')
 ice_draft = di.variables["zice"]
 
 mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
@@ -103,7 +107,7 @@ for tt in np.arange(0,12):
     dz_inv[tt,:,:,:] = np.diff(z_w_sorted,axis=2)
     dz[tt,:,:,:] = dz_inv[tt,:,:,::-1]
 
-dg = xr.open_dataset("/scratch/project_2000789/boeiradi/waom4_frc/waom4extend_grd.nc")
+dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
 
 lat_rho = dg.variables["lat_rho"]
 lon_rho = dg.variables["lon_rho"]
@@ -141,7 +145,7 @@ cy=plt.pcolor(mask_zice)#, transform=ccrs.PlateCarree())
 plt.colorbar(cy)
 plt.clim(0.,1.)
 
-dx = xr.open_dataset('/scratch/project_2000789/boeiradi/waom4extend_shflim_S_0.25Q/output_yr10_diag/Full_vint_vars_for_WMT_m.s-1.nc')
+dx = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr20/Full_vint_vars_for_WMT_m.s-1.nc')
 
 # - variables integrated throughout the ML; multiply by -1 b/c dz is negative.
 temp_vdia_diff_full_vint = dx.variables["temp_vdia_diff_full_vint"]
@@ -198,6 +202,7 @@ temp_adv_full_vint = (temp_hdia_adv_full_vint + temp_vdia_adv_full_vint)
 salt_net_full_vint = salt_tend_full_vint
 temp_net_full_vint = temp_tend_full_vint
 
+
 #  Function to calculate Water Mass Transformation (in m3/s):
 
 # rho grid for binning:
@@ -209,7 +214,6 @@ len_rho_grid=len(rho_grid)
 
 dx = np.divide(1,pm)
 dy = np.divide(1,pn)
-dt = 86400#30#/12 #why divide by 12?
 
 def wmt(var_int, dx, dy,var_type):
     # var_type: 'budget' or 'sfc_frc'
@@ -260,27 +264,15 @@ def wmt(var_int, dx, dy,var_type):
 
 # Shelf only: excluding open ocean & ice shelves
 
-Fs_rate_delta_adv_vint_iceshelf_mm = wmt(salt_adv_full_vint*mask_outice, dx, dy,'budget')
-Fs_rate_delta_diff_vint_iceshelf_mm = wmt(R_s_vint*mask_outice, dx, dy,'budget')
-Fs_rate_delta_net_vint_iceshelf_mm = wmt(salt_net_full_vint*mask_outice, dx, dy,'budget')
-Fs_rate_delta_sfc_iceshelf_mm = wmt(salt_sfc*mask_outice, dx, dy,'sfc_frc')
+Fs_rate_delta_adv_vint_iceshelf_mm = wmt(salt_adv_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fs_rate_delta_diff_vint_iceshelf_mm = wmt(R_s_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fs_rate_delta_net_vint_iceshelf_mm = wmt(salt_net_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fs_rate_delta_sfc_iceshelf_mm = wmt(salt_sfc*mask_shelf*mask_outice, dx, dy,'sfc_frc')
 
-# decomponsing vert/horiz components:
-Fs_rate_delta_vadv_vint_iceshelf_mm = wmt(salt_vdia_adv_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-Fs_rate_delta_hadv_vint_iceshelf_mm = wmt(salt_hdia_adv_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-Fs_rate_delta_vdiff_vint_iceshelf_mm = wmt(salt_vdia_diff_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-Fs_rate_delta_hdiff_vint_iceshelf_mm = wmt(salt_hdia_diff_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-
-Fh_rate_delta_adv_vint_iceshelf_mm = wmt(temp_adv_full_vint*mask_outice, dx, dy,'budget')
-Fh_rate_delta_diff_vint_iceshelf_mm = wmt(R_t_vint*mask_outice, dx, dy,'budget')
-Fh_rate_delta_net_vint_iceshelf_mm = wmt(temp_net_full_vint*mask_outice, dx, dy,'budget')
-Fh_rate_delta_sfc_iceshelf_mm = wmt(temp_sfc*mask_outice, dx, dy,'sfc_frc')
-
-# decomponsing vert/horiz components:
-Fh_rate_delta_vadv_vint_iceshelf_mm = wmt(temp_vdia_adv_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-Fh_rate_delta_hadv_vint_iceshelf_mm = wmt(temp_hdia_adv_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-Fh_rate_delta_vdiff_vint_iceshelf_mm = wmt(temp_vdia_diff_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
-Fh_rate_delta_hdiff_vint_iceshelf_mm = wmt(temp_hdia_diff_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fh_rate_delta_adv_vint_iceshelf_mm = wmt(temp_adv_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fh_rate_delta_diff_vint_iceshelf_mm = wmt(R_t_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fh_rate_delta_net_vint_iceshelf_mm = wmt(temp_net_full_vint*mask_shelf*mask_outice, dx, dy,'budget')
+Fh_rate_delta_sfc_iceshelf_mm = wmt(temp_sfc*mask_shelf*mask_outice, dx, dy,'sfc_frc')
 
 # development mask for density classes:
 sigma_sept = sigma_t[8,0:50,0:50]
@@ -315,14 +307,6 @@ Fh_rate_diff_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
 Fs_rate_net_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
 Fh_rate_net_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
 
-Fs_rate_vadv_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_vadv_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fs_rate_vdiff_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_vdiff_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fs_rate_hadv_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_hadv_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fs_rate_hdiff_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
-Fh_rate_hdiff_vint_iceshelf_mm_int = np.empty((len(rho_grid),12))
 
 for irho in np.arange(0,len(rho_grid)):   
     for mm in np.arange(0,12):
@@ -332,26 +316,16 @@ for irho in np.arange(0,len(rho_grid)):
         
         Fs_rate_adv_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_adv_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
         Fh_rate_adv_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_adv_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-
-        Fs_rate_vadv_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_vadv_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_vadv_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_vadv_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-        Fs_rate_hadv_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_hadv_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_hadv_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_hadv_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
         
         Fs_rate_diff_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_diff_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
         Fh_rate_diff_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_diff_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
         
-        Fs_rate_vdiff_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_vdiff_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_vdiff_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_vdiff_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-        Fs_rate_hdiff_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_hdiff_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-        Fh_rate_hdiff_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_hdiff_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
-
         Fs_rate_net_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fs_rate_delta_net_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
         Fh_rate_net_vint_iceshelf_mm_int[irho,mm] = np.nansum(np.nansum(Fh_rate_delta_net_vint_iceshelf_mm[mm,irho,:], axis=1), axis=0)
 
 
 # figures
-fig_path = '/users/boeiradi/COLD_project/postprocessing/figs/WMT/'
+fig_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/WMT/'
 
 # plot with bars
 width=.023
@@ -380,13 +354,12 @@ cf=plt.plot(rho_grid,-Fs_sig_sfc_iceshelf,'--b',label='WMT due to sfc salt flux'
 ch=plt.plot(rho_grid,Fh_sig_sfc_iceshelf,'r',label='WMT due to sfc heat flux')
 ct=plt.plot(rho_grid,F_sig_sfc_iceshelf,'k',label='WMT due to sfc total flux')
 plt.legend()
-plt.xlim(26.5,28),plt.ylim(-16,2.5)
+plt.xlim(26.5,28),plt.ylim(-5,5)
 plt.grid(True)
 plt.text(26.6,1.5,'Buoyancy loss')
 plt.text(26.6,-1.5,'Buoyancy gain')
-plt.grid(True)
 
-name_fig="waom4extend_shflim_S_0.25Q_WMT_Full_sfc_fluxes_annual_iceshelf.png"
+name_fig="waom4extend_shflim_S_0.25Q_yr20_WMT_Full_sfc_fluxes_annual_iceshelf_comparison.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 
 # ADV (vint)
@@ -398,20 +371,6 @@ Fs_sig_adv_vint_iceshelf =  np.nanmean(Fs_sig_adv_vint_iceshelf_mm, axis=1)
 Fh_sig_adv_vint_iceshelf =  np.nanmean(Fh_sig_adv_vint_iceshelf_mm, axis=1)
 F_sig_adv_vint_iceshelf = Fs_sig_adv_vint_iceshelf + Fh_sig_adv_vint_iceshelf
 
-# Vert adv
-Fs_sig_vadv_vint_iceshelf_mm = -Fs_rate_vadv_vint_iceshelf_mm_int*Dt/1e6
-Fh_sig_vadv_vint_iceshelf_mm = -Fh_rate_vadv_vint_iceshelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_vadv_vint_iceshelf =  np.nanmean(Fs_sig_vadv_vint_iceshelf_mm, axis=1)
-Fh_sig_vadv_vint_iceshelf =  np.nanmean(Fh_sig_vadv_vint_iceshelf_mm, axis=1)
-
-# Horz adv
-Fs_sig_hadv_vint_iceshelf_mm = -Fs_rate_hadv_vint_iceshelf_mm_int*Dt/1e6
-Fh_sig_hadv_vint_iceshelf_mm = -Fh_rate_hadv_vint_iceshelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_hadv_vint_iceshelf =  np.nanmean(Fs_sig_hadv_vint_iceshelf_mm, axis=1)
-Fh_sig_hadv_vint_iceshelf =  np.nanmean(Fh_sig_hadv_vint_iceshelf_mm, axis=1)
-
 # DIFF
 Fs_sig_diff_vint_iceshelf_mm = -Fs_rate_diff_vint_iceshelf_mm_int*Dt/1e6 
 Fh_sig_diff_vint_iceshelf_mm = -Fh_rate_diff_vint_iceshelf_mm_int*Dt/1e6 
@@ -420,20 +379,6 @@ F_sig_diff_vint_iceshelf_mm = -Fs_sig_diff_vint_iceshelf_mm + Fh_sig_diff_vint_i
 Fs_sig_diff_vint_iceshelf =  np.nanmean(Fs_sig_diff_vint_iceshelf_mm, axis=1)
 Fh_sig_diff_vint_iceshelf =  np.nanmean(Fh_sig_diff_vint_iceshelf_mm, axis=1)
 F_sig_diff_vin_iceshelft = -Fs_sig_diff_vint_iceshelf + Fh_sig_diff_vint_iceshelf
-
-# vert diff
-Fs_sig_vdiff_vint_iceshelf_mm = -Fs_rate_vdiff_vint_iceshelf_mm_int*Dt/1e6
-Fh_sig_vdiff_vint_iceshelf_mm = -Fh_rate_vdiff_vint_iceshelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_vdiff_vint_iceshelf =  np.nanmean(Fs_sig_vdiff_vint_iceshelf_mm, axis=1)
-Fh_sig_vdiff_vint_iceshelf =  np.nanmean(Fh_sig_vdiff_vint_iceshelf_mm, axis=1)
-
-# horz diff
-Fs_sig_hdiff_vint_iceshelf_mm = -Fs_rate_hdiff_vint_iceshelf_mm_int*Dt/1e6
-Fh_sig_hdiff_vint_iceshelf_mm = -Fh_rate_hdiff_vint_iceshelf_mm_int*Dt/1e6
-# - calculate the anual average of the monthly ars:
-Fs_sig_hdiff_vint_iceshelf =  np.nanmean(Fs_sig_hdiff_vint_iceshelf_mm, axis=1)
-Fh_sig_hdiff_vint_iceshelf =  np.nanmean(Fh_sig_hdiff_vint_iceshelf_mm, axis=1)
 
 # NET
 Fs_sig_net_vint_iceshelf_mm = -Fs_rate_net_vint_iceshelf_mm_int*Dt/1e6 
@@ -486,9 +431,8 @@ plt.xlim(26.5,28),plt.ylim(-5,5)
 plt.grid(True)
 plt.text(26.6,1.5,'Buoyancy loss')
 plt.text(26.6,-1.5,'Buoyancy gain')
-plt.title('Total tendencies')
 
-name_fig="waom4extend_shflim_S_0.25Q_WMT_Full_heat-salt_vint_annual_iceshelf.png"
+name_fig="waom4extend_shflim_S_0.25Q_yr20_WMT_Full_heat-salt_vint_annual_iceshelf.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 
 ### plot some maps
@@ -560,7 +504,7 @@ for irho in np.arange(29,35):#15,37):
     ax4.add_feature(cfeature.LAND, zorder=1, edgecolor='black', facecolor='white') 
     plt.clim(-5e-5,5e-5)
                                                 
-    name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_Full_annual_yr10_l" + str(irho)  + "_iceshelf.png"
+    name_fig="waom4extend_shflim_S_0.25Q_yr20_WMTmaps_Full_annual_yr10_l" + str(irho)  + "_iceshelf.png"
     plt.savefig(fig_path + name_fig, dpi=300)
     plt.close()
 
@@ -611,27 +555,23 @@ ax4.set_extent([-180, 180, -90, -60], crs=ccrs.PlateCarree())
 ax4.add_feature(cfeature.LAND, zorder=1, edgecolor='black', facecolor='white') 
 plt.clim(-5e-5,5e-5)
                                                 
-name_fig="waom4extend_shflim_S_0.25Q_WMTmaps_Full_annual_yr10_iceshelf.png"
+name_fig="waom4extend_shflim_S_0.25Q_yr20_WMTmaps_Full_annual_yr10_iceshelf.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
 # --- Save transformation arrays:
-npy_path = '/users/boeiradi/COLD_project/postprocessing/tmp_files/'
+npy_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/tmp_files/'
 
 print('Saving files .....')
 
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_sfc_total',rho_grid = rho_grid, F_sig_sfc_iceshelf = F_sig_sfc_iceshelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_sfc_salt',rho_grid = rho_grid, Fs_sig_sfc_iceshelf = Fs_sig_sfc_iceshelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_sfc_heat',rho_grid = rho_grid, Fh_sig_sfc_iceshelf = Fh_sig_sfc_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_sfc_total',rho_grid = rho_grid, F_sig_sfc_iceshelf = F_sig_sfc_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_sfc_salt',rho_grid = rho_grid, Fs_sig_sfc_iceshelf = Fs_sig_sfc_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_sfc_heat',rho_grid = rho_grid, Fh_sig_sfc_iceshelf = Fh_sig_sfc_iceshelf)
 
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_vint_salt_net',rho_grid = rho_grid, Fs_sig_net_vint_iceshelf = Fs_sig_net_vint_iceshelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_vint_salt_diff',rho_grid = rho_grid, Fs_sig_diff_vint_iceshelf = Fs_sig_diff_vint_iceshelf,\
-        Fs_sig_vdiff_vint_iceshelf = Fs_sig_vdiff_vint_iceshelf, Fs_sig_hdiff_vint_iceshelf = Fs_sig_hdiff_vint_iceshelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_vint_salt_adv',rho_grid = rho_grid, Fs_sig_adv_vint_iceshelf = Fs_sig_adv_vint_iceshelf,\
-        Fs_sig_vadv_vint_iceshelf = Fs_sig_vadv_vint_iceshelf, Fs_sig_hadv_vint_iceshelf = Fs_sig_hadv_vint_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_vint_salt_net',rho_grid = rho_grid, Fs_sig_net_vint_iceshelf = Fs_sig_net_vint_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_vint_salt_diff',rho_grid = rho_grid, Fs_sig_diff_vint_iceshelf = Fs_sig_diff_vint_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_vint_salt_adv',rho_grid = rho_grid, Fs_sig_adv_vint_iceshelf = Fs_sig_adv_vint_iceshelf)
 
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_vint_heat_net', rho_grid = rho_grid, Fh_sig_net_vint_iceshelf = Fh_sig_net_vint_iceshelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_vint_heat_diff', rho_grid = rho_grid, Fh_sig_diff_vint_iceshelf = Fh_sig_diff_vint_iceshelf,\
-        Fh_sig_vdiff_vint_iceshelf = Fh_sig_vdiff_vint_iceshelf, Fh_sig_hdiff_vint_iceshelf = Fh_sig_hdiff_vint_iceshelf)
-np.savez(npy_path + 'WAOM4extend_Full_WMT_iceshelf_vint_heat_adv', rho_grid = rho_grid, Fh_sig_adv_vint_iceshelf = Fh_sig_adv_vint_iceshelf,\
-        Fh_sig_vadv_vint_iceshelf = Fh_sig_vadv_vint_iceshelf, Fh_sig_hadv_vint_iceshelf = Fh_sig_hadv_vint_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_vint_heat_net', rho_grid = rho_grid, Fh_sig_net_vint_iceshelf = Fh_sig_net_vint_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_vint_heat_diff', rho_grid = rho_grid, Fh_sig_diff_vint_iceshelf = Fh_sig_diff_vint_iceshelf)
+np.savez(npy_path + 'WAOM4extend_yr20_Full_WMT_iceshelf_vint_heat_adv', rho_grid = rho_grid, Fh_sig_adv_vint_iceshelf = Fh_sig_adv_vint_iceshelf)

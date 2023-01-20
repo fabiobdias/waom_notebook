@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -P v45
-#PBS -q normal 
+#PBS -P gh9
+#PBS -q express
 #PBS -l ncpus=1
 #PBS -l mem=16GB
 #PBS -l walltime=1:00:00
@@ -12,4 +12,10 @@
 # Run Python applications
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Maps_validations/WAOM10_shflim_S_ORAS5em_0.25Q_EN4_validation+sea-ice_maps.py > $PBS_JOBID.log
 
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Maps_validations/WAOM10_shflim_S_0.25Q_EN4_validation+sea-ice_maps.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Maps_validations/WAOM10_shflim_S_0.25Q_EN4_validation+sea-ice_maps.py > $PBS_JOBID.log
+
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Maps_validations/WAOM10extend_shflim_S_0.25Q_EN4_validation+sea-ice_maps.py > $PBS_JOBID.log
+
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Maps_validations/WAOM10extend_shflim_S_0.25Q_ORAS5em_EN4_validation+sea-ice_maps.py > $PBS_JOBID.log
+
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Maps_validations/WAOM10shrink_shflim_S_0.25Q_ORAS5em_EN4_validation+sea-ice_maps.py > $PBS_JOBID.log

@@ -9,6 +9,7 @@ import matplotlib
 roms_dir = os.path.join('/g','data3','hh5','tmp','access-om','fbd581', 'ROMS')
 proj_dir = os.path.join(roms_dir,'postprocessing','figs','Grid_avg')
 data_dir = os.path.join(roms_dir,'OUTPUT')
+scratch_dir = os.path.join('/scratch' ,'gh9','fbd581', 'ROMS')
 
 #from dask.distributed import Client
 #C = Client()
@@ -31,7 +32,8 @@ def total_bmb(avg,grd,vostock,time_slice):
     return bmb,ismr,mask
 
 grd10_path = os.path.join(roms_dir,'waom10_frc','waom10_grd.nc')
-waom10_ORAS5_path = os.path.join(data_dir,'waom10_shflim_S_ORAS5em_0.25Q','output_01-20yr','ocean_avg_00??.nc')
+#waom10_ORAS5_path = os.path.join(data_dir,'waom10_shflim_S_ORAS5em_0.25Q','output_01-20yr','ocean_avg_00??.nc')
+waom10_ORAS5_path = os.path.join(scratch_dir,'waom10_shflim_S_ORAS5em_0.25Q','output_01-20yr','ocean_avg_00??.nc')
 waom10_ECCO2_path = os.path.join(data_dir,'waom10_shflim_S_0.25Q','output_01-20yr','ocean_avg_00??.nc')
 vostock10 = [np.arange(200,260),np.arange(400,480)]
 time = slice('2007','2026')

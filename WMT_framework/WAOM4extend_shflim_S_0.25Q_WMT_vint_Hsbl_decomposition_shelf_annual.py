@@ -355,9 +355,7 @@ F_sig_sfc_shelf = -Fs_sig_sfc_shelf + Fh_sig_sfc_shelf
 
 # plots:
 
-
 fig = plt.figure(figsize=(12,10))
-
 
 ax3 = fig.add_subplot(223)
 plt.title('Continental shelf')

@@ -35,12 +35,12 @@ def read_section_roms(sec_name,ind_ij, ind_len): # 'wed',0,0
 #if sec_name == 'WWed' or sec_name ==  'EWed' or sec_name ==  'ERos' or sec_name ==  'Wros':
 
 # vars to export
-    variables = ['temp','salt','zeta','z_rho']
+    variables = ['temp','salt','zeta','z_rho','Hsbl']
 
 # load ROMS avg output
     count = 0
     for mm in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-        ds = xr.open_dataset("/scratch/project_2000789/boeiradi/waom2extend_shflim_S_0.25Q/output_yr5/ocean_avg_00" + mm + "avg.nc")
+        ds = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_avg_00" + mm + ".nc")
         print('size temp and time length: ', ds.temp.shape, len(ds.salt.isel(xi_rho=10, eta_rho=100, s_rho=0)))
         # ----- # first calculate z_rho spatially and put into ds xarray
         ds = ds.set_coords(['Cs_r', 'Cs_w', 'hc', 'h', 'Vtransform'])
@@ -51,7 +51,7 @@ def read_section_roms(sec_name,ind_ij, ind_len): # 'wed',0,0
         
         print('size temp and time length: ', ds.temp.shape, len(ds.salt.isel(xi_rho=10, eta_rho=100, s_rho=0)))
         print(sec_name, 'xi =', xi_pt[ind_ij], 'eta =', eta_sec_ini[ind_ij], eta_sec_end[ind_ij])
-        ds[variables].isel(ocean_time=slice(0, 8),xi_rho=xi_pt[ind_ij], eta_rho=slice(eta_sec_ini[ind_ij],eta_sec_end[ind_ij])).to_netcdf('/users/boeiradi/COLD_project/postprocessing/ncdf_tmp/WAOM2extend_shflim_S_sec_'+ sec_name + '_5days_mm' + mm + '.nc', mode='w', format='NETCDF4')
+        ds[variables].isel(ocean_time=slice(0, 8),xi_rho=xi_pt[ind_ij], eta_rho=slice(eta_sec_ini[ind_ij],eta_sec_end[ind_ij])).to_netcdf('/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/ncdf_tmp/WAOM2extend_shflim_S_sec_'+ sec_name + '_5days_mm' + mm + '.nc', mode='w', format='NETCDF4')
         
     return 
 
@@ -59,6 +59,6 @@ read_section_roms('WWed',0, 0)
 
 read_section_roms('EWed',1, 1)
 
-read_section_roms('ERos',2, 2)
+#read_section_roms('ERos',2, 2)
 
-read_section_roms('WRos',3, 3)
+#read_section_roms('WRos',3, 3)
