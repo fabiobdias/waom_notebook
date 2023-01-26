@@ -1,5 +1,5 @@
 # waom_notebook
-# By Fabio Boeira Dias (CCRC-UNSW, previously at University of Helsinki/Finland)
+# Fabio Boeira Dias (CCRC-UNSW, previously at University of Helsinki/Finland)
 
 Python scripts to pre- and (mostly) postprocessing of the Whole Antarctica Ocean Model (WAOM)
 
