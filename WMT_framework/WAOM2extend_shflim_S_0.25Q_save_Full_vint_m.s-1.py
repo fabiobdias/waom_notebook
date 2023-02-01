@@ -26,9 +26,16 @@ from matplotlib.colors import LinearSegmentedColormap   # for custom colormaps
 #import iris.plot as iplt
 import gsw
 
+# define output directory:
+outdir = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q'
+outdir = '/scratch/gi0/fbd581/waom2extend_shflim_S_0.25Q/'
+
+#yr = 'yr5'
+yr = 'yr1'
+
 # load ROMS avg output
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    ds = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_avg_00' + mm + '.nc')
+    ds = xr.open_dataset(outdir + '/output_' + yr + '_diag/ocean_avg_00' + mm + '.nc')
     print(ds.variables["temp"].shape)
     temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
     salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
@@ -97,7 +104,7 @@ for mm in np.arange(0,12):
 ## read diffusion/advection of temperature - horizontal and vertical terms:
 
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    dd = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_dia_00' + mm + '.nc')
+    dd = xr.open_dataset(outdir + '/output_' + yr  + '_diag/ocean_dia_00' + mm + '.nc')
     print(dd.variables["temp_vdiff"].shape)
     temp_hdiff_tmp = np.nanmean(dd.variables["temp_hdiff"], axis=0)
     temp_vdiff_tmp = np.nanmean(dd.variables["temp_vdiff"], axis=0)
@@ -130,7 +137,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
 ## read diffusion/advection of temperature - horizontal and vertical terms:
 
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    dd = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_dia_00' + mm + '.nc')
+    dd = xr.open_dataset(outdir + '/output_' + yr  + '_diag/ocean_dia_00' + mm + '.nc')
     print(dd.variables["salt_vdiff"].shape)
     salt_hdiff_tmp = np.nanmean(dd.variables["salt_hdiff"], axis=0)
     salt_vdiff_tmp = np.nanmean(dd.variables["salt_vdiff"], axis=0)
@@ -163,7 +170,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
 ## read tendency terms for temperature and salinity:
 
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    dd = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_dia_00' + mm + '.nc')
+    dd = xr.open_dataset(outdir + '/output_' + yr  + '_diag/ocean_dia_00' + mm + '.nc')
     salt_rate_tmp = np.nanmean(dd.variables["salt_rate"], axis=0)
     temp_rate_tmp = np.nanmean(dd.variables["temp_rate"], axis=0)
     
@@ -325,7 +332,7 @@ plt.colorbar(cy)
 #plt.clim(-.0001,.0001)
 
 fig_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/WMT/'
-name_fig='waom2extend_shflim_S_0.25Q_Full_OHB_Sep_yr5.png'
+name_fig='waom2extend_shflim_S_0.25Q_Full_OHB_Sep_' + yr  + '.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -334,7 +341,7 @@ plt.close()
 # - temp and salt averaged over MLD [temp_MLD, salt_MLD] 
 # - temp/salt diffusion components (xz and yz, across MLD)
 
-fn = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/Full_vint_vars_for_WMT_m.s-1.nc'
+fn = outdir + '/output_' + yr  + '_diag/Full_vint_vars_for_WMT_m.s-1.nc'
 dx = Dataset(fn, 'w', format='NETCDF4')
 
 times = dx.createDimension('times', 12)
