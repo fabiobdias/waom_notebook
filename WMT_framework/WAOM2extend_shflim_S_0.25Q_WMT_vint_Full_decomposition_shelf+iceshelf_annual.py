@@ -25,9 +25,16 @@ from matplotlib.colors import LinearSegmentedColormap   # for custom colormaps
 #import iris.plot as iplt
 import gsw
 
+# output directory
+gdata_dir = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q'
+out_dir = '/scratch/gi0/fbd581/waom2extend_shflim_S_0.25Q'
+
+#yr = 'yr5'
+yr = 'yr1'
+
 # load ROMS avg output
 for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
-    ds = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_avg_00' + mm + '.nc')
+    ds = xr.open_dataset(out_dir + '/output_' + yr + '_diag/ocean_avg_00' + mm + '.nc')
     print(ds.variables["temp"].shape)
     temp_tmp = np.nanmean(ds.variables["temp"], axis=0)
     salt_tmp = np.nanmean(ds.variables["salt"], axis=0)
@@ -88,7 +95,7 @@ for mm  in ['01','02','03','04','05','06','07','08','09','10','11','12']:
     
 sigma_t_sfc = gsw.rho(salt[:,-1,:,:],temp[:,-1,:,:],0) - 1000
 
-di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_avg_0001.nc')
+di = xr.open_dataset(out_dir + '/output_' + yr + '_diag/ocean_avg_0001.nc')
 ice_draft = di.variables["zice"]
 
 mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
@@ -106,7 +113,7 @@ for tt in np.arange(0,12):
     dz_inv[tt,:,:,:] = np.diff(z_w_sorted,axis=2)
     dz[tt,:,:,:] = dz_inv[tt,:,:,::-1]
 
-dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom2_frc/waom2extend_grd.nc")
+dg = xr.open_dataset(gdata_dir + "/../../waom2_frc/waom2extend_grd.nc")
 
 lat_rho = dg.variables["lat_rho"]
 lon_rho = dg.variables["lon_rho"]
@@ -145,7 +152,7 @@ cy=plt.pcolor(mask_zice)#, transform=ccrs.PlateCarree())
 plt.colorbar(cy)
 plt.clim(0.,1.)
 
-dx = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/Full_vint_vars_for_WMT_m.s-1.nc')
+dx = xr.open_dataset(out_dir + '/output_' + yr + '_diag/Full_vint_vars_for_WMT_m.s-1.nc')
 
 # - variables integrated throughout the ML; multiply by -1 b/c dz is negative.
 temp_vdia_diff_full_vint = dx.variables["temp_vdia_diff_full_vint"]
@@ -610,7 +617,7 @@ ax4.set_extent([-180, 180, -90, -60], crs=ccrs.PlateCarree())
 ax4.add_feature(cfeature.LAND, zorder=1, edgecolor='black', facecolor='white') 
 plt.clim(-5e-5,5e-5)
                                                 
-name_fig="waom2extend_shflim_S_0.25Q_WMTmaps_Full_annual_yr10_shelf_noice.png"
+name_fig="waom2extend_shflim_S_0.25Q_WMTmaps_Full_annual_" + yr + "_shelf_noice.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -619,20 +626,20 @@ npy_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/tmp_files/'
 
 print('Saving files .....')
 
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_sfc_total',rho_grid = rho_grid, F_sig_sfc_shelf_noice = F_sig_sfc_shelf_noice)
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_sfc_salt',rho_grid = rho_grid, Fs_sig_sfc_shelf_noice = Fs_sig_sfc_shelf_noice)
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_sfc_heat',rho_grid = rho_grid, Fh_sig_sfc_shelf_noice = Fh_sig_sfc_shelf_noice)
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_sfc_total',rho_grid = rho_grid, F_sig_sfc_shelf_noice = F_sig_sfc_shelf_noice)
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_sfc_salt',rho_grid = rho_grid, Fs_sig_sfc_shelf_noice = Fs_sig_sfc_shelf_noice)
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_sfc_heat',rho_grid = rho_grid, Fh_sig_sfc_shelf_noice = Fh_sig_sfc_shelf_noice)
 
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_vint_salt_net',rho_grid = rho_grid, Fs_sig_net_vint_shelf_noice = Fs_sig_net_vint_shelf_noice)
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_vint_salt_diff',rho_grid = rho_grid, Fs_sig_diff_vint_shelf_noice = Fs_sig_diff_vint_shelf_noice,\
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_vint_salt_net',rho_grid = rho_grid, Fs_sig_net_vint_shelf_noice = Fs_sig_net_vint_shelf_noice)
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_vint_salt_diff',rho_grid = rho_grid, Fs_sig_diff_vint_shelf_noice = Fs_sig_diff_vint_shelf_noice,\
         Fs_sig_vdiff_vint_shelf_noice = Fs_sig_vdiff_vint_shelf_noice, Fs_sig_hdiff_vint_shelf_noice = Fs_sig_hdiff_vint_shelf_noice)
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_vint_salt_adv',rho_grid = rho_grid, Fs_sig_adv_vint_shelf_noice = Fs_sig_adv_vint_shelf_noice,\
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_vint_salt_adv',rho_grid = rho_grid, Fs_sig_adv_vint_shelf_noice = Fs_sig_adv_vint_shelf_noice,\
         Fs_sig_vadv_vint_shelf_noice = Fs_sig_vadv_vint_shelf_noice, Fs_sig_hadv_vint_shelf_noice = Fs_sig_hadv_vint_shelf_noice)
 
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_vint_heat_net', rho_grid = rho_grid, Fh_sig_net_vint_shelf_noice = Fh_sig_net_vint_shelf_noice)
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_vint_heat_diff', rho_grid = rho_grid, Fh_sig_diff_vint_shelf_noice = Fh_sig_diff_vint_shelf_noice,\
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_vint_heat_net', rho_grid = rho_grid, Fh_sig_net_vint_shelf_noice = Fh_sig_net_vint_shelf_noice)
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_vint_heat_diff', rho_grid = rho_grid, Fh_sig_diff_vint_shelf_noice = Fh_sig_diff_vint_shelf_noice,\
         Fh_sig_vdiff_vint_shelf_noice = Fh_sig_vdiff_vint_shelf_noice, Fh_sig_hdiff_vint_shelf_noice = Fh_sig_hdiff_vint_shelf_noice)
-np.savez(npy_path + 'WAOM2extend_Full_WMT_shelf_noice_vint_heat_adv', rho_grid = rho_grid, Fh_sig_adv_vint_shelf_noice = Fh_sig_adv_vint_shelf_noice,\
+np.savez(npy_path + 'WAOM2extend_yr1_Full_WMT_shelf_noice_vint_heat_adv', rho_grid = rho_grid, Fh_sig_adv_vint_shelf_noice = Fh_sig_adv_vint_shelf_noice,\
         Fh_sig_vadv_vint_shelf_noice = Fh_sig_vadv_vint_shelf_noice, Fh_sig_hadv_vint_shelf_noice = Fh_sig_hadv_vint_shelf_noice)
 
 # decomponsed components (vert/horiz) added to respective adv/diff files
