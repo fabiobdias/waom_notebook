@@ -1,0 +1,13 @@
+
+======================================================================================
+                  Resource Usage on 2023-04-19 09:16:03:
+   Job Id:             79581400.gadi-pbs
+   Project:            e14
+   Exit Status:        271 (Linux Signal 15 SIGTERM Termination)
+   Service Units:      4608.32
+   NCPUs Requested:    48                     NCPUs Used: 48              
+                                           CPU Time Used: 06:55:32        
+   Memory Requested:   190.0GB               Memory Used: 3.0GB           
+   Walltime requested: 48:00:00            Walltime Used: 48:00:12        
+   JobFS requested:    100.0MB                JobFS used: 0B              
+======================================================================================
