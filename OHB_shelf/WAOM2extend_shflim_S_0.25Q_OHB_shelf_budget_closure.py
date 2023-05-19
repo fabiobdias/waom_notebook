@@ -66,13 +66,13 @@ z_w = ds.zeta + (ds.zeta + ds.h) * Zo_w + ds.zice
 ds.close()
 
 ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_his_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, decode_times=False) #, chuncks="auto", concat_dim="ocean_time"
-
 #- preserving 5-days avgs
-temp_snap = ds.variables["temp"]
-
+temp_snap = ds.temp.drop_sel(ocean_time=[17,36,55])
 ds.close()
 
-#%%time
+print('temp_snap')
+print(temp_snap)
+
 
 # calculate dT/dt by differentiating temp_snap:
 temp_Rate = np.empty(temp_snap.shape)
@@ -83,18 +83,21 @@ ds = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581//ROMS/OUTPUT/waom2extend
 temp_ini = ds.variables["temp"].isel(ocean_time=-1, two=0) # 5-days mean
 ds.close()
 
+print('temp_ini.shape')
+print(temp_ini.shape)
 
 tlen = len(temp[:,0,0,0])
 
 #%%time
 
 # transform to DataArray
-temp_snap = xr.DataArray(temp_snap)
+#temp_snap = xr.DataArray(temp_snap) # -> already done above (when deleting extra snapshots
 temp_ini = xr.DataArray(temp_ini)
 
 # - append temp_ini to first time index in temp_snap and then do diff
 temp_snap = xr.concat([temp_ini,temp_snap], 'ocean_time')
 dT = temp_snap.diff('ocean_time')
+print('dT.shape')
 print(dT.shape)
 
 #
@@ -103,10 +106,9 @@ temp_Rate = np.divide(dT, dt)
 temp_Rate = xr.DataArray(temp_Rate)
 # temp_Rate=temp_Rate.rename({'dim_0':'ocean_time','dim_1':'s_rho','dim_2':'eta_rho','dim_3':'xi_rho'})
 
-print(dT.shape)
-
 temp_Rate = temp_Rate.transpose('ocean_time','s_rho','eta_rho','xi_rho')
 
+print('temp_Rate.shape')
 print(temp_Rate.shape)
 
 # calculate surface sigma_theta (potential density)
@@ -158,13 +160,12 @@ Tf = -1.95 # degC
 
 # use -1000 mask to compute integral of surface heat fluxes and ocean heat content tendency:
 # temp_Rate=xr.DataArray(temp_Rate)
-temp_rate = temp_Rate.transpose('ocean_time','s_rho','eta_rho','xi_rho')
 dT = dT.transpose('ocean_time','s_rho','eta_rho','xi_rho')
 
 ## Integrated heat tendency and sfc heat flux terms to check heat budget closure:
 
 # 1. area-integral surface heat flux
-tlen = len(temp_rate[:,0,0,0])
+tlen = len(temp_Rate[:,0,0,0])
 area_sum =  np.nansum(np.nansum(area,axis=1), axis=0)
 
 print('------------------ tracking error in waom2 OHB closure: --------------------')

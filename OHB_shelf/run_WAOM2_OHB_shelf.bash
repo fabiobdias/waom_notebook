@@ -11,4 +11,4 @@
 
  
 # Run Python applications
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/WAOM2extend_shflim_S_0.25Q_OHB_shef_budget_closure.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/WAOM2extend_shflim_S_0.25Q_OHB_shelf_budget_closure.py > $PBS_JOBID.log
