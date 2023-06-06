@@ -359,8 +359,8 @@ contour_index_array = np.arange(1, len(contour_ordering)+1)
 
 vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
 
-ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
-# ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+#ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
 
 #- preserving 5-days avgs
 temp = ds.variables["temp"]
@@ -576,10 +576,10 @@ z_rho_across_contour_xr = xr.DataArray(z_rho_across_contour, coords = coordinate
 
 files_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
 
-temp_along_contour_xr.to_netcdf(files_path + 'WAOM4_temp_1500m', mode='w', format="NETCDF4")
-Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_Tf_heat_transp_1500m', mode='w', format="NETCDF4")
-heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_heat_transp_1500m', mode='w', format="NETCDF4")
-z_rho_across_contour_xr.to_netcdf(files_path + 'WAOM4_Zrho_1500m', mode='w', format="NETCDF4")
+temp_along_contour_xr.to_netcdf(files_path + 'WAOM4_notides_temp_1500m', mode='w', format="NETCDF4")
+Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Tf_heat_transp_1500m', mode='w', format="NETCDF4")
+heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_heat_transp_1500m', mode='w', format="NETCDF4")
+z_rho_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Zrho_1500m', mode='w', format="NETCDF4")
 
 ##  ------------ save some figures:
 fig_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/OHB_shelf/'
@@ -592,7 +592,7 @@ plt.plot((np.sum(np.cumsum(heat_trans_across_contour, axis=1),axis=0))+(np.sum(n
 ax.set_ylabel('Cumulative heat transport \n across 1500m isobath (W)');
 plt.grid()
 plt.legend()
-name_fig='WAOM4_Cross-1500m_transport_vint_raw.png'
+name_fig='WAOM4_notides_Cross-1500m_transport_vint_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -607,7 +607,7 @@ plt.plot(np.cumsum(heat_trans_across_contour[-1,:], axis=0), '--b', label='Heat 
 ax.set_ylabel('Cumulative heat transport \n across 1500m isobath (W)');
 plt.grid()
 plt.legend()
-name_fig='WAOM4_Cross-1500m_transport_z-levels_raw.png'
+name_fig='WAOM4_notides_Cross-1500m_transport_z-levels_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -624,7 +624,7 @@ plt.plot(np.arange(0,len(heat_trans_across_contour[0,:])-N+1),np.convolve(x, np.
 ax.set_ylabel('Cross-shelf heat transport \n across 1500m isobath (W)');
 plt.grid()
 plt.legend()
-name_fig='WAOM4_Cross-1500m_transport_vint-smoothed_raw.png'
+name_fig='WAOM4_notides_Cross-1500m_transport_vint-smoothed_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -634,7 +634,7 @@ fig, ax = plt.subplots(nrows=1, figsize = (10, 5))
 plt.pcolormesh(heat_trans_across_contour)
 plt.colorbar()
 ax.set_ylabel('Heat transport (anomaly referenced to $T_f$) \n across 1500m isobath (W)');
-name_fig='WAOM4_Cross-1500m_transport_section_raw.png'
+name_fig='WAOM4_notides_Cross-1500m_transport_section_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -787,7 +787,7 @@ axes[1].set_xlim(0, distance_along_contour[-1])
 axes[1].set_xlabel('Longitude coordinates along contour')
 axes[1].set_ylabel('Cumulative transport (W)');
 axes[1].grid()
-name_fig='WAOM4_Cross-1500m_CumTransport_vint.png'
+name_fig='WAOM4_notides_Cross-1500m_CumTransport_vint.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -823,7 +823,7 @@ axes[1].grid()
 plt.plot(np.sum(heat_trans_across_contour, axis=0)*1e-15, '-k', label='Heat transport vert-integ.',linewidth=0.1)
 plt.plot(0*np.ones(heat_trans_across_contour[0,:].shape), '-k', label='Heat transport vert-integ. smoothed', linewidth=1)
 
-name_fig='WAOM4_Cross-1500m_CumTransport_smoothed_vint.png'
+name_fig='WAOM4_notides_Cross-1500m_CumTransport_smoothed_vint.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 

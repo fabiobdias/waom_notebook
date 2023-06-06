@@ -18,4 +18,5 @@
 
 # OSC evolution with subregions
 #srun python -s /users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py
-srun python -s /users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py
+#srun python -s /users/boeiradi/COLD_project/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4x2extend_shflim_S_0.25Q_SSS+OSC_evolution_shelf.py
+

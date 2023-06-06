@@ -67,7 +67,7 @@ ds.close()
 
 ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_his_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, decode_times=False) #, chuncks="auto", concat_dim="ocean_time"
 #- preserving 5-days avgs
-temp_snap = ds.temp.drop_sel(ocean_time=[17,36,55])
+temp_snap = ds.temp.drop_sel(ocean_time=55).drop_sel(ocean_time=36).drop_sel(ocean_time=17)
 ds.close()
 
 print('temp_snap')

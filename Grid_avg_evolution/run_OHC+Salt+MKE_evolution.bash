@@ -1,9 +1,9 @@
 #!/bin/bash
-#PBS -P v45
-#PBS -q express
-#PBS -l ncpus=1
-#PBS -l mem=64GB
-#PBS -l walltime=1:00:00
+#PBS -P e14
+#PBS -q normal
+#PBS -l ncpus=8
+#PBS -l mem=128GB
+#PBS -l walltime=03:00:00
 #PBS -l software=python
 #PBS -l wd
 #PBS -l storage=gdata/hh5+scratch/gh9
@@ -19,4 +19,7 @@
 
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Grid_avg_evolution/WAOM10extend_x4km_shflim_S_ORAS5emXECCO2_0.25Q_OHC+Salt+MKE_evolution.py > $PBS_JOBID.log
 
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Grid_avg_evolution/WAOM10extendXshrink_shflim_S_ORAS5emXECCO2_0.25Q_OHC+Salt+MKE_evolution.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Grid_avg_evolution/WAOM10extendXshrink_shflim_S_ORAS5emXECCO2_0.25Q_OHC+Salt+MKE_evolution.py > $PBS_JOBID.log
+
+# WAOM4 x WAOM4-NOTIDE
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/Grid_avg_evolution/WAOM4extend_tidesXnotides_OHC+OSC+MKE_evolution_shelf.py > $PBS_JOBID.log
