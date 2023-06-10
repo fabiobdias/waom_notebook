@@ -759,6 +759,22 @@ for i in np.arange(100, len(lon_along_contour.one)):
 
 # distance_indices[13] = len(lon_along_contour.contour_index.values)-1
 
+### save variables along the 1500-m isobath contour: lon/lat/distance_along_contour
+
+lon_along_contour
+lon_along_contour.to_netcdf(files_path + 'WAOM4_lon_along_1500m', mode='w', format="NETCDF4")
+
+lat_along_contour
+lat_along_contour.to_netcdf(files_path + 'WAOM4_lat_along_1500m', mode='w', format="NETCDF4")
+## distance
+coordinatesD=dict(contour_index_array=(['contour_index_array'], np.arange(0,len(contour_index_array))))
+distance_along_contour_xr = xr.DataArray(distance_along_contour, coords = coordinatesD, dims = ['contour_index_array'])
+distance_along_contour_xr.to_netcdf(files_path + 'WAOM4_dist_along_1500m', mode='w', format="NETCDF4")
+# distance indices
+coordinatesI=dict(lon_index=(['lon_index'], np.arange(0,9)))
+distance_indices_xr = xr.DataArray(distance_indices, coords = coordinatesI, dims = ['lon_index'])
+distance_indices_xr.to_netcdf(files_path + 'WAOM4_dist_indices_1500m', mode='w', format="NETCDF4")
+
 # Plot cumulative transport against distance along the contour:
 
 #
