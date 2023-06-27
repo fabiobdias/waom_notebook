@@ -16,7 +16,7 @@ import numpy as np
 import numpy.ma as ma
 import cartopy.crs as ccrs
 import matplotlib as mpl
-mpl.use('Agg')
+# mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as dates
 from matplotlib.ticker import NullFormatter
@@ -39,14 +39,15 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # load ice draft to create masks
-di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_avg_0001.nc')
+di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag/ocean_avg_0001.nc')
 ice_draft = di.variables["zice"]
 
 mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
 mask_outice = ma.masked_where(ice_draft >= 0, np.ones(ice_draft.shape))
+mask_zice_1000 = ma.masked_where(ice_draft < -1000, np.ones(ice_draft.shape))
 di.close()
 
-dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom2_frc/waom2extend_grd.nc")
+dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
 
 lat_rho = dg.variables["lat_rho"]
 lon_rho = dg.variables["lon_rho"]
@@ -66,14 +67,14 @@ area=np.divide(1,pm*pn)
 ## creating the contour, such as a isobath, and extracting the coordinates using matplotlib's Path class
 # based on https://github.com/COSIMA/cosima-recipes/blob/master/DocumentedExamples/Cross-contour_transport.ipynb
 
-h = dg.h.load()
+zice = dg.zice.load()
 
-h = h*mask_zice
+zice = zice*mask_zice_1000
 
 # Fill in land with zeros:
-h = h.fillna(0)
+zice = zice.fillna(0)
 
-contour_depth = 1500.
+contour_depth = -.01
 
 ## Choose whether you want your contour on the u or t grid.
 grid_sel = 't'
@@ -84,18 +85,18 @@ elif grid_sel == 't':
     x_var = lon_rho
     y_var = lat_rho
 
-count = 133 # contour 133 for 1500m isobath, WAOM4
+count = 398 # contour 398 for calving-front isobath, WAOM4
 x_contour = []
 y_contour = []
 
 # Create the contour:
-sc = plt.contour(h, levels=[contour_depth])
+sc = plt.contour(zice, levels=[contour_depth])
 for collection in sc.collections:
     for path in collection.get_paths():
         # print(collection.get_paths())
         
         count += 1
-        if count ==  212:
+        if count ==  399:
             # Write down the lat/lon indices
             for ii in range(np.size(path.vertices[:,0])):
                 x_contour.append(int(np.round(path.vertices[ii][0])))
@@ -359,7 +360,8 @@ contour_index_array = np.arange(1, len(contour_ordering)+1)
 
 vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
 
-ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom2extend_shflim_S_0.25Q/output_yr5_diag/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+# ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
 
 #- preserving 5-days avgs
 temp = ds.variables["temp"]
@@ -387,7 +389,7 @@ ds.close()
 months=np.arange(0,365)*(30.41667) ## Daily
 
 coordinatesT=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                    eta_rho=(['eta_rho'], np.arange(0,2800)), xi_rho=(['xi_rho'], np.arange(0,3150)))
+                    eta_rho=(['eta_rho'], np.arange(0,1400)), xi_rho=(['xi_rho'], np.arange(0,1575)))
 temp_xr = xr.DataArray(temp, coords = coordinatesT, dims = ['ocean_time','s_rho','eta_rho', 'xi_rho'])
 
 # rename dimensions as simply eta/xi
@@ -440,9 +442,9 @@ HuonT_avg = np.nanmean(HuonT, axis=0)
 
 # Convert heat transport to data arrays:
 coordinates3Du = dict(z=(['z'], np.arange(0,31)),
-                    eta_u=(['eta_u'], np.arange(0,2800)), xi_u=(['xi_u'], np.arange(0,3149)))
+                    eta_u=(['eta_u'], np.arange(0,1400)), xi_u=(['xi_u'], np.arange(0,1574)))
 coordinates3Dv = dict(z=(['z'], np.arange(0,31)),
-                    eta_v=(['eta_v'], np.arange(0,2799)), xi_v=(['xi_v'], np.arange(0,3150)))
+                    eta_v=(['eta_v'], np.arange(0,1399)), xi_v=(['xi_v'], np.arange(0,1575)))
 
 HuonT_avg = xr.DataArray(HuonT_avg, coords = coordinates3Du, dims = ['z','eta_u', 'xi_u'])
 HvomT_avg = xr.DataArray(HvomT_avg, coords = coordinates3Dv, dims = ['z','eta_v', 'xi_v'])
@@ -563,7 +565,7 @@ for zz in range(0,31):
     z_rho_across_contour[zz,:] = z_rho_across_contour_tmp
     del z_rho_across_contour_tmp
 
-##  ----------- save variables along the 1500-m isobath contour:
+##  ----------- save variables along the Calving front contour:
 # 1st need to convert to xarray:
 coordinatesC=dict(s_rho=(['s_rho'], np.arange(0,31)),
                     contour_index_array=(['contour_index_array'], np.arange(0,len(contour_index_array))))
@@ -575,10 +577,10 @@ z_rho_across_contour_xr = xr.DataArray(z_rho_across_contour, coords = coordinate
 
 files_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
 
-temp_along_contour_xr.to_netcdf(files_path + 'WAOM2_temp_1500m', mode='w', format="NETCDF4")
-Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM2_Tf_heat_transp_1500m', mode='w', format="NETCDF4")
-heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM2_heat_transp_1500m', mode='w', format="NETCDF4")
-z_rho_across_contour_xr.to_netcdf(files_path + 'WAOM2_Zrho_1500m', mode='w', format="NETCDF4")
+temp_along_contour_xr.to_netcdf(files_path + 'WAOM4_notides_temp_CalvingFront', mode='w', format="NETCDF4")
+Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Tf_heat_transp_CalvingFront', mode='w', format="NETCDF4")
+heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_heat_transp_CalvingFront', mode='w', format="NETCDF4")
+z_rho_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Zrho_CalvingFront', mode='w', format="NETCDF4")
 
 ##  ------------ save some figures:
 fig_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/OHB_shelf/'
@@ -591,7 +593,7 @@ plt.plot((np.sum(np.cumsum(heat_trans_across_contour, axis=1),axis=0))+(np.sum(n
 ax.set_ylabel('Cumulative heat transport \n across 1500m isobath (W)');
 plt.grid()
 plt.legend()
-name_fig='WAOM2_Cross-1500m_transport_vint_raw.png'
+name_fig='WAOM4_notides_Cross-CalvingFront_transport_vint_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -606,7 +608,7 @@ plt.plot(np.cumsum(heat_trans_across_contour[-1,:], axis=0), '--b', label='Heat 
 ax.set_ylabel('Cumulative heat transport \n across 1500m isobath (W)');
 plt.grid()
 plt.legend()
-name_fig='WAOM2_Cross-1500m_transport_z-levels_raw.png'
+name_fig='WAOM4_notides_Cross-CalvingFront_transport_z-levels_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -623,7 +625,7 @@ plt.plot(np.arange(0,len(heat_trans_across_contour[0,:])-N+1),np.convolve(x, np.
 ax.set_ylabel('Cross-shelf heat transport \n across 1500m isobath (W)');
 plt.grid()
 plt.legend()
-name_fig='WAOM2_Cross-1500m_transport_vint-smoothed_raw.png'
+name_fig='WAOM4_notides_Cross-CalvingFront_transport_vint-smoothed_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -633,7 +635,7 @@ fig, ax = plt.subplots(nrows=1, figsize = (10, 5))
 plt.pcolormesh(heat_trans_across_contour)
 plt.colorbar()
 ax.set_ylabel('Heat transport (anomaly referenced to $T_f$) \n across 1500m isobath (W)');
-name_fig='WAOM2_Cross-1500m_transport_section_raw.png'
+name_fig='WAOM4_notides_Cross-CalvingFront_transport_section_raw.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -761,16 +763,18 @@ for i in np.arange(100, len(lon_along_contour.one)):
 ### save variables along the 1500-m isobath contour: lon/lat/distance_along_contour
 
 lon_along_contour
-lon_along_contour.to_netcdf(files_path + 'WAOM2_lon_along_1500m', mode='w', format="NETCDF4")
+lon_along_contour.to_netcdf(files_path + 'WAOM4_notides_lon_along_CalvingFront', mode='w', format="NETCDF4")
 
 lat_along_contour
-lat_along_contour.to_netcdf(files_path + 'WAOM2_lat_along_1500m', mode='w', format="NETCDF4")
+lat_along_contour.to_netcdf(files_path + 'WAOM4_notides_lat_along_CalvingFront', mode='w', format="NETCDF4")
 ## distance
 coordinatesD=dict(contour_index_array=(['contour_index_array'], np.arange(0,len(contour_index_array))))
-
 distance_along_contour_xr = xr.DataArray(distance_along_contour, coords = coordinatesD, dims = ['contour_index_array'])
-distance_along_contour_xr.to_netcdf(files_path + 'WAOM2_dist_along_1500m', mode='w', format="NETCDF4")
-
+distance_along_contour_xr.to_netcdf(files_path + 'WAOM4_notides_dist_along_CalvingFront', mode='w', format="NETCDF4")
+# distance indices
+coordinatesI=dict(lon_index=(['lon_index'], np.arange(0,9)))
+distance_indices_xr = xr.DataArray(distance_indices, coords = coordinatesI, dims = ['lon_index'])
+distance_indices_xr.to_netcdf(files_path + 'WAOM4_notides_dist_indices_CalvingFront', mode='w', format="NETCDF4")
 
 # Plot cumulative transport against distance along the contour:
 
@@ -800,7 +804,7 @@ axes[1].set_xlim(0, distance_along_contour[-1])
 axes[1].set_xlabel('Longitude coordinates along contour')
 axes[1].set_ylabel('Cumulative transport (W)');
 axes[1].grid()
-name_fig='WAOM2_Cross-1500m_CumTransport_vint.png'
+name_fig='WAOM4_notides_Cross-CalvingFront_CumTransport_vint.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -836,7 +840,7 @@ axes[1].grid()
 plt.plot(np.sum(heat_trans_across_contour, axis=0)*1e-15, '-k', label='Heat transport vert-integ.',linewidth=0.1)
 plt.plot(0*np.ones(heat_trans_across_contour[0,:].shape), '-k', label='Heat transport vert-integ. smoothed', linewidth=1)
 
-name_fig='WAOM2_Cross-1500m_CumTransport_smoothed_vint.png'
+name_fig='WAOM4_notides_Cross-CalvingFront_CumTransport_smoothed_vint.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 

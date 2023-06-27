@@ -189,11 +189,13 @@ mask_coast = ma.masked_where(np.isnan(shflux[0,:,:]), np.ones(shflux[0,:,:].shap
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (10,5))
 
 ax[0].title.set_text('WAOM4-NOTIDE \n Heat content tendencies')
+#aa=ax[0].pcolormesh(np.nanmean(temp_rate_vol[1:-1], axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
 aa=ax[0].pcolormesh(np.nanmean(temp_rate_vol[1:-1], axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
 # plt.colorbar(aa)
 
 ax[1].title.set_text('WAOM4-NOTIDE \n Surface heat flux')
-bb=ax[1].pcolormesh(np.nanmean(shflux[1:-1], axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
+#bb=ax[1].pcolormesh(np.nanmean(shflux[1:-1], axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
+bb=ax[1].pcolormesh(np.nanmean(shflux, axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
 
 cax2 = plt.axes([0.92, 0.12, 0.01, 0.75])
 cb = plt.colorbar(bb, cax=cax2, orientation='vertical')

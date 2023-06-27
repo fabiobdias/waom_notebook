@@ -13,8 +13,9 @@ import xarray as xr
 import numpy as np
 import numpy.ma as ma
 import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 import matplotlib as mpl
-# mpl.use('Agg')
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as dates
 from matplotlib.ticker import NullFormatter
@@ -112,8 +113,7 @@ temp_ini = xr.DataArray(temp_ini, dims = ['ocean_time','s_rho','eta_rho','xi_rho
 
 # - append temp_ini to first time index in temp_snap and then do diff
 temp_snap = xr.concat([temp_ini,temp_snap], 'ocean_time')
-# remove first timestep (cames from first index in the rst file):
-temp_snap = temp_snap.drop_sel(ocean_time=0)
+
 print(temp_snap)
 
 dT = temp_snap.diff('ocean_time')
@@ -216,24 +216,24 @@ for mm in np.arange(0,tlen):
     temp_rate_int[mm] = np.nansum(np.nansum(temp_rate_vol[mm,:],axis=1), axis=0)*Cp*rho0
 
 
-fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (12,9))
 
-aa=ax[0,0].pcolormesh(np.nanmean(temp_rate_vol, axis=0)*mask_shelf, vmin=-100, vmax=100, cmap='coolwarm')
+# mask of the coast
+mask_coast = ma.masked_where(np.isnan(shflux[0,:,:]), np.ones(shflux[0,:,:].shape))
+
+# plot maps dOHC/dt and shflux:
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (10,5))
+
+ax[0].title.set_text('WAOM2 \n Heat content tendencies')
+aa=ax[0].pcolormesh(np.nanmean(temp_rate_vol, axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
 # plt.colorbar(aa)
 
-bb=ax[0,1].pcolormesh(np.nanmean(shflux, axis=0)*mask_shelf, vmin=-100, vmax=100, cmap='coolwarm')
+ax[1].title.set_text('WAOM2 \n Surface heat flux')
+bb=ax[1].pcolormesh(np.nanmean(shflux, axis=0)*mask_shelf*mask_coast, vmin=-100, vmax=100, cmap='coolwarm')
 
 cax2 = plt.axes([0.92, 0.12, 0.01, 0.75])
 cb = plt.colorbar(bb, cax=cax2, orientation='vertical')
 cb.ax.set_ylabel('W.m$^{-2}$')
-
 name_fig="waom2_OHC+shflux_shelf_annual_maps.png"
-plt.savefig(fig_path + name_fig, dpi=300)
-plt.close()
-
-plt.plot(shflux[:,400,200])
-plt.plot(shflux2[:,400,200],'--')
-name_fig="waom2_shflux1vs2_shelf_annual_pt.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
@@ -254,8 +254,13 @@ print('SHF integ. over the shelf (annual):', np.nanmean(shflux_int))#*1e-15)
 ohc_tend = temp_rate_int - np.nanmean(temp_rate_int)
 shflux_tend = shflux_int - np.nanmean(shflux_int)
 
-months=np.arange(0,73)*(5/30.41667)
+months=np.arange(0,72)*(5/30.41667)
 
+# print vars shapes B4 plotting:
+print('months, shflux_tend, ohc_tend shapes:')
+print(months.shape, shflux_tend.shape, ohc_tend.shape)
+
+fig = plt.figure(figsize=(10,6))
 plt.plot(months,shflux_tend, label='Sfc heat flux')
 plt.plot(months,ohc_tend, label='OHC tendency')
 plt.plot(months,shflux_int*0,'--k')
@@ -265,6 +270,8 @@ plt.ylim([-1.5e14,1.5e14])
 plt.legend()
 plt.ylabel('Heat transport (W)')
 plt.xlabel('Time (months)')
+plt.title('WAOM2')
+
 name_fig="waom2_heat_budget_closure_shelf.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
