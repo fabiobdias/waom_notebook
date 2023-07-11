@@ -374,8 +374,8 @@ def extract_transp_across_contour(var_x, var_y):   # var:4D [time,eta_rho,xi_rho
 
     for tt in range(0,tlen): # loop through time
         for zz in range(0,zlen): # loop through z-levels
-            var_x_tmp = var_x[tt,zz,:,:]
-            var_y_tmp = var_y[tt,zz,:,:]
+            var_x_tmp = var_x[tt,zz,:,:]*mask_x_transport_Ugrd
+            var_y_tmp = var_y[tt,zz,:,:]*mask_y_transport_Vgrd
 
             # stack transports into 1d and drop any points not on contour:
             x_var_1d_tmp = var_x_tmp.stack(contour_index = ['eta', 'xi'])
@@ -405,6 +405,20 @@ coordinates3Du = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
 coordinates3Dv = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                     eta_v=(['eta_v'], np.arange(0,559)), xi_v=(['xi_v'], np.arange(0,630)))
 
+# correct Huon/Hvom and HuonT/HvomT using mask_x/y_transport:
+#  - convection for the northward (+) and southward (-) across contour
+#HuonT_corr = np.empty(HuonT.shape)
+#HvomT_corr = np.empty(HvomT.shape)
+#
+#for tt in range(0,73):
+#    for zz in range(0,31):
+#        HuonT_corr[tt,zz,:] = HuonT[tt,zz,:]*mask_x_transport_Ugrd
+#        HvomT_corr[tt,zz,:] = HvomT[tt,zz,:]*mask_y_transport_Vgrd
+#
+# - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate heat transport
+#HuonT_xr = xr.DataArray(HuonT_corr, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])
+#HvomT_xr = xr.DataArray(HvomT_corr, coords = coordinates3Dv, dims = ['ocean_time','s_rho','eta_v', 'xi_v'])
+
 # - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate heat transport
 HuonT_xr = xr.DataArray(HuonT, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])
 HvomT_xr = xr.DataArray(HvomT, coords = coordinates3Dv, dims = ['ocean_time','s_rho','eta_v', 'xi_v'])
@@ -420,7 +434,6 @@ Tf = -1.95 # in WAOM10
 # now multiply heat transport by rho0 x Cp x [units: J/s = Watt]
 heat_xtransp = HuonT_xr*Cp*rho0
 heat_ytransp = HvomT_xr*Cp*rho0
-
 
 # extract variables:
 # 1. temp

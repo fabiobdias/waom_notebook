@@ -343,12 +343,12 @@ ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom
 
 #- preserving 5-days avgs
 temp = ds.variables["temp"]
-salt = ds.variables["salt"]
-shflux = ds.variables["shflux"]
-ssflux = ds.variables["ssflux"]
-m = ds.variables["m"]
-HvomT = ds.variables["Hvom_temp"]       ## !!! Huon_temp/Hvom_temp were not saved in the original run
-HuonT = ds.variables["Huon_temp"]       ## now it's running here: /scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag
+#salt = ds.variables["salt"]
+#shflux = ds.variables["shflux"]
+#ssflux = ds.variables["ssflux"]
+#m = ds.variables["m"]
+#HvomT = ds.variables["Hvom_temp"]       ## !!! Huon_temp/Hvom_temp were not saved in the original run
+#HuonT = ds.variables["Huon_temp"]       ## now it's running here: /scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag
 Hvom = ds.variables["Hvom"]
 Huon = ds.variables["Huon"]
 
@@ -373,8 +373,8 @@ def extract_transp_across_contour(var_x, var_y):   # var:4D [time,eta_rho,xi_rho
 
     for tt in range(0,tlen): # loop through time
         for zz in range(0,zlen): # loop through z-levels
-            var_x_tmp = var_x[tt,zz,:,:]
-            var_y_tmp = var_y[tt,zz,:,:]
+            var_x_tmp = var_x[tt,zz,:,:]*mask_x_transport_Ugrd
+            var_y_tmp = var_y[tt,zz,:,:]*mask_y_transport_Vgrd
 
             # stack transports into 1d and drop any points not on contour:
             x_var_1d_tmp = var_x_tmp.stack(contour_index = ['eta', 'xi'])

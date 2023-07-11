@@ -36,14 +36,14 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # load ice draft to create masks
-di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag/ocean_avg_0001.nc')
+di = xr.open_dataset('/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag/ocean_avg_0001.nc')
 ice_draft = di.variables["zice"]
 
 mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
 mask_outice = ma.masked_where(ice_draft >= 0, np.ones(ice_draft.shape))
 di.close()
 
-dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
+dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom10_frc/waom10extend_grd.nc")
 
 lat_rho = dg.variables["lat_rho"]
 lon_rho = dg.variables["lon_rho"]
@@ -81,7 +81,8 @@ elif grid_sel == 't':
     x_var = lon_rho
     y_var = lat_rho
 
-count = 133 # contour 133 for 1500m isobath, WAOM4
+    fig = plt.figure(figsize = (8, 6))
+count = 164 # contour 87 for 2000m isobath, 165 for 1500m
 x_contour = []
 y_contour = []
 
@@ -339,16 +340,16 @@ contour_index_array = np.arange(1, len(contour_ordering)+1)
 
 vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
 
-ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
 
 #- preserving 5-days avgs
 temp = ds.variables["temp"]
-#salt = ds.variables["salt"]
-#shflux = ds.variables["shflux"]
-#ssflux = ds.variables["ssflux"]
-#m = ds.variables["m"]
-#HvomT = ds.variables["Hvom_temp"]       ## !!! Huon_temp/Hvom_temp were not saved in the original run
-#HuonT = ds.variables["Huon_temp"]       ## now it's running here: /scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag
+salt = ds.variables["salt"]
+shflux = ds.variables["shflux"]
+ssflux = ds.variables["ssflux"]
+m = ds.variables["m"]
+HvomT = ds.variables["Hvom_temp"]       ## !!! Huon_temp/Hvom_temp were not saved in the original run
+HuonT = ds.variables["Huon_temp"]       ## now it's running here: /scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag
 Hvom = ds.variables["Hvom"]
 Huon = ds.variables["Huon"]
 
@@ -396,15 +397,25 @@ def extract_transp_across_contour(var_x, var_y):   # var:4D [time,eta_rho,xi_rho
     return transp_across_contour
 
 # convert temp to DataArray to extract values along contour:
-months=np.arange(0,365)*(1/30.41667)
+months=np.arange(0,73)*(5/30.41667)
 
 # Convert heat transport to data arrays:
 coordinates3Du = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                    eta_u=(['eta_u'], np.arange(0,1400)), xi_u=(['xi_u'], np.arange(0,1574)))
+                    eta_u=(['eta_u'], np.arange(0,560)), xi_u=(['xi_u'], np.arange(0,629)))
 coordinates3Dv = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                    eta_v=(['eta_v'], np.arange(0,1399)), xi_v=(['xi_v'], np.arange(0,1575)))
+                    eta_v=(['eta_v'], np.arange(0,559)), xi_v=(['xi_v'], np.arange(0,630)))
 
-# - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate Tf heat transport
+# correct Huon/Hvom and HuonT/HvomT using mask_x/y_transport:
+#  - convection for the northward (+) and southward (-) across contour
+#Huon_corr = np.empty(Huon.shape)
+#Hvom_corr = np.empty(Hvom.shape)
+#
+#for tt in range(0,73):
+#    for zz in range(0,31):
+#        Huon_corr[tt,zz,:] = Huon[tt,zz,:]*mask_x_transport_Ugrd
+#        Hvom_corr[tt,zz,:] = Hvom[tt,zz,:]*mask_y_transport_Vgrd
+
+# - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate heat transport
 Huon_xr = xr.DataArray(Huon, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])
 Hvom_xr = xr.DataArray(Hvom, coords = coordinates3Dv, dims = ['ocean_time','s_rho','eta_v', 'xi_v'])
 
@@ -412,25 +423,15 @@ Hvom_xr = xr.DataArray(Hvom, coords = coordinates3Dv, dims = ['ocean_time','s_rh
 Huon_xr = Huon_xr.rename({'eta_u': 'eta','xi_u': 'xi'})
 Hvom_xr = Hvom_xr.rename({'eta_v': 'eta','xi_v': 'xi'})
 
-# determine constants:
-rho0 = 1025 # kg. m-3
-Cp = 3989.245 # J.kg-1.degC-1
-Tf = -1.95 # in WAOM10
-# now multiply transport (m3.s-1) by rho0 x Cp x Tf [units: J/s = Watt]
-Tf_heat_xtransp = Huon_xr*Cp*rho0*Tf
-Tf_heat_ytransp = Hvom_xr*Cp*rho0*Tf
-
-
 # extract variables:
-# 1. temp
-Tf_heat_trans_across_contour = extract_transp_across_contour(Tf_heat_xtransp, Tf_heat_ytransp)
+# 1. vol transp
+vol_trans_across_contour = extract_transp_across_contour(Huon_xr, Hvom_xr)
 
 # save to netcdf file:
 coordinatesC=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                     contour_index_array=(['contour_index_array'], np.arange(0,len(contour_index_array))))
 
-Tf_heat_trans_across_contour_xr = xr.DataArray(Tf_heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
+heat_trans_across_contour_xr = xr.DataArray(vol_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
 files_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Tf_heat_trans_1500m_daily', mode='w', format="NETCDF4")
-
+heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_vol_trans_1500m_5daily', mode='w', format="NETCDF4")
 

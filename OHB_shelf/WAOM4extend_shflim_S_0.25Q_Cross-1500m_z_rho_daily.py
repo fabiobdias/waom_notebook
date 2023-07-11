@@ -343,14 +343,14 @@ ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom
 
 #- preserving 5-days avgs
 temp = ds.variables["temp"]
-salt = ds.variables["salt"]
-shflux = ds.variables["shflux"]
-ssflux = ds.variables["ssflux"]
-m = ds.variables["m"]
-HvomT = ds.variables["Hvom_temp"]       ## !!! Huon_temp/Hvom_temp were not saved in the original run
-HuonT = ds.variables["Huon_temp"]       ## now it's running here: /scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag
-Hvom = ds.variables["Hvom"]
-Huon = ds.variables["Huon"]
+#salt = ds.variables["salt"]
+#shflux = ds.variables["shflux"]
+#ssflux = ds.variables["ssflux"]
+#m = ds.variables["m"]
+#HvomT = ds.variables["Hvom_temp"]       ## !!! Huon_temp/Hvom_temp were not saved in the original run
+#HuonT = ds.variables["Huon_temp"]       ## now it's running here: /scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag
+#Hvom = ds.variables["Hvom"]
+#Huon = ds.variables["Huon"]
 
 ds = ds.set_coords(['Cs_r', 'Cs_w', 'hc', 'h', 'Vtransform'])
 

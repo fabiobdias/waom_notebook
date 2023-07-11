@@ -374,8 +374,8 @@ def extract_transp_across_contour(var_x, var_y):   # var:4D [time,eta_rho,xi_rho
 
     for tt in range(0,tlen): # loop through time
         for zz in range(0,zlen): # loop through z-levels
-            var_x_tmp = var_x[tt,zz,:,:]
-            var_y_tmp = var_y[tt,zz,:,:]
+            var_x_tmp = var_x[tt,zz,:,:]*mask_x_transport_Ugrd
+            var_y_tmp = var_y[tt,zz,:,:]*mask_y_transport_Vgrd
 
             # stack transports into 1d and drop any points not on contour:
             x_var_1d_tmp = var_x_tmp.stack(contour_index = ['eta', 'xi'])
@@ -404,6 +404,17 @@ coordinates3Du = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                     eta_u=(['eta_u'], np.arange(0,560)), xi_u=(['xi_u'], np.arange(0,629)))
 coordinates3Dv = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                     eta_v=(['eta_v'], np.arange(0,559)), xi_v=(['xi_v'], np.arange(0,630)))
+
+# correct Huon/Hvom and HuonT/HvomT using mask_x/y_transport:
+#  - convection for the northward (+) and southward (-) across contour
+#Huon_corr = np.empty(Huon.shape)
+#Hvom_corr = np.empty(Hvom.shape)
+#
+#for tt in range(0,73):
+#    for zz in range(0,31):
+#        Huon_corr[tt,zz,:] = Huon[tt,zz,:]*mask_x_transport_Ugrd
+#        Hvom_corr[tt,zz,:] = Hvom[tt,zz,:]*mask_y_transport_Vgrd
+#
 
 # - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate Tf heat transport
 Huon_xr = xr.DataArray(Huon, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])

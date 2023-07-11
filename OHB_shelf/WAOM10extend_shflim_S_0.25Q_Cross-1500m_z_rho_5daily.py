@@ -81,7 +81,6 @@ elif grid_sel == 't':
     x_var = lon_rho
     y_var = lat_rho
 
-    fig = plt.figure(figsize = (8, 6))
 count = 164 # contour 87 for 2000m isobath, 165 for 1500m
 x_contour = []
 y_contour = []

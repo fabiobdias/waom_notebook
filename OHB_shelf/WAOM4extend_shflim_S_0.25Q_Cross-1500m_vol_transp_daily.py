@@ -339,7 +339,7 @@ contour_index_array = np.arange(1, len(contour_ordering)+1)
 
 vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
 
-ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+ds = xr.open_mfdataset(paths="/g/data3/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
 
 #- preserving 5-days avgs
 temp = ds.variables["temp"]
@@ -352,13 +352,13 @@ temp = ds.variables["temp"]
 Hvom = ds.variables["Hvom"]
 Huon = ds.variables["Huon"]
 
-ds = ds.set_coords(['Cs_r', 'Cs_w', 'hc', 'h', 'Vtransform'])
+#ds = ds.set_coords(['Cs_r', 'Cs_w', 'hc', 'h', 'Vtransform'])
 
-Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * ds.h) / (ds.hc + ds.h)
-z_rho = ds.zeta + (ds.zeta + ds.h) * Zo_rho + ds.zice
-print("Vtransform=2")
-Zo_w = (ds.hc * ds.s_w + ds.Cs_w * ds.h) / (ds.hc + ds.h)
-z_w = ds.zeta + (ds.zeta + ds.h) * Zo_w + ds.zice
+#Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * ds.h) / (ds.hc + ds.h)
+#z_rho = ds.zeta + (ds.zeta + ds.h) * Zo_rho + ds.zice
+#print("Vtransform=2")
+#Zo_w = (ds.hc * ds.s_w + ds.Cs_w * ds.h) / (ds.hc + ds.h)
+#z_w = ds.zeta + (ds.zeta + ds.h) * Zo_w + ds.zice
 
 ds.close()
 
@@ -404,7 +404,7 @@ coordinates3Du = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
 coordinates3Dv = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                     eta_v=(['eta_v'], np.arange(0,1399)), xi_v=(['xi_v'], np.arange(0,1575)))
 
-# - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate Tf heat transport
+# - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate vol transport
 Huon_xr = xr.DataArray(Huon, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])
 Hvom_xr = xr.DataArray(Hvom, coords = coordinates3Dv, dims = ['ocean_time','s_rho','eta_v', 'xi_v'])
 
@@ -412,25 +412,16 @@ Hvom_xr = xr.DataArray(Hvom, coords = coordinates3Dv, dims = ['ocean_time','s_rh
 Huon_xr = Huon_xr.rename({'eta_u': 'eta','xi_u': 'xi'})
 Hvom_xr = Hvom_xr.rename({'eta_v': 'eta','xi_v': 'xi'})
 
-# determine constants:
-rho0 = 1025 # kg. m-3
-Cp = 3989.245 # J.kg-1.degC-1
-Tf = -1.95 # in WAOM10
-# now multiply transport (m3.s-1) by rho0 x Cp x Tf [units: J/s = Watt]
-Tf_heat_xtransp = Huon_xr*Cp*rho0*Tf
-Tf_heat_ytransp = Hvom_xr*Cp*rho0*Tf
-
-
 # extract variables:
 # 1. temp
-Tf_heat_trans_across_contour = extract_transp_across_contour(Tf_heat_xtransp, Tf_heat_ytransp)
+vol_trans_across_contour = extract_transp_across_contour(Huon_xr, Hvom_xr)
 
 # save to netcdf file:
 coordinatesC=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                     contour_index_array=(['contour_index_array'], np.arange(0,len(contour_index_array))))
 
-Tf_heat_trans_across_contour_xr = xr.DataArray(Tf_heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
+vol_trans_across_contour_xr = xr.DataArray(vol_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
 files_path = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Tf_heat_trans_1500m_daily', mode='w', format="NETCDF4")
+vol_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_vol_trans_1500m_daily', mode='w', format="NETCDF4")
 
 
