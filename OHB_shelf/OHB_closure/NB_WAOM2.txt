@@ -1,0 +1,6 @@
+The waom2 experiment has unmatched his/avg time stamps - likely caused by the run splitted into monthly or 3-monthly chunks
+The ideal scenario would involve to re-run this with a matched DTs.
+Currently, I'm just deletting a few timestamps to get a closer match.
+
+This causes the waom2 scripts to have some differences other than horizontal resolution,
+being related with the treatment to delete and concatante the history and restart fields.
