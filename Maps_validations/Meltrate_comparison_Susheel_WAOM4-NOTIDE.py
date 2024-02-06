@@ -12,8 +12,10 @@ from matplotlib.colors import LinearSegmentedColormap   # for custom colormaps
 
 from datetime import datetime, timedelta
 
+import matplotlib.ticker as mticker
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
 from netCDF4 import Dataset
 from netCDF4 import num2date, date2num
@@ -354,3 +356,129 @@ name_fig="Susheel_waom10x4x4-notides_melt_rates_maps_annual_yr20_FRIS.png"
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
 
+# ----------------------------------------------------------------------------------------------------------------
+# load 1500 and calving front contours:
+tmp_files_dir = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
+expt = 'WAOM10'
+ds = xr.open_dataset(tmp_files_dir + expt + '_lon_along_1500m')
+lon_along_10km_shelf = ds.variables["one"]
+ds.close()
+ds = xr.open_dataset(tmp_files_dir + expt + '_lat_along_1500m')
+lat_along_10km_shelf = ds.variables["two"]
+ds.close()
+ds = xr.open_dataset(tmp_files_dir + expt + '_lon_along_CalvingFront')
+lon_along_10km_CF = ds.variables["one"]
+ds.close()
+ds = xr.open_dataset(tmp_files_dir + expt + '_lat_along_CalvingFront')
+lat_along_10km_CF = ds.variables["two"]
+ds.close()
+
+expt = 'WAOM4'
+ds = xr.open_dataset(tmp_files_dir + expt + '_lon_along_1500m')
+lon_along_4km_shelf = ds.variables["one"]
+ds.close()
+ds = xr.open_dataset(tmp_files_dir + expt + '_lat_along_1500m')
+lat_along_4km_shelf = ds.variables["two"]
+ds.close()
+ds = xr.open_dataset(tmp_files_dir + expt + '_lon_along_CalvingFront')
+lon_along_4km_CF = ds.variables["one"]
+ds.close()
+ds = xr.open_dataset(tmp_files_dir + expt + '_lat_along_CalvingFront')
+lat_along_4km_CF = ds.variables["two"]
+ds.close()
+
+
+proj = ccrs.PlateCarree(central_longitude=115.0)
+ratio = .3
+
+# for TIS/MUIS region:
+fig = plt.figure(figsize=(12,6))
+
+ax1 = fig.add_subplot(222, projection=proj)
+plt.title('B) WAOM10')
+cy=plt.pcolormesh(lon_rho_10km,lat_rho_10km,np.nanmean(m_10km, axis=0)*86400*365.25, transform=ccrs.PlateCarree(), cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+gl = ax1.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,linewidth=.5, color='gray', alpha=0.5, linestyle='--')
+gl.rotate_labels = False
+gl.xlabels_top = False
+gl.ylabels_right = False
+gl.xlines = True
+gl.xlocator = mticker.FixedLocator([105, 110, 120, 125])
+gl.ylocator = mticker.FixedLocator([-65, -66, -67])
+gl.xformatter = LONGITUDE_FORMATTER
+gl.yformatter = LATITUDE_FORMATTER
+gl.xlabel_style = {'size': 9, 'color': 'gray'}
+gl.ylabel_style = {'size': 9, 'color': 'gray'}
+ax1.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax1.add_feature(cfeature.LAND, zorder=1, facecolor='lightgray') #edgecolor='white',
+x_left, x_right = ax1.get_xlim()
+y_low, y_high = ax1.get_ylim()
+ax1.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+ax2 = fig.add_subplot(223, projection=proj)
+plt.title('C) WAOM4')
+cy=plt.pcolormesh(lon_rho_4km,lat_rho_4km,np.nanmean(m_4km, axis=0)*86400*365.25, transform=ccrs.PlateCarree(), cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+gl = ax2.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,linewidth=.5, color='gray', alpha=0.5, linestyle='--')
+gl.rotate_labels = False
+gl.xlabels_top = False
+gl.ylabels_right = False
+gl.xlines = True
+gl.xlocator = mticker.FixedLocator([105, 110, 120, 125])
+gl.ylocator = mticker.FixedLocator([-65, -66, -67])
+gl.xformatter = LONGITUDE_FORMATTER
+gl.yformatter = LATITUDE_FORMATTER
+gl.xlabel_style = {'size': 9, 'color': 'gray'}
+gl.ylabel_style = {'size': 9, 'color': 'gray'}
+ax2.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax2.add_feature(cfeature.LAND, zorder=1, facecolor='lightgray') #edgecolor='white',
+x_left, x_right = ax2.get_xlim()
+y_low, y_high = ax2.get_ylim()
+ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+ax3 = fig.add_subplot(224, projection=proj)
+plt.title('D) WAOM4-NOTIDE')
+cy=plt.pcolormesh(lon_rho_4km,lat_rho_4km,(np.nanmean(m_4kmNT, axis=0))*86400*365.25, transform=ccrs.PlateCarree(), cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+gl = ax3.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,linewidth=.5, color='gray', alpha=0.5, linestyle='--')
+gl.rotate_labels = False
+gl.xlabels_top = False
+gl.ylabels_right = False
+gl.xlines = True
+gl.xlocator = mticker.FixedLocator([105, 110, 120, 125])
+gl.ylocator = mticker.FixedLocator([-65, -66, -67])
+gl.xformatter = LONGITUDE_FORMATTER
+gl.yformatter = LATITUDE_FORMATTER
+gl.xlabel_style = {'size': 9, 'color': 'gray'}
+gl.ylabel_style = {'size': 9, 'color': 'gray'}
+ax3.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax3.add_feature(cfeature.LAND, zorder=1, facecolor='lightgray') #edgecolor='white',
+x_left, x_right = ax3.get_xlim()
+y_low, y_high = ax3.get_ylim()
+ax3.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+ax4 = fig.add_subplot(221, projection=proj)
+plt.pcolormesh(lon_rho_2km,lat_rho_2km, wb_rho, transform=ccrs.PlateCarree(),  cmap=plt.cm.seismic, vmin=Vmin, vmax=Vmax)#, norm=norm)
+plt.title('A) Adusumilli et al. (2020)')
+gl = ax4.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,linewidth=.5, color='gray', alpha=0.5, linestyle='--')
+gl.rotate_labels = False
+gl.xlabels_top = False
+gl.ylabels_right = False
+gl.xlines = True
+gl.xlocator = mticker.FixedLocator([105, 110, 120, 125])
+gl.ylocator = mticker.FixedLocator([-65, -66, -67])
+gl.xformatter = LONGITUDE_FORMATTER
+gl.yformatter = LATITUDE_FORMATTER
+gl.xlabel_style = {'size': 9, 'color': 'gray'}
+gl.ylabel_style = {'size': 9, 'color': 'gray'}
+ax4.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax4.add_feature(cfeature.LAND, zorder=1, facecolor='lightgray') #edgecolor='white',
+x_left, x_right = ax4.get_xlim()
+y_low, y_high = ax4.get_ylim()
+ax4.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+cbar_ax1 = fig.add_axes([0.13, 0.12, 0.76, 0.01])
+fig.colorbar(cy, cax=cbar_ax1, orientation='horizontal')
+cbar_ax1.set_xlabel('Melt rate (m.yr$^{-1}$)',fontsize=10)#, labelpad=-35)
+
+name_fig="Susheel_waom10x4x4-notides_melt_rates_maps_annual_yr20_EAntTIS.png"
+
+plt.savefig(fig_path + name_fig, dpi=300)
+plt.close()

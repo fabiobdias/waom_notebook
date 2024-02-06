@@ -449,6 +449,6 @@ if __name__== '__main__':
     
     Tf_heat_trans_across_contour_xr = xr.DataArray(Tf_heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4-notides_Tf_heat_trans_CF_daily', mode='w', format="NETCDF4")
+    Tf_heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_Tf_heat_trans_CF_daily', mode='w', format="NETCDF4")
     
     

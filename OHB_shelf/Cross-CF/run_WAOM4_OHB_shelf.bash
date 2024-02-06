@@ -17,7 +17,7 @@ module load conda/analysis3-unstable
 # run cross-CF transport/vars to save on tmp file:
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_temp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_salt_daily.py > $PBS_JOBID.log
-#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_z_rho_daily.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_z_rho_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_vol_transp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_heat_transp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4_Cross-CF_Tf_heat_transp_daily.py > $PBS_JOBID.log
@@ -29,4 +29,4 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4-notides_Cross-CF_z_rho_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4-notides_Cross-CF_vol_transp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4-notides_Cross-CF_heat_transp_daily.py > $PBS_JOBID.log
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4-notides_Cross-CF_Tf_heat_transp_daily.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM4-notides_Cross-CF_Tf_heat_transp_daily.py > $PBS_JOBID.log

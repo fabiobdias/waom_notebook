@@ -349,8 +349,8 @@ if __name__== '__main__':
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    #ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
-    ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
+    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+    #ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
     
     #- preserving 5-days avgs
     temp = ds.variables["temp"]

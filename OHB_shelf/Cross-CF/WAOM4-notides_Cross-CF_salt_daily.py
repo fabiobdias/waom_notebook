@@ -424,6 +424,6 @@ if __name__== '__main__':
     
     salt_along_contour_xr = xr.DataArray(salt_along_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    salt_along_contour_xr.to_netcdf(files_path + 'WAOM4-notides_salt_CF_daily', mode='w', format="NETCDF4")
+    salt_along_contour_xr.to_netcdf(files_path + 'WAOM4_notides_salt_CF_daily', mode='w', format="NETCDF4")
     
     

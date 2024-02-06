@@ -257,3 +257,89 @@ cbar_ax4.set_xlabel('')#, labelpad=-35)
 name_fig='waom4x4-NOTIDE_bottomTSmaps_yr10.png'
 plt.savefig(fig_path + name_fig, dpi=300)
 plt.close()
+
+
+# --------------------------------------------------------------------------
+# zoomm near TIS/MUIS
+
+# --- bottom
+
+tmin = -2.7
+tmax = 1.5
+smin = 34.1
+smax = 35.
+
+fig = plt.figure(figsize=(25,15))
+
+proj = ccrs.PlateCarree(central_longitude=115.0)
+ratio = .6667
+
+ax1 = fig.add_subplot(221, projection=proj)
+ct1=plt.pcolormesh(lon_rho_4km,lat_rho_4km,np.squeeze(temp_ann_4km[0,:,:])*mask_shelf_4km, transform=ccrs.PlateCarree(), cmap=plt.cm.plasma, vmin=tmin, vmax=tmax)
+# plt.title('Bottom temperature \n WAOM10')
+plt.title('WAOM4')
+ax1.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
+ax1.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax1.add_feature(cfeature.LAND, zorder=3, facecolor='lightgrey')
+ax1.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+x_left, x_right = ax1.get_xlim()
+y_low, y_high = ax1.get_ylim()
+ax1.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+ax2 = fig.add_subplot(222, projection=proj)
+cs1=plt.pcolormesh(lon_rho_4km,lat_rho_4km,np.squeeze(salt_ann_4km[0,:,:])*mask_shelf_4km, transform=ccrs.PlateCarree(), cmap=plt.cm.plasma, vmin=smin, vmax=smax)
+# plt.title('Bottom salinity \n WAOM10')
+plt.title('WAOM4')
+#ax2.gridlines() # draw_labels=True,linewidth=
+ax2.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
+ax2.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax2.add_feature(cfeature.LAND, zorder=3, facecolor='lightgrey')
+ax2.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+x_left, x_right = ax2.get_xlim()
+y_low, y_high = ax2.get_ylim()
+ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+
+ax3 = fig.add_subplot(223, projection=proj)
+ct1a=plt.pcolormesh(lon_rho_4km,lat_rho_4km,(np.squeeze(temp_ann_4kmNT[0,:,:])-np.squeeze(temp_ann_4km[0,:,:]))*mask_shelf_4km, transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-0.6, vmax=0.6)
+# plt.title('Bottom temperature \n WAOM10')
+plt.title('WAOM4-NOTIDE minus WAOM4')
+ax3.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
+ax3.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax3.add_feature(cfeature.LAND, zorder=3, facecolor='lightgrey')
+ax3.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+x_left, x_right = ax3.get_xlim()
+y_low, y_high = ax3.get_ylim()
+ax3.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+ax4 = fig.add_subplot(224, projection=proj)
+cs1a=plt.pcolormesh(lon_rho_4km,lat_rho_4km,(np.squeeze(salt_ann_4kmNT[0,:,:])-np.squeeze(salt_ann_4km[0,:,:]))*mask_shelf_4km, transform=ccrs.PlateCarree(), cmap=plt.cm.coolwarm, vmin=-.25, vmax=.25)
+# plt.title('Bottom salinity \n WAOM10')
+plt.title('WAOM4-NOTIDE minus WAOM4')
+ax4.add_feature(cfeature.LAND, zorder=3, edgecolor='white', facecolor='gray')
+ax4.set_extent([100, 130, -64.5, -67.5], crs=ccrs.PlateCarree())
+ax4.add_feature(cfeature.LAND, zorder=3, facecolor='lightgrey')
+ax4.add_feature(bathym, facecolor='none', edgecolor='black', linestyle='dashed', linewidth=1)
+x_left, x_right = ax4.get_xlim()
+y_low, y_high = ax4.get_ylim()
+ax4.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
+
+cbar_ax1 = fig.add_axes([0.08, 0.55, 0.01, 0.35])
+fig.colorbar(ct1, cax=cbar_ax1, orientation='vertical')
+cbar_ax1.set_ylabel('$^{\circ}$C')#, labelpad=-35)
+
+cbar_ax2 = fig.add_axes([0.9, 0.55, 0.01, 0.35])
+fig.colorbar(cs1, cax=cbar_ax2, orientation='vertical')
+cbar_ax2.set_xlabel('')#, labelpad=-35)
+
+cbar_ax3 = fig.add_axes([0.08, 0.1, 0.01, 0.35])
+fig.colorbar(ct1a, cax=cbar_ax3, orientation='vertical')
+cbar_ax3.set_ylabel('$^{\circ}$C')#, labelpad=-35)
+
+cbar_ax4 = fig.add_axes([0.9, 0.1, 0.01, 0.35])
+fig.colorbar(cs1a, cax=cbar_ax4, orientation='vertical')
+cbar_ax4.set_xlabel('')#, labelpad=-35)
+
+name_fig='waom4x4-NOTIDE_bottomTSmaps_yr10_EAntTIS.png'
+plt.savefig(fig_path + name_fig, dpi=300)
+plt.close()
