@@ -42,7 +42,7 @@ if __name__== '__main__':
     print(client)
     
     # load ice draft to create masks
-    di = xr.open_dataset('/scratch/gi0/fbd581/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_0001.nc')
+    di = xr.open_dataset('/g/data/hh5/tmp/access-om/fbd581//ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_0001.nc')
     ice_draft = di.variables["zice"]
     
     mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
@@ -86,27 +86,14 @@ if __name__== '__main__':
     elif grid_sel == 't':
         x_var = lon_rho
         y_var = lat_rho
-    
-    fig = plt.figure(figsize = (8, 6))
-    count = 164 # contour 87 for 2000m isobath, 165 for 1500m
-    x_contour = []
-    y_contour = []
-    
-    # Create the contour:
-    sc = plt.contour(h, levels=[contour_depth])
-    for collection in sc.collections:
-        for path in collection.get_paths():
-            # print(collection.get_paths())
-    
-            count += 1
-            if count ==  212:
-                # Write down the lat/lon indices
-                for ii in range(np.size(path.vertices[:,0])):
-                    x_contour.append(int(np.round(path.vertices[ii][0])))
-                    y_contour.append(int(np.round(path.vertices[ii][1])))
-    
-    #plt.scatter(x_contour, y_contour, s=5, alpha=0.5, color='tomato');
-    
+        
+# load contour generated from WAOM10_Extract_1500m_contour.ipynb
+    fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
+    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_x_contour.csv")
+    x_contour = xcon_np.tolist()
+    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_y_contour.csv")
+    y_contour = ycon_np.tolist()
+
     ## SHOULD I SMOOTH IT? PROBABLY YES!
     
     # Difference between two neighbouring indices
@@ -128,7 +115,7 @@ if __name__== '__main__':
     h_contour = np.zeros(len(x_contour))
     
     for ii in range(len(h_contour)):
-        h_contour[ii] = h[y_contour[ii], x_contour[ii]]
+        h_contour[ii] = h[int(y_contour[ii]), int(x_contour[ii])]
     
     # Get lat/lon along the contour
     
@@ -149,12 +136,14 @@ if __name__== '__main__':
     lon_along_contour = np.zeros((len(x_contour)))
     
     for ii in range(len(h_contour)):
-        lon_along_contour[ii] = x_var[y_contour[ii-1],x_contour[ii-1]]
-        lat_along_contour[ii] = y_var[y_contour[ii-1],x_contour[ii-1]]
+        lon_along_contour[ii] = x_var[int(y_contour[ii-1]),int(x_contour[ii-1])]
+        lat_along_contour[ii] = y_var[int(y_contour[ii-1]),int(x_contour[ii-1])]
     
     # Repeat the leftmost point at the end of the array.
     # (Required for masking contour above and below)
-    
+    print('testing error in 4km; print lat_along_contour/lon_along_contour shapes:')
+    print(lat_along_contour.shape, lon_along_contour.shape)
+
     lat_along_contour = np.append(lat_along_contour, lat_along_contour[0])
     lon_along_contour = np.append(lon_along_contour, lon_along_contour[0])
     
@@ -174,8 +163,7 @@ if __name__== '__main__':
     contour_mask = h*0
     
     for ii in range(num_points-1):
-        contour_mask[y_contour[ii], x_contour[ii]] = contour_mask_numbered[ii]+1
-    
+        contour_mask[int(y_contour[ii]), int(x_contour[ii])] = contour_mask_numbered[ii]+1
     mask_value = -1000
     contour_mask_numbered = contour_mask
     
@@ -348,7 +336,7 @@ if __name__== '__main__':
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
     
     #- preserving 5-days avgs
     temp = ds.variables["temp"]

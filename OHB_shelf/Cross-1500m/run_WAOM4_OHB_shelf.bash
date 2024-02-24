@@ -27,9 +27,9 @@ module load conda/analysis3-unstable
 
 ## WAOM4_NOTIDE
 # run cross-1500m transport/vars to save on tmp file:
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_temp_daily.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_temp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_salt_daily.py > $PBS_JOBID.log
-#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_z_rho_daily.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_z_rho_daily.py > $PBS_JOBID.log
 
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_vol_transp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_heat_transp_daily.py > $PBS_JOBID.log

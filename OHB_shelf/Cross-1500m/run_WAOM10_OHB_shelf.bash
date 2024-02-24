@@ -23,7 +23,7 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_Tf_heat_transp_5daily.py > $PBS_JOBID.log
 
 # daily outputs:
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_temp_daily.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_temp_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_salt_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_z_rho_daily.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_vol_transp_daily.py > $PBS_JOBID.log
@@ -31,4 +31,9 @@ python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_Tf_heat_transp_daily.py > $PBS_JOBID.log
 
 
+## 	TESTS WITH NEW CODE+BUG FIX:
+# https://github.com/COSIMA/cosima-recipes/pull/286
 
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_vol_transp_daily_oldCode.py > $PBS_JOBID.log
+
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_vol_transp_daily_newCode.py > $PBS_JOBID.log

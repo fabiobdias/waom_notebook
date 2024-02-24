@@ -86,27 +86,15 @@ if __name__== '__main__':
     elif grid_sel == 't':
         x_var = lon_rho
         y_var = lat_rho
-    
-    fig = plt.figure(figsize = (8, 6))
-    count = 133
-    x_contour = []
-    y_contour = []
-    
-    # Create the contour:
-    sc = plt.contour(h, levels=[contour_depth])
-    for collection in sc.collections:
-        for path in collection.get_paths():
-            # print(collection.get_paths())
-    
-            count += 1
-            if count ==  212:
-                # Write down the lat/lon indices
-                for ii in range(np.size(path.vertices[:,0])):
-                    x_contour.append(int(np.round(path.vertices[ii][0])))
-                    y_contour.append(int(np.round(path.vertices[ii][1])))
-    
-    #plt.scatter(x_contour, y_contour, s=5, alpha=0.5, color='tomato');
-    
+   
+##
+    fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
+
+    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_x_contour.csv")
+    x_contour = xcon_np.tolist()
+    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_y_contour.csv")
+    y_contour = ycon_np.tolist()
+
     ## SHOULD I SMOOTH IT? PROBABLY YES!
     
     # Difference between two neighbouring indices
@@ -128,7 +116,7 @@ if __name__== '__main__':
     h_contour = np.zeros(len(x_contour))
     
     for ii in range(len(h_contour)):
-        h_contour[ii] = h[y_contour[ii], x_contour[ii]]
+        h_contour[ii] = h[int(y_contour[ii]), int(x_contour[ii])]
     
     # Get lat/lon along the contour
     
@@ -149,12 +137,14 @@ if __name__== '__main__':
     lon_along_contour = np.zeros((len(x_contour)))
     
     for ii in range(len(h_contour)):
-        lon_along_contour[ii] = x_var[y_contour[ii-1],x_contour[ii-1]]
-        lat_along_contour[ii] = y_var[y_contour[ii-1],x_contour[ii-1]]
+        lon_along_contour[ii] = x_var[int(y_contour[ii-1]),int(x_contour[ii-1])]
+        lat_along_contour[ii] = y_var[int(y_contour[ii-1]),int(x_contour[ii-1])]
     
     # Repeat the leftmost point at the end of the array.
     # (Required for masking contour above and below)
-    
+    print('testing error in 4km; print lat_along_contour/lon_along_contour shapes:')
+    print(lat_along_contour.shape, lon_along_contour.shape)
+
     lat_along_contour = np.append(lat_along_contour, lat_along_contour[0])
     lon_along_contour = np.append(lon_along_contour, lon_along_contour[0])
     
@@ -174,17 +164,12 @@ if __name__== '__main__':
     contour_mask = h*0
     
     for ii in range(num_points-1):
-        contour_mask[y_contour[ii], x_contour[ii]] = contour_mask_numbered[ii]+1
-    
+        contour_mask[int(y_contour[ii]), int(x_contour[ii])] = contour_mask_numbered[ii]+1
     mask_value = -1000
     contour_mask_numbered = contour_mask
-    
-    # fill in points to south of contour:
-    contour_masked_above = np.copy(contour_mask_numbered)
-    contour_masked_above[-1, 0] = mask_value
-    
+        
     #Create mask
-    #Now we create a mask below contour sothat the direction of the contour can be determined
+    #Now we create a mask below contour so that the direction of the contour can be determined
     
     #Remark on computational inefficiency:
     #Note that creating masks with nested for loops is very inefficient. We should probably use boolean masks (just compare the entire array with mask_value), and DataArray.shift() or DataArray.roll() from each of the directions to generate the masks without using loops.
@@ -198,7 +183,7 @@ if __name__== '__main__':
     contour_masked_above[-1, 0] = mask_value
     
     # from top left:
-    for ii in range(len(contour_mask[0,:])-1): #x: len(x-axis) - 1
+    for ii in range(len(contour_mask[0,:])-1):               #x: len(x-axis) - 1
         for jj in range(len(contour_mask[:,0]))[::-1][:-1]: #y: len(y-axis)[from end to start, inverse order][from first to (end-1)]
             if contour_masked_above[jj, ii] == mask_value: # if north of contour line
                 if contour_masked_above[jj-1, ii] == 0: # if previous cell in Y-dir is zero (= south of contour line)
