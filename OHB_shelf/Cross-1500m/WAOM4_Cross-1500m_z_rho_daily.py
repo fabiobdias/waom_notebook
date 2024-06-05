@@ -89,7 +89,6 @@ if __name__== '__main__':
    
 ##
     fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
-
     xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_x_contour.csv")
     x_contour = xcon_np.tolist()
     ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_y_contour.csv")
@@ -167,7 +166,10 @@ if __name__== '__main__':
         contour_mask[int(y_contour[ii]), int(x_contour[ii])] = contour_mask_numbered[ii]+1
     mask_value = -1000
     contour_mask_numbered = contour_mask
-        
+    
+    # fill in points to south of contour:
+    contour_masked_above = np.copy(contour_mask_numbered)
+    contour_masked_above[-1, 0] = mask_value
     #Create mask
     #Now we create a mask below contour so that the direction of the contour can be determined
     
@@ -409,6 +411,6 @@ if __name__== '__main__':
     
     z_rho_along_contour_xr = xr.DataArray(z_rho_along_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    z_rho_along_contour_xr.to_netcdf(files_path + 'WAOM4_z_rho_1500m_5daily', mode='w', format="NETCDF4")
+    z_rho_along_contour_xr.to_netcdf(files_path + 'WAOM4_z_rho_1500m_daily', mode='w', format="NETCDF4")
     
     

@@ -259,7 +259,7 @@ if __name__== '__main__':
         # take transport grid point to south of t grid:
         elif (contour_masked_above[index_j-1, index_i]==0) and (contour_masked_above[index_j+1, index_i]==0):
             mask_y_transport[index_j-1, index_i] = 1
-            mask_y_transport[index_j, index_i] = -1        
+            mask_y_transport[index_j, index_i] = -1
             mask_y_transport_numbered[index_j-1, index_i] = new_number_count
             mask_y_transport_numbered[index_j, index_i] = new_number_count+1
             new_number_count += 2
@@ -349,7 +349,7 @@ if __name__== '__main__':
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
     
     #- preserving 5-days avgs
     temp = ds.variables["temp"]

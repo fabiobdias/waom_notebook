@@ -87,28 +87,13 @@ if __name__== '__main__':
         x_var = lon_rho
         y_var = lat_rho
     
-    fig = plt.figure(figsize = (8, 6))
-    count = 133
-    x_contour = []
-    y_contour = []
-    
-    # Create the contour:
-    sc = plt.contour(h, levels=[contour_depth])
-    for collection in sc.collections:
-        for path in collection.get_paths():
-            # print(collection.get_paths())
-    
-            count += 1
-            if count ==  212:
-                # Write down the lat/lon indices
-                for ii in range(np.size(path.vertices[:,0])):
-                    x_contour.append(int(np.round(path.vertices[ii][0])))
-                    y_contour.append(int(np.round(path.vertices[ii][1])))
-    
-    #plt.scatter(x_contour, y_contour, s=5, alpha=0.5, color='tomato');
-    
-    ## SHOULD I SMOOTH IT? PROBABLY YES!
-    
+# load contour generated from WAOM10_Extract_1500m_contour.ipynb
+    fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
+    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_x_contour.csv")
+    x_contour = xcon_np.tolist()
+    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_y_contour.csv")
+    y_contour = ycon_np.tolist()
+
     # Difference between two neighbouring indices
     diff_x_contour = np.diff(x_contour)
     diff_y_contour = np.diff(y_contour)
@@ -128,7 +113,7 @@ if __name__== '__main__':
     h_contour = np.zeros(len(x_contour))
     
     for ii in range(len(h_contour)):
-        h_contour[ii] = h[y_contour[ii], x_contour[ii]]
+        h_contour[ii] = h[int(y_contour[ii]), int(x_contour[ii])]
     
     # Get lat/lon along the contour
     
@@ -149,8 +134,8 @@ if __name__== '__main__':
     lon_along_contour = np.zeros((len(x_contour)))
     
     for ii in range(len(h_contour)):
-        lon_along_contour[ii] = x_var[y_contour[ii-1],x_contour[ii-1]]
-        lat_along_contour[ii] = y_var[y_contour[ii-1],x_contour[ii-1]]
+        lon_along_contour[ii] = x_var[int(y_contour[ii-1]),int(x_contour[ii-1])]
+        lat_along_contour[ii] = y_var[int(y_contour[ii-1]),int(x_contour[ii-1])]
     
     # Repeat the leftmost point at the end of the array.
     # (Required for masking contour above and below)
@@ -174,8 +159,7 @@ if __name__== '__main__':
     contour_mask = h*0
     
     for ii in range(num_points-1):
-        contour_mask[y_contour[ii], x_contour[ii]] = contour_mask_numbered[ii]+1
-    
+        contour_mask[int(y_contour[ii]), int(x_contour[ii])] = contour_mask_numbered[ii]+1
     mask_value = -1000
     contour_mask_numbered = contour_mask
     
