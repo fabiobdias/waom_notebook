@@ -1,0 +1,7 @@
+# ignore all logs
+*.log
+*.[eo]*
+
+OHB_shelf/run_WAOM4_OHB_shelf.bash.e79183918 OHB_shelf/run_WAOM4_OHB_shelf.bash.e79186626 OHB_shelf/run_WAOM4_OHB_shelf.bash.e79247809 OHB_shelf/run_WAOM4_OHB_shelf.bash.e79581400 OHB_shelf/run_WAOM4_OHB_shelf.bash.e79593087 OHB_shelf/run_WAOM4_OHB_shelf.bash.o79183918 OHB_shelf/run_WAOM4_OHB_shelf.bash.o79186626 OHB_shelf/run_WAOM4_OHB_shelf.bash.o79247809 OHB_shelf/run_WAOM4_OHB_shelf.bash.o79581400 OHB_shelf/run_WAOM4_OHB_shelf.bash.o79593087
+OHB_shelf/79581400.gadi-pbs.log OHB_shelf/79593087.gadi-pbs.log OHB_shelf/80358540.gadi-pbs.log
+Grid_avg_evolution/.ipynb_checkpoints Maps_validations/.ipynb_checkpoints OHB_shelf/.ipynb_checkpoints Storm_analyses/.ipynb_checkpoints TS_diagrams/.ipynb_checkpoints WMT_framework/.ipynb_checkpoints OHB_shelf/Cross-1000m/.ipynb_checkpoints OHB_shelf/Cross-2000m/.ipynb_checkpoints OHB_shelf/Cross-CF/.ipynb_checkpoints OHB_shelf/OHB_closure/.ipynb_checkpoints   OHB_shelf/old_Cross_scripts/.ipynb_checkpoints 
