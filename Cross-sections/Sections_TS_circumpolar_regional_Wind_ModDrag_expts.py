@@ -35,6 +35,11 @@ import logging
 import warnings
 warnings.filterwarnings('ignore')
 
+import sys
+
+longitude = float(sys.argv[1])
+print('Processing longitude = ', longitude)
+
 if __name__== '__main__':
 
     client = Client(threads_per_worker=1, memory_limit=0, silence_logs=logging.ERROR)
@@ -67,9 +72,9 @@ if __name__== '__main__':
     # calc dz:
     hwater = ds.h- abs(ds.zice) # replace ds.h for hwater below
     Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * hwater) / (ds.hc + hwater)
-    z_rho = ds.zeta + (ds.zeta + hwater) * Zo_rho 
+    z_rho = ds.zeta + (ds.zeta + hwater) * Zo_rho - abs(ds.zice)
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
-    z_w = ds.zeta + (ds.zeta + hwater) * Zo_w 
+    z_w = ds.zeta + (ds.zeta + hwater) * Zo_w - abs(ds.zice)
     del Zo_rho, Zo_w
 
     ds.close()
@@ -83,9 +88,9 @@ if __name__== '__main__':
     # calc dz:
     hwater = ds.h- abs(ds.zice) # replace ds.h for hwater below
     Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * hwater) / (ds.hc + hwater)
-    z_rho_mdA = ds.zeta + (ds.zeta + hwater) * Zo_rho 
+    z_rho_mdA = ds.zeta + (ds.zeta + hwater) * Zo_rho - abs(ds.zice)
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
-    z_w_mdA = ds.zeta + (ds.zeta + hwater) * Zo_w 
+    z_w_mdA = ds.zeta + (ds.zeta + hwater) * Zo_w - abs(ds.zice)
     del Zo_rho, Zo_w
     ds.close()
 
@@ -98,9 +103,9 @@ if __name__== '__main__':
     # calc dz:
     hwater = ds.h- abs(ds.zice) # replace ds.h for hwater below
     Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * hwater) / (ds.hc + hwater)
-    z_rho_mdB = ds.zeta + (ds.zeta + hwater) * Zo_rho 
+    z_rho_mdB = ds.zeta + (ds.zeta + hwater) * Zo_rho - abs(ds.zice)
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
-    z_w_mdB = ds.zeta + (ds.zeta + hwater) * Zo_w 
+    z_w_mdB = ds.zeta + (ds.zeta + hwater) * Zo_w - abs(ds.zice)
     del Zo_rho, Zo_w
     ds.close()
 
@@ -114,9 +119,9 @@ if __name__== '__main__':
     # calc dz:
     hwater = ds.h- abs(ds.zice) # replace ds.h for hwater below
     Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * hwater) / (ds.hc + hwater)
-    z_rho_mdC = ds.zeta + (ds.zeta + hwater) * Zo_rho 
+    z_rho_mdC = ds.zeta + (ds.zeta + hwater) * Zo_rho - abs(ds.zice)
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
-    z_w_mdC = ds.zeta + (ds.zeta + hwater) * Zo_w 
+    z_w_mdC = ds.zeta + (ds.zeta + hwater) * Zo_w - abs(ds.zice)
     del Zo_rho, Zo_w
     ds.close()
 
@@ -130,9 +135,9 @@ if __name__== '__main__':
     # calc dz:
     hwater = ds.h- abs(ds.zice) # replace ds.h for hwater below
     Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * hwater) / (ds.hc + hwater)
-    z_rho_mdD = ds.zeta + (ds.zeta + hwater) * Zo_rho 
+    z_rho_mdD = ds.zeta + (ds.zeta + hwater) * Zo_rho - abs(ds.zice)
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
-    z_w_mdD = ds.zeta + (ds.zeta + hwater) * Zo_w 
+    z_w_mdD = ds.zeta + (ds.zeta + hwater) * Zo_w - abs(ds.zice)
     del Zo_rho, Zo_w
     ds.close()
 
@@ -179,8 +184,8 @@ if __name__== '__main__':
         minlat = -90
         maxlat = -60
 
-        # lat_maxpts = np.ceil(30/0.091985) # took 3.5min
-        lat_maxpts = np.ceil(30/0.5) # took
+        lat_maxpts = np.ceil(30/0.091985) # took 3.5min
+        ##lat_maxpts = np.ceil(30/0.5) # took
         lat_vector = np.linspace(minlat,maxlat,num=int(lat_maxpts))
 
         lon=longitude # west of PIT trough
@@ -233,7 +238,9 @@ if __name__== '__main__':
     # 2 (4 ModDrag expts): 56min27s (~14min per expt)
     # similar queue should take ~1h
 
-    longitude=-158
+    # - now longitude is set as input:
+    #longitude=-165
+    #longitude = input("Enter something: ")
 
     lat_31lev, temp_merid_transect, Hz_merid_transect = extract_merid_section(longitude,temp,z_rho)
     lat_31lev, temp_mdA_merid_transect, Hz_mdA_merid_transect = extract_merid_section(longitude,temp_mdA,z_rho_mdA)
