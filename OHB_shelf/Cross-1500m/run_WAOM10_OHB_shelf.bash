@@ -61,7 +61,11 @@ module load conda/analysis3-24.01
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_zonal_convergence_inputBin.py 6 > $PBS_JOBID.log
 
 # v4 (only for heat transport): subtract Tf HT before extracting along/contour (i.e., in the original model grid) = Mimicing access-om2 script (Wilton's):
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_newcode_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
+# corrected z_rho calculation:
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_temp_daily_v4.py > $PBS_JOBID.log
 
 ## testing with model run using T0=-3.6 -> NO difference in the Huon_temp/Hvom_temp diagnostics.
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10-T0_Cross-1500m_temp_daily_v3.py > $PBS_JOBID.log

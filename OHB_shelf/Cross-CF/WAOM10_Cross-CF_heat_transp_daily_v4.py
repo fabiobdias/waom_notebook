@@ -3,7 +3,7 @@
 
 # Fabio B Dias - 28 June 2023
 # Description:
-#     this script obtain and save the 1500m isobath contour variables, which is used for the 
+#     this script obtain and save the CF isobath contour variables, which is used for the 
 #     cross-shelf heat transport estimates
 
 # read nc output from WAOM 10km run
@@ -47,6 +47,7 @@ if __name__== '__main__':
     
     mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
     mask_outice = ma.masked_where(ice_draft >= 0, np.ones(ice_draft.shape))
+    mask_zice_1000 = ma.masked_where(ice_draft < -1000, np.ones(ice_draft.shape))
     di.close()
     
     dg = xr.open_dataset("/g/data/hh5/tmp/access-om/fbd581/ROMS/waom10_frc/waom10extend_grd.nc")
@@ -68,15 +69,13 @@ if __name__== '__main__':
     
     ## creating the contour, such as a isobath, and extracting the coordinates using matplotlib's Path class
     # based on https://github.com/COSIMA/cosima-recipes/blob/master/DocumentedExamples/Cross-contour_transport.ipynb
-    
-    h = dg.h.load()
-    
-    h = h*mask_zice
+    zice = dg.zice.load()
+    zice = zice*mask_zice_1000
     
     # Fill in land with zeros:
-    h = h.fillna(0)
+    zice = zice.fillna(0)
     
-    contour_depth = 1500.
+    contour_depth = -.01
     
     ## Choose whether you want your contour on the u or t grid.
     grid_sel = 't'
@@ -87,11 +86,11 @@ if __name__== '__main__':
         x_var = lon_rho
         y_var = lat_rho
 
-# load contour generated from WAOM10_Extract_1500m_contour.ipynb
+# load contour generated from WAOM10_Extract_CF_contour.ipynb
     fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
-    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_x_contour.csv")
+    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_CF_x_contour.csv")
     x_contour = xcon_np.tolist()
-    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_y_contour.csv")
+    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_CF_y_contour.csv")
     y_contour = ycon_np.tolist()
 
     ## SHOULD I SMOOTH IT? PROBABLY YES!
@@ -347,7 +346,7 @@ if __name__== '__main__':
     rho0=1035
     Cp=3992.1
     # Tf = -1.95 # degC
-    Tf =  -3.534879684448242 # coldest temp along 1500m among all three WAOM expts (10km, 4km, 4km-notide)
+    Tf =  -3.534879684448242 # coldest temp along CF among all three WAOM expts (10km, 4km, 4km-notide)
     
     # 1) multiply rho0*Cp:
     HTv = HvomT*rho0*Cp
@@ -436,5 +435,5 @@ if __name__== '__main__':
     
     heat_trans_across_contour_xr = xr.DataArray(heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_heat_trans_1500m_daily_v4', mode='w', format="NETCDF4")
+    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_heat_trans_CF_daily_v4', mode='w', format="NETCDF4")
     # -> PS: V4 already accounts for (-Tf HT), contrary to V3.

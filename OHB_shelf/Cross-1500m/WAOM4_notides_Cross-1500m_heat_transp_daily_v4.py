@@ -42,14 +42,14 @@ if __name__== '__main__':
     print(client)
     
     # load ice draft to create masks
-    di = xr.open_dataset('/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_0001.nc')
+    di = xr.open_dataset('/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_0001.nc')
     ice_draft = di.variables["zice"]
     
     mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
     mask_outice = ma.masked_where(ice_draft >= 0, np.ones(ice_draft.shape))
     di.close()
     
-    dg = xr.open_dataset("/g/data/hh5/tmp/access-om/fbd581/ROMS/waom10_frc/waom10extend_grd.nc")
+    dg = xr.open_dataset("/g/data/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
     
     lat_rho = dg.variables["lat_rho"]
     lon_rho = dg.variables["lon_rho"]
@@ -87,11 +87,11 @@ if __name__== '__main__':
         x_var = lon_rho
         y_var = lat_rho
 
-# load contour generated from WAOM10_Extract_1500m_contour.ipynb
+# load contour generated from WAOM4_Extract_1500m_contour.ipynb
     fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
-    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_x_contour.csv")
+    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_x_contour.csv")
     x_contour = xcon_np.tolist()
-    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_y_contour.csv")
+    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM4_1500m_y_contour.csv")
     y_contour = ycon_np.tolist()
 
     ## SHOULD I SMOOTH IT? PROBABLY YES!
@@ -319,7 +319,7 @@ if __name__== '__main__':
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
+    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
     
     #- preserving 5-days avgs
     temp = ds.variables["temp"]
@@ -384,9 +384,9 @@ if __name__== '__main__':
     
     # Convert heat transport to data arrays:
     coordinates3Du = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                        eta_u=(['eta_u'], np.arange(0,560)), xi_u=(['xi_u'], np.arange(0,629)))
+                        eta_u=(['eta_u'], np.arange(0,1440)), xi_u=(['xi_u'], np.arange(0,1574)))
     coordinates3Dv = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                        eta_v=(['eta_v'], np.arange(0,559)), xi_v=(['xi_v'], np.arange(0,630)))
+                        eta_v=(['eta_v'], np.arange(0,1439)), xi_v=(['xi_v'], np.arange(0,1575)))
     
     # - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate heat transport
     #HuonT_xr = xr.DataArray(HTvm, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])
@@ -436,5 +436,5 @@ if __name__== '__main__':
     
     heat_trans_across_contour_xr = xr.DataArray(heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_heat_trans_1500m_daily_v4', mode='w', format="NETCDF4")
+    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM4_notides_heat_trans_1500m_daily_v4', mode='w', format="NETCDF4")
     # -> PS: V4 already accounts for (-Tf HT), contrary to V3.

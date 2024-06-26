@@ -42,7 +42,7 @@ if __name__== '__main__':
     print(client)
     
     # load ice draft to create masks
-    di = xr.open_dataset('/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_0001.nc')
+    di = xr.open_dataset('/scratch/gi0/fbd581/waom10extend_testcode/output_21yr_diag_daily/ocean_avg_0001.nc')
     ice_draft = di.variables["zice"]
     
     mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
@@ -319,7 +319,7 @@ if __name__== '__main__':
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom10extend_shflim_S_0.25Q/output_20yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
+    ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom10extend_testcode/output_21yr_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=True, drop_variables=vars2drop, decode_times=False)
     
     #- preserving 5-days avgs
     temp = ds.variables["temp"]
@@ -436,5 +436,5 @@ if __name__== '__main__':
     
     heat_trans_across_contour_xr = xr.DataArray(heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_heat_trans_1500m_daily_v4', mode='w', format="NETCDF4")
+    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_newcode_heat_trans_1500m_daily_v4', mode='w', format="NETCDF4")
     # -> PS: V4 already accounts for (-Tf HT), contrary to V3.

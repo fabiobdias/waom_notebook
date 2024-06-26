@@ -3,7 +3,7 @@
 
 # Fabio B Dias - 28 June 2023
 # Description:
-#     this script obtain and save the 1500m isobath contour variables, which is used for the 
+#     this script obtain and save the CF isobath contour variables, which is used for the 
 #     cross-shelf heat transport estimates
 
 # read nc output from WAOM 10km run
@@ -47,6 +47,7 @@ if __name__== '__main__':
     
     mask_zice = ma.masked_where(ice_draft < 0, np.ones(ice_draft.shape))
     mask_outice = ma.masked_where(ice_draft >= 0, np.ones(ice_draft.shape))
+    mask_zice_1000 = ma.masked_where(ice_draft < -1000, np.ones(ice_draft.shape))
     di.close()
     
     dg = xr.open_dataset("/g/data/hh5/tmp/access-om/fbd581/ROMS/waom10_frc/waom10extend_grd.nc")
@@ -68,15 +69,13 @@ if __name__== '__main__':
     
     ## creating the contour, such as a isobath, and extracting the coordinates using matplotlib's Path class
     # based on https://github.com/COSIMA/cosima-recipes/blob/master/DocumentedExamples/Cross-contour_transport.ipynb
-    
-    h = dg.h.load()
-    
-    h = h*mask_zice
+    zice = dg.zice.load()
+    zice = zice*mask_zice_1000
     
     # Fill in land with zeros:
-    h = h.fillna(0)
-    
-    contour_depth = 1500.
+    zice = zice.fillna(0)
+
+    contour_depth = -.01
     
     ## Choose whether you want your contour on the u or t grid.
     grid_sel = 't'
@@ -87,11 +86,11 @@ if __name__== '__main__':
         x_var = lon_rho
         y_var = lat_rho
 
-# load contour generated from WAOM10_Extract_1500m_contour.ipynb
+# load contour generated from WAOM10_Extract_CF_contour.ipynb
     fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/'
-    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_x_contour.csv")
+    xcon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_CF_x_contour.csv")
     x_contour = xcon_np.tolist()
-    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_1500m_y_contour.csv")
+    ycon_np=np.loadtxt("/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/Contour_isobath/WAOM10_CF_y_contour.csv")
     y_contour = ycon_np.tolist()
 
     ## SHOULD I SMOOTH IT? PROBABLY YES!
@@ -141,7 +140,9 @@ if __name__== '__main__':
     
     # Repeat the leftmost point at the end of the array.
     # (Required for masking contour above and below)
-    
+    #print('testing error in 4km; print lat_along_contour/lon_along_contour shapes:')
+    #print(lat_along_contour.shape, lon_along_contour.shape)
+
     lat_along_contour = np.append(lat_along_contour, lat_along_contour[0])
     lon_along_contour = np.append(lon_along_contour, lon_along_contour[0])
     
@@ -152,6 +153,10 @@ if __name__== '__main__':
     contour_mask_numbered = np.zeros_like(lon_along_contour)
     
     for ii in range(num_points-1):
+        lat1 = lat_along_contour[ii]
+        lat2 = lat_along_contour[ii+1]
+        lon1 = lon_along_contour[ii]
+        lon2 = lon_along_contour[ii+1]
         contour_mask_numbered[ii] = ii
     
     contour_mask = h*0
@@ -166,7 +171,7 @@ if __name__== '__main__':
     contour_masked_above[-1, 0] = mask_value
     
     #Create mask
-    #Now we create a mask below contour sothat the direction of the contour can be determined
+    #Now we create a mask below contour so that the direction of the contour can be determined
     
     #Remark on computational inefficiency:
     #Note that creating masks with nested for loops is very inefficient. We should probably use boolean masks (just compare the entire array with mask_value), and DataArray.shift() or DataArray.roll() from each of the directions to generate the masks without using loops.
@@ -219,11 +224,11 @@ if __name__== '__main__':
     
     # Direction of cross-contour transport
     
-    mask_x_transport = np.zeros_like(lon_u)
-    mask_y_transport = np.zeros_like(lon_v)
+    mask_x_transport = np.zeros_like(contour_mask_numbered)
+    mask_y_transport = np.zeros_like(contour_mask_numbered)
     
-    mask_x_transport_numbered = np.zeros_like(lon_u)
-    mask_y_transport_numbered = np.zeros_like(lon_v)
+    mask_y_transport_numbered = np.zeros_like(contour_mask_numbered)
+    mask_x_transport_numbered = np.zeros_like(contour_mask_numbered)
     
     shape = contour_masked_above.shape
     
@@ -278,6 +283,7 @@ if __name__== '__main__':
     
     print(pm.shape, pn.shape)
     
+    
     # Convert contour masks to data arrays, so we can multiply them later.
     # We need to ensure the lat lon coordinates correspond to the actual data location:
     #       The y masks are used for ty_trans, so like vhrho this should have dimensions (yu_ocean, xt_ocean).
@@ -285,20 +291,19 @@ if __name__== '__main__':
     #       However the actual name will always be simply y_ocean/x_ocean irrespective of the variable
     #       to make concatenation of transports in both direction and sorting possible.
     coordinates=dict(one=lon_rho, two=lat_rho)
-    coordinatesU=dict(one=lon_u, two=lat_u)
-    coordinatesV=dict(one=lon_v, two=lat_v)
-
-    mask_x_transport = xr.DataArray(mask_x_transport, coords = coordinatesU, dims = ['eta_u', 'xi_u'])
-    mask_y_transport = xr.DataArray(mask_y_transport, coords = coordinatesV, dims = ['eta_v', 'xi_v'])
-    mask_x_transport_numbered = xr.DataArray(mask_x_transport_numbered, coords = coordinatesU, dims = ['eta_u', 'xi_u'])
-    mask_y_transport_numbered = xr.DataArray(mask_y_transport_numbered, coords = coordinatesV, dims = ['eta_v', 'xi_v'])
-
+    
+    
+    mask_x_transport = xr.DataArray(mask_x_transport, coords = coordinates, dims = ['eta_rho', 'xi_rho'])
+    mask_y_transport = xr.DataArray(mask_y_transport, coords = coordinates, dims = ['eta_rho', 'xi_rho'])
+    mask_x_transport_numbered = xr.DataArray(mask_x_transport_numbered, coords = coordinates, dims = ['eta_rho', 'xi_rho'])
+    mask_y_transport_numbered = xr.DataArray(mask_y_transport_numbered, coords = coordinates, dims = ['eta_rho', 'xi_rho'])
+    
     # rename dimensions as simply eta/xi
-    mask_x_transport = mask_x_transport.rename({'eta_u': 'eta','xi_u': 'xi'})
-    mask_y_transport = mask_y_transport.rename({'eta_v': 'eta','xi_v': 'xi'})
-    mask_x_transport_numbered = mask_x_transport_numbered.rename({'eta_u': 'eta','xi_u': 'xi'})
-    mask_y_transport_numbered = mask_y_transport_numbered.rename({'eta_v': 'eta','xi_v': 'xi'})
-
+    mask_x_transport = mask_x_transport.rename({'eta_rho': 'eta','xi_rho': 'xi'})
+    mask_y_transport = mask_y_transport.rename({'eta_rho': 'eta','xi_rho': 'xi'})
+    mask_x_transport_numbered = mask_x_transport_numbered.rename({'eta_rho': 'eta','xi_rho': 'xi'})
+    mask_y_transport_numbered = mask_y_transport_numbered.rename({'eta_rho': 'eta','xi_rho': 'xi'})
+    
     # Create the contour order data-array. Note that in this procedure the x-grid counts have x-grid
     #   dimensions and the y-grid counts have y-grid dimensions, but these are implicit, the dimension
     #   *names* are kept general across the counts, the generic y_ocean, x_ocean, so that concatening works
@@ -323,6 +328,7 @@ if __name__== '__main__':
     
     #- preserving 5-days avgs
     temp = ds.variables["temp"]
+    salt = ds.variables["salt"]
     shflux = ds.variables["shflux"]
     ssflux = ds.variables["ssflux"]
     m = ds.variables["m"]
@@ -331,110 +337,70 @@ if __name__== '__main__':
     Hvom = ds.variables["Hvom"]
     Huon = ds.variables["Huon"]
     
-    print("Vtransform=2")
-    hwater = ds.h - abs(ds.zice)
+    ds = ds.set_coords(['Cs_r', 'Cs_w', 'hc', 'h', 'Vtransform'])
+   
+    hwater = ds.h -abs(ds.zice)
     Zo_rho = (ds.hc * ds.s_rho + ds.Cs_r * hwater) / (ds.hc + hwater)
     z_rho = ds.zeta + (ds.zeta + hwater) * Zo_rho - abs(ds.zice)
+    print("Vtransform=2")
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
     z_w = ds.zeta + (ds.zeta + hwater) * Zo_w - abs(ds.zice)
 
     ds.close()
     
-    # subtract Tf heat transport from abs heat transport in the original grid (like done in ACCESS-OM2)
-    # rho0 = 1025 # kg. m-3
-    # Cp = 3989.245 # J.kg-1.degC-1
-    # use same values as in access-om2
-    rho0=1035
-    Cp=3992.1
-    # Tf = -1.95 # degC
-    Tf =  -3.534879684448242 # coldest temp along 1500m among all three WAOM expts (10km, 4km, 4km-notide)
-    
-    # 1) multiply rho0*Cp:
-    HTv = HvomT*rho0*Cp
-    HTu = HuonT*rho0*Cp
-    
-    # 2) calculate mean freezing point heat transport:
-    #VTv_avg = Hvom.mean('ocean_time')
-    #VTu_avg = Huon.mean('ocean_time')
-    #HTf_v_avg = VTv_avg*Tf*rho0*Cp
-    #HTf_u_avg = VTu_avg*Tf*rho0*Cp
-    HTf_v = Hvom*Tf*rho0*Cp
-    HTf_u = Huon*Tf*rho0*Cp
-
-    # 3) subtract Tf HT from abs HT:
-    HTv = HTv - HTf_v
-    HTu = HTu - HTf_u
-    
-    # 4) rename dimensions before multiplying for mask_x/y_transport:
-    # convert to DataArray first:
-    HTv = xr.DataArray(HTv)
-    HTu = xr.DataArray(HTu)
-    HTv = HTv.rename({'eta_v': 'eta','xi_v': 'xi'})
-    HTu = HTu.rename({'eta_u': 'eta','xi_u': 'xi'})
-
-    # 5) multiply mask_x/y_transport:
-    HTvm = HTv*mask_y_transport
-    HTum = HTu*mask_x_transport
-
-    HTv.load()
-    HTu.load()
-
-    # convert temp to DataArray to extract values along contour: Not necessary in v4!
+    # convert temp to DataArray to extract values along contour:
     months=np.arange(0,365)*(1/30.41667)
     
-    # Convert heat transport to data arrays:
-    coordinates3Du = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                        eta_u=(['eta_u'], np.arange(0,560)), xi_u=(['xi_u'], np.arange(0,629)))
-    coordinates3Dv = dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                        eta_v=(['eta_v'], np.arange(0,559)), xi_v=(['xi_v'], np.arange(0,630)))
-    
-    # - handling x/y transports (Hvom, Huon [m3.s-1]) to calculate heat transport
-    #HuonT_xr = xr.DataArray(HTvm, coords = coordinates3Du, dims = ['ocean_time','s_rho','eta_u', 'xi_u'])
-    #HvomT_xr = xr.DataArray(HTum, coords = coordinates3Dv, dims = ['ocean_time','s_rho','eta_v', 'xi_v'])
-    
+    coordinatesT=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
+                        eta_rho=(['eta_rho'], np.arange(0,560)), xi_rho=(['xi_rho'], np.arange(0,630)))
+    z_rho = z_rho.transpose('ocean_time','s_rho','eta_rho','xi_rho')
+    z_rho_xr = xr.DataArray(z_rho, coords = coordinatesT, dims = ['ocean_time','s_rho','eta_rho', 'xi_rho'])
+   
     # rename dimensions as simply eta/xi
-    #HuonT_xr = HuonT_xr.rename({'eta_u': 'eta','xi_u': 'xi'})
-    #HvomT_xr = HvomT_xr.rename({'eta_v': 'eta','xi_v': 'xi'})
+    z_rho_xr = z_rho_xr.rename({'eta_rho': 'eta','xi_rho': 'xi'})
 
     # define a function to extract any 4D var along the contour line
     
+    def extract_var_along_contour(var):   # var:4D [time,eta_rho,xi_rho]
 
-    def extract_transp_across_contour(var_x, var_y):   # var:4D [time,eta_rho,xi_rho]
-        tlen = len(HTu[:,0,0,0])
-        zlen = len(HTu[0,:,0,0])
-        transp_across_contour = np.empty((tlen,zlen,len(contour_ordering)))
-        for tt in range(0,tlen):
+        zlen = len(temp[0,:,0,0])
+        tlen = len(temp[:,0,0,0])
+        print(tlen,zlen)
+        var_along_contour = np.empty((tlen,zlen,len(contour_ordering)))
+
+        for tt in range(0,tlen): # loop through time
             for zz in range(0,zlen): # loop through z-levels
-                var_x_tmp = var_x[zz,:,:]
-                var_y_tmp = var_y[zz,:,:]
-
+                var_tmp = var[tt,zz,:,:]
+                
                 # stack transports into 1d and drop any points not on contour:
-                x_var_1d_tmp = var_x_tmp.stack(contour_index = ['eta', 'xi'])
+                x_var_1d_tmp = var_tmp.stack(contour_index = ['eta', 'xi'])
                 x_var_1d_tmp = x_var_1d_tmp.where(mask_x_numbered_1d>0, drop = True)
-                y_var_1d_tmp = var_y_tmp.stack(contour_index = ['eta', 'xi'])
+                y_var_1d_tmp = var_tmp.stack(contour_index = ['eta', 'xi'])
                 y_var_1d_tmp = y_var_1d_tmp.where(mask_y_numbered_1d>0, drop = True)
 
                 # combine all points on contour:
-                transp_across_contour_tmp = xr.concat((x_var_1d_tmp, y_var_1d_tmp), dim = 'contour_index')
-                transp_across_contour_tmp = transp_across_contour_tmp.reset_index('contour_index') # added by fabio, otherwise it crashes due to duplicated indices
-                transp_across_contour_tmp = transp_across_contour_tmp.sortby(contour_ordering)
-                transp_across_contour_tmp.coords['contour_index'] = contour_index_array
-                transp_across_contour_tmp = transp_across_contour_tmp.load()
+                var_along_contour_tmp = xr.concat((x_var_1d_tmp, y_var_1d_tmp), dim = 'contour_index')
+                var_along_contour_tmp = var_along_contour_tmp.reset_index('contour_index') # added by fabio, otherwise it crashes due to duplicated indices
+                var_along_contour_tmp = var_along_contour_tmp.sortby(contour_ordering)
+                var_along_contour_tmp.coords['contour_index'] = contour_index_array
+                var_along_contour_tmp = var_along_contour_tmp.load()
 
-                transp_across_contour[zz,:] = transp_across_contour_tmp
-                del transp_across_contour_tmp
+                print(tt, zz, var_along_contour_tmp.shape)
+                var_along_contour[tt,zz,:] = var_along_contour_tmp
+                del var_along_contour_tmp
 
-        return transp_across_contour
+        return var_along_contour
 
     # extract variables:
-    # 1. vol transp
-    heat_trans_across_contour = extract_transp_across_contour(HTum, HTvm)
-    
+    # 1. z_rho
+    z_rho_along_contour = extract_var_along_contour(z_rho_xr)
+
     # save to netcdf file:
     coordinatesC=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
                         contour_index_array=(['contour_index_array'], np.arange(0,len(contour_index_array))))
     
-    heat_trans_across_contour_xr = xr.DataArray(heat_trans_across_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
+    z_rho_along_contour_xr = xr.DataArray(z_rho_along_contour, coords = coordinatesC, dims = ['ocean_time','s_rho','contour_index_array'])
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    heat_trans_across_contour_xr.to_netcdf(files_path + 'WAOM10_heat_trans_1500m_daily_v4', mode='w', format="NETCDF4")
-    # -> PS: V4 already accounts for (-Tf HT), contrary to V3.
+    z_rho_along_contour_xr.to_netcdf(files_path + 'WAOM10_z_rho_CF_daily_v4', mode='w', format="NETCDF4")
+    
+    

@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 #PBS -P e14
 #PBS -q normal
 #PBS -l ncpus=48
@@ -34,7 +34,9 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_salt_daily_v3.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_z_rho_daily_v3.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_vol_transp_daily_v3.py > $PBS_JOBID.log
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_heat_transp_daily_v3.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_heat_transp_daily_v3.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_z_rho_daily_v4.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_heat_transp_daily_v4.py > $PBS_JOBID.log
 
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-CF/WAOM10_Cross-CF_Coordinates_daily_v3.py > $PBS_JOBID.log
 
