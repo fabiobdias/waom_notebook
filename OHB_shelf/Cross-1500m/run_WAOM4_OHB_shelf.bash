@@ -54,7 +54,7 @@ module load conda/analysis3-unstable
 # v4
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
 # corrected z_rho calculation:
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log
 
 ## WAOM4_NOTIDE
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_temp_daily_v2.py > $PBS_JOBID.log
@@ -71,4 +71,4 @@ python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_
 
 # v4
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
-
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log

@@ -353,7 +353,7 @@ if __name__== '__main__':
     months=np.arange(0,365)*(1/30.41667)
     
     coordinatesT=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)),
-                        eta_rho=(['eta_rho'], np.arange(0,1440)), xi_rho=(['xi_rho'], np.arange(0,1575)))
+                        eta_rho=(['eta_rho'], np.arange(0,1400)), xi_rho=(['xi_rho'], np.arange(0,1575)))
     z_rho = z_rho.transpose('ocean_time','s_rho','eta_rho','xi_rho')
     z_rho_xr = xr.DataArray(z_rho, coords = coordinatesT, dims = ['ocean_time','s_rho','eta_rho', 'xi_rho'])
    

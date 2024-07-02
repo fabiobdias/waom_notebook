@@ -3,7 +3,7 @@
 #PBS -q hugemem
 #PBS -l ncpus=48
 #PBS -l mem=1500GB
-#PBS -l walltime=24:00:00
+#PBS -l walltime=12:00:00
 #PBS -l software=python
 #PBS -l wd
 #PBS -l storage=gdata/hh5+scratch/gh9+scratch/gi0
@@ -65,7 +65,8 @@ module load conda/analysis3-24.01
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_newcode_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
 # corrected z_rho calculation:
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_temp_daily_v4.py > $PBS_JOBID.log
+# v4 for the HDIFF term:
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10_Cross-1500m_hdiff_heat_transp_daily_v4.py > $PBS_JOBID.log
 
 ## testing with model run using T0=-3.6 -> NO difference in the Huon_temp/Hvom_temp diagnostics.
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM10-T0_Cross-1500m_temp_daily_v3.py > $PBS_JOBID.log
