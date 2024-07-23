@@ -351,8 +351,8 @@ if __name__== '__main__':
 
 ## ======================== section below if for the Advective horizontal heat transport =========================
     # --- calculate horizontal diffusion term:
-    #  Dx = (Ni * Hz * pm)/pn * dT/dx
-    #  Dy = (Ni * Hz * pn)/pm * dT/dy
+    #  Dx = d/dx [(Ni * Hz * pm)/pn * dT/dx]
+    #  Dy = d/dy [(Ni * Hz * pn)/pm * dT/dy]
     #
 
     # parameters: pm/pn already load
@@ -392,8 +392,8 @@ if __name__== '__main__':
 
     pm_u = pm.rolling({'xi_rho': 2}).mean() # first column is nan (so actual dimension is 629x560
     pn_v = pn.rolling({'eta_rho': 2}).mean() # first row is nan (so actual dimension is 630x559
-    pmon_u = pm_u/pn_v
-    pnom_v = pn_v/pm_u
+    pmon_u = pm_u*pn_v
+    pnom_v = pn_v*pm_u
 
     pmon_u=pmon_u.rename({'eta_rho': 'eta','xi_rho': 'xi'})
     pnom_v=pnom_v.rename({'eta_rho': 'eta','xi_rho': 'xi'})
@@ -407,14 +407,13 @@ if __name__== '__main__':
     Dz_u = Dz_u.drop_sel({'xi': Dz_u['xi'][0]})
     Dz_v = Dz_v.drop_sel({'eta': Dz_v['eta'][0]})
 
-
     # # replace s_rho in one variable to match:
     Dz_u['s_rho'] = dTdx.s_rho
     Dz_v['s_rho'] = dTdy.s_rho
 
     # calculate Hz*dT/dx & Hz*dT/dy
-    Hzmon_dTdx = np.empty(dTdx.shape)
-    Hznom_dTdy = np.empty(dTdy.shape)
+    Hzmon_dTdx = np.zeros(dTdx.shape)
+    Hznom_dTdy = np.zeros(dTdy.shape)
     for tt in range(365): # 1 day all z-levels take ~10-11min
         for kk in range(31):
             Hzmon_dTdx[tt,kk,:] = dTdx.isel(ocean_time=tt, s_rho=kk)*Dz_u.isel(ocean_time=tt, s_rho=kk)*pmon_u*ni_10km

@@ -70,5 +70,6 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_heat_transp_daily_v3.py > $PBS_JOBID.log
 
 # v4
-#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_heat_transp_daily_v4.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/Cross-1500m/WAOM4_notides_Cross-1500m_z_rho_daily_v4.py > $PBS_JOBID.log
+

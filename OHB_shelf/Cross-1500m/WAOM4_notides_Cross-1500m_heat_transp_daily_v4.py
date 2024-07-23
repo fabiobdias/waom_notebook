@@ -343,11 +343,11 @@ if __name__== '__main__':
     # subtract Tf heat transport from abs heat transport in the original grid (like done in ACCESS-OM2)
     # rho0 = 1025 # kg. m-3
     # Cp = 3989.245 # J.kg-1.degC-1
+    Tf =  -3.534879684448242 # coldest temp along 1500m among all three WAOM expts (10km, 4km, 4km-notide)
     # use same values as in access-om2
     rho0=1035
     Cp=3992.1
-    # Tf = -1.95 # degC
-    Tf =  -3.534879684448242 # coldest temp along 1500m among all three WAOM expts (10km, 4km, 4km-notide)
+    #Tf = -2.5 # degC, following TS diagrams along contour there aren't any visible colder temp.
     
     # 1) multiply rho0*Cp:
     HTv = HvomT*rho0*Cp
@@ -405,8 +405,8 @@ if __name__== '__main__':
         transp_across_contour = np.empty((tlen,zlen,len(contour_ordering)))
         for tt in range(0,tlen):
             for zz in range(0,zlen): # loop through z-levels
-                var_x_tmp = var_x[zz,:,:]
-                var_y_tmp = var_y[zz,:,:]
+                var_x_tmp = var_x[tt,zz,:,:]
+                var_y_tmp = var_y[tt,zz,:,:]
 
                 # stack transports into 1d and drop any points not on contour:
                 x_var_1d_tmp = var_x_tmp.stack(contour_index = ['eta', 'xi'])
@@ -421,7 +421,7 @@ if __name__== '__main__':
                 transp_across_contour_tmp.coords['contour_index'] = contour_index_array
                 transp_across_contour_tmp = transp_across_contour_tmp.load()
 
-                transp_across_contour[zz,:] = transp_across_contour_tmp
+                transp_across_contour[tt,zz,:] = transp_across_contour_tmp
                 del transp_across_contour_tmp
 
         return transp_across_contour
