@@ -28,7 +28,8 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_vdiff_regional_using_lon_masks_iceshelf.py > $PBS_JOBID.log
 
 # Basal melt (m/yr) averaged over the longitudinal bins:
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_basal_melt_avg_regional.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_basal_melt_avg_regional.py > $PBS_JOBID.log
 
-
+# using 5-daily data for comparison before doing high-resolution (only 5daily ocean_dia available)
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_hadv_regional_using_lon_masks_5daily.py > $PBS_JOBID.log
 
