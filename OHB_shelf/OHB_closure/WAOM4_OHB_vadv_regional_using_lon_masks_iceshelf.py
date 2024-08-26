@@ -102,7 +102,8 @@ if __name__== '__main__':
         # load horizontal diffusion of heat calculated online:
     	# float temp_hdiff(ocean_time, s_rho, eta_rho, xi_rho) ;
 
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
+#    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
+    ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
     temp_hdiff = ds.temp_hdiff
     temp_vdiff = ds.temp_vdiff
     temp_hadv = ds.temp_hadv
@@ -181,7 +182,7 @@ if __name__== '__main__':
 
     for ll in np.arange(0,len(mask_LonBins)):
         # 1. cont.shelf + ice shelf cavities:
-        comb_masks = mask_LonBins[ll]*mask_shelf*mask_land*mask_iceshelf
+        comb_masks = mask_LonBins[ll]*mask_shelf*mask_land*mask_outiceshelf
         condition1 = comb_masks != 1
 
         for mm in np.arange(0,tlen):

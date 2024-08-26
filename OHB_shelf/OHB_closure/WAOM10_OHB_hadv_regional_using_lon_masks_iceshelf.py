@@ -181,7 +181,7 @@ if __name__== '__main__':
 
     for ll in np.arange(0,len(mask_LonBins)):
         # 1. cont.shelf + ice shelf cavities:
-        comb_masks = mask_LonBins[ll]*mask_shelf*mask_land*mask_iceshelf
+        comb_masks = mask_LonBins[ll]*mask_shelf*mask_land*mask_outiceshelf
         condition1 = comb_masks != 1
 
         for mm in np.arange(0,tlen):

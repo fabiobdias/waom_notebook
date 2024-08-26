@@ -54,7 +54,7 @@ if __name__== '__main__':
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
 
     m = ds.variables["m"]
     time_avg = ds.variables["ocean_time"] 
@@ -102,7 +102,8 @@ if __name__== '__main__':
         # load horizontal diffusion of heat calculated online:
     	# float temp_hdiff(ocean_time, s_rho, eta_rho, xi_rho) ;
 
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
+#    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
+    ds = xr.open_mfdataset(paths="/scratch/gi0/fbd581/waom4extend_shflim_S_0.25Q/output_yr10_notides_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
     temp_hdiff = ds.temp_hdiff
     temp_vdiff = ds.temp_vdiff
     temp_hadv = ds.temp_hadv
@@ -181,7 +182,7 @@ if __name__== '__main__':
 
     for ll in np.arange(0,len(mask_LonBins)):
         # 1. cont.shelf + ice shelf cavities:
-        comb_masks = mask_LonBins[ll]*mask_shelf*mask_land*mask_iceshelf
+        comb_masks = mask_LonBins[ll]*mask_shelf*mask_land*mask_outiceshelf
         condition1 = comb_masks != 1
 
         for mm in np.arange(0,tlen):
@@ -202,5 +203,5 @@ if __name__== '__main__':
     temp_hadv_int_xr = xr.DataArray(temp_hadv_int, coords = coordinatesC, dims = ['lon_bins','ocean_time'])
 
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    temp_hadv_int_xr.to_netcdf(files_path + 'WAOM4_OHB_lonbins_temp_hadv_vint_daily_iceshelf', mode='w', format="NETCDF4")
+    temp_hadv_int_xr.to_netcdf(files_path + 'WAOM4_notides_OHB_lonbins_temp_hadv_vint_daily_iceshelf', mode='w', format="NETCDF4")
 

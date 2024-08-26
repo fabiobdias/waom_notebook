@@ -117,7 +117,7 @@ if __name__== '__main__':
     dz = np.diff(Z_w,axis=1)
 
         # convert dz to xarray:
-    months=np.arange(0,365)*(1/30.41667)
+    months=np.arange(0,73)*(5/30.41667)
     # save to netcdf file:
     coordinatesC=dict(ocean_time=months, s_rho=(['s_rho'], np.arange(0,31)), eta_rho=(['eta_rho'], np.arange(0,560)), xi_rho=(['xi_rho'], np.arange(0,630)))
 
@@ -195,7 +195,7 @@ if __name__== '__main__':
 
 
     # save into a netcdf file:
-    months=np.arange(0,365)*(5/30.41667)
+    months=np.arange(0,73)*(5/30.41667)
     lon_bin_midpts = np.arange(-178.5,180,3)
 
     coordinatesC=dict(lon_bins=lon_bin_midpts, ocean_time=months)
