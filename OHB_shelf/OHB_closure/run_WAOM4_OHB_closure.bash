@@ -94,6 +94,6 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_notides_OHB_vdiff_regional_using_lonlat_masks_iceshelf.py > $PBS_JOBID.log
 
 # Basal melt (m/yr) averaged over the new lon-lat bins:
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_basal_melt_avg_regional_lonlatBins.py > $PBS_JOBID.log
-#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_notides_basal_melt_avg_regional_lonlatBins.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_basal_melt_avg_regional_lonlatBins.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_notides_basal_melt_avg_regional_lonlatBins.py > $PBS_JOBID.log
 

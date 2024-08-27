@@ -109,13 +109,16 @@ if __name__== '__main__':
     for ll in np.arange(127):
         comb_masks = mask_LonBins[ll,:]*mask_shelf*mask_land
         condition1 = comb_masks != 1
+        # apply mask for area_sum too:
+        area_masked = ma.masked_where(condition1, area)
+        area_sum_masked = np.nansum(np.nansum(area_masked,axis=1), axis=0)
 
         for tt in np.arange(365):
             print('ll, tt =', ll, tt)
             melt_masked =  ma.masked_where(condition1, m.isel(ocean_time=tt))
             melt_area = (melt_masked*area)*86400*365.25 # Convert to m /yr
             melt_area_avg = np.nansum(np.nansum(melt_area,axis=1), axis=0)
-            melt_bins[tt,ll] = melt_area_avg
+            melt_bins[tt,ll] = np.divide(melt_area_avg,area_sum_masked)
             del melt_masked, melt_area, melt_area_avg
 
     print('===========> Finished loop days/longitudinal bins!!!!')
@@ -135,6 +138,6 @@ if __name__== '__main__':
     melt_bins_xr = xr.DataArray(melt_bins, coords = coordinatesC, dims = ['ocean_time','lon_bins'])
 
     files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
-    melt_bins_xr.to_netcdf(files_path + 'WAOM4_OHB_lonlatbins_melt_daily', mode='w', format="NETCDF4")
+    melt_bins_xr.to_netcdf(files_path + 'WAOM4_OHB_lonlatbins_melt_daily_v2', mode='w', format="NETCDF4")
     print('===========> Finished saving melt file!!!!')
 
