@@ -53,5 +53,18 @@ module load conda/analysis3-unstable
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_hdiff_regional_using_lonlat_masks_iceshelf.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_vdiff_regional_using_lonlat_masks_iceshelf.py > $PBS_JOBID.log
 
+## -- using LonLat mask v2 with adjusted Antarctic Peninsula
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_hadv_regional_using_lonlat_masks_v2.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_vadv_regional_using_lonlat_masks_v2.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_hdiff_regional_using_lonlat_masks_v2.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_vdiff_regional_using_lonlat_masks_v2.py > $PBS_JOBID.log
+
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_hadv_regional_using_lonlat_masks_iceshelf_v2.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_vadv_regional_using_lonlat_masks_iceshelf_v2.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_hdiff_regional_using_lonlat_masks_iceshelf_v2.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_OHB_vdiff_regional_using_lonlat_masks_iceshelf_v2.py > $PBS_JOBID.log
+
 # Basal melt (m/yr) averaged over the new lon-lat bins:
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_basal_melt_avg_regional_lonlatBins.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_basal_melt_avg_regional_lonlatBins.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM10_basal_melt_avg_regional_lonlatBins_v2.py > $PBS_JOBID.log
+
