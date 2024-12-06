@@ -402,7 +402,8 @@ if __name__== '__main__':
     [80, 110, -68.1, -63],              # Shackleton
     [110, 135, -68, -63.5],             # Totten
     [130,160, -70, -64],              # Mertz
-    [-215,-160, -84, -67]]              # Ross
+    [-195,-165, -85, -69]]            # Ross
+    ###[-215,-160, -84, -67]]              # Ross
 
     ## this piece do the maps for Figure 4 (containing annual temp, anom 1month in summer, anom 1 month in winter) + TS-diag for 2 regions (totten x PIG) at SURFACE, MID-DEPTH, BOTTOM sigma layers
 
@@ -422,7 +423,7 @@ if __name__== '__main__':
         # names_subreg = ['Sulzberger','Getz','Thwaites-PIG','Bellingshausen','FRIS',
                        # 'Fimbul','Amery','Shackleton','Totten','Mertz','Ross1','Ross2']
 
-        for rr in range(0,11):
+        for rr in range(10,11):
             Pname = names_subreg[rr]
 
             # define 2d Map vars for plottins: annual, summer month, winter month
@@ -536,7 +537,7 @@ if __name__== '__main__':
                 PROJV=proj_v
             PROJN=proj_v
 
-            ax2 = fig.add_subplot(2,4,1, projection=PROJ) # Anual
+            ax2 = fig.add_subplot(3,4,5, projection=PROJ) # Anual
             ct=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,annual_T.isel(s_rho=slayer[dd]).values,
                            vmin=-3, vmax=3 ,cmap=cmocean.cm.thermal, transform=PROJN)
 
@@ -557,6 +558,7 @@ if __name__== '__main__':
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
             gl.left_labels=False
+            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -576,6 +578,7 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
+            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -596,6 +599,7 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
+            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -618,6 +622,7 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
+            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -639,6 +644,7 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
+            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -666,11 +672,11 @@ if __name__== '__main__':
             ax3.set_aspect(0.32)
 
 
-            cbar_ax1 = fig.add_axes([0.07, 0.62,  0.006, 0.18])
+            cbar_ax1 = fig.add_axes([0.07, 0.42,  0.006, 0.18])
             fig.colorbar(ct, cax=cbar_ax1, orientation='vertical')
             cbar_ax1.set_ylabel('Temperature ($^{\circ}$C)')#, labelpad=-35)
 
-            cbar_ax12 = fig.add_axes([0.13, 0.525,  0.16, 0.01])
+            cbar_ax12 = fig.add_axes([0.13, 0.365,  0.16, 0.01])
             fig.colorbar(cm, cax=cbar_ax12, orientation='horizontal')
             cbar_ax12.set_xlabel('Melt rate (m/yr)')#, labelpad=-35)
 
@@ -682,9 +688,12 @@ if __name__== '__main__':
             fig.colorbar(cts, cax=cbar_ax3, orientation='horizontal')
             cbar_ax3.set_xlabel('Surface heat flux (W m$^{-2}$)')#, labelpad=-35)
 
-            cbar_ax1 = fig.add_axes([0.912, 0.2,  0.01, 0.6])
-            fig.colorbar(c, cax=cbar_ax1, orientation='vertical')
-            cbar_ax1.set_ylabel('Temperature-Salinity diagram; Depth (m)')#, labelpad=-35)
+            #cbar_ax1 = fig.add_axes([0.912, 0.2,  0.01, 0.6])
+            #fig.colorbar(c, cax=cbar_ax1, orientation='vertical')
+            #cbar_ax1.set_ylabel('Temperature-Salinity diagram; Depth (m)')#, labelpad=-35)
+            cbar_ax1 = fig.add_axes([0.735, 0.525,  0.16, 0.01])
+            fig.colorbar(c, cax=cbar_ax1, orientation='horizontal')
+            cbar_ax1.set_xlabel('Temperature-Salinity diagram; Depth (m)')
 
             name_fig='waom4_MapsT+SHF_season_' + pname[dd] + '_' + Pname +'_newTS.png'
             plt.savefig(fig_path + name_fig, dpi=600, bbox_inches='tight')

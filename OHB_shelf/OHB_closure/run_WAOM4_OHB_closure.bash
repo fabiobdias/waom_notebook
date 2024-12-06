@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -P jk72
+#PBS -P e14
 #PBS -q normal
 ###hugemem 
 ###megamem
@@ -141,4 +141,5 @@ module load conda/analysis3-unstable
 # Run Fig 4 (maps + TS-diag)
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_run_maps_Figure4.py > $PBS_JOBID.log
 #python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_run_maps_Figure4_newTS.py > $PBS_JOBID.log
-python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_run_maps_Figure4_newTS_bottom.py > $PBS_JOBID.log
+#python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_run_maps_Figure4_newTS_bottom.py > $PBS_JOBID.log
+python3 /g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/waom_notebook/OHB_shelf/OHB_closure/WAOM4_run_maps_Figure4_newTS_bottom_v2.py > $PBS_JOBID.log
