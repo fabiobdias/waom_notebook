@@ -445,7 +445,7 @@ if __name__== '__main__':
             win_S = (salt3d_4km.isel(ocean_time=win_MM)).mean('ocean_time')
             win_Z = z_rho3d_4km.isel(ocean_time=win_MM).mean('ocean_time')
             win_U = np.nanmean(u_rho_i[win_MM,:,:],axis=0)
-            win_V = np.nanmean(v_rho_i[win_MM,:,:],axis=0
+            win_V = np.nanmean(v_rho_i[win_MM,:,:],axis=0)
             win_melt = melt_4km.isel(ocean_time=win_MM).mean('ocean_time')*Melt_fac
 
             # shflux
@@ -544,10 +544,10 @@ if __name__== '__main__':
                            ma.masked_where(contour_masked_above_CF_4km == -1000, annual_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
 
-            ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
-                       np.mean(u_rho_i[:,slayer[dd],::5,::5],axis=0),
-                       np.mean(v_rho_i[:,slayer[dd],::5,::5],axis=0),scale=2,transform=PROJV)
-            ax2.set_title(names_subreg[rr] + '\n' + zname[dd] + ': Annual mean')
+            #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
+            #           np.mean(u_rho_i[:,slayer[dd],::5,::5],axis=0),
+            #           np.mean(v_rho_i[:,slayer[dd],::5,::5],axis=0),scale=2,transform=PROJV)
+            ax2.set_title(names_subreg[rr] + '\n Annual bottom temperature')
             ax2.set_extent([LonMin, LonMax, LatMin, LatMax], crs=PROJN) # Getz
             x_left, x_right = ax2.get_xlim()
             y_low, y_high = ax2.get_ylim()
@@ -557,7 +557,6 @@ if __name__== '__main__':
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
             gl.left_labels=False
-            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -567,8 +566,8 @@ if __name__== '__main__':
             cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
                            ma.masked_where(contour_masked_above_CF_4km == -1000, sum_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
-            ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],sum_U[slayer[dd],::5,::5],sum_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
-            ax2.set_title('Temperature anomaly \n Summer')
+            #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],sum_U[slayer[dd],::5,::5],sum_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
+            ax2.set_title('Bottom temperature anomaly \n Summer')
             ax2.set_extent([LonMin, LonMax, LatMin, LatMax], crs=PROJN) # Getz
             x_left, x_right = ax2.get_xlim()
             y_low, y_high = ax2.get_ylim()
@@ -577,7 +576,6 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
-            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -587,8 +585,8 @@ if __name__== '__main__':
             cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
                            ma.masked_where(contour_masked_above_CF_4km == -1000, sum_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
-            ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],sum_U[slayer[dd],::5,::5],sum_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
-            ax2.set_title('Sfc heat flux anomaly \n Summer')
+            #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],sum_U[slayer[dd],::5,::5],sum_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
+            ax2.set_title('Surface heat flux \n Summer')
             # ax2.set_extent([-135, -75, -76, -69], crs=ccrs.PlateCarree()) # PIG-Thwaites region
             ax2.set_extent([LonMin, LonMax, LatMin, LatMax], crs=PROJN) # Getz
             x_left, x_right = ax2.get_xlim()
@@ -598,7 +596,6 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
-            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -608,10 +605,10 @@ if __name__== '__main__':
             cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
                            ma.masked_where(contour_masked_above_CF_4km == -1000, win_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
-            ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
-                       win_U[slayer[dd],::5,::5],
-                       win_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
-            ax2.set_title('Temperature anomaly \n Winter')
+            #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
+            #           win_U[slayer[dd],::5,::5],
+            #           win_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
+            ax2.set_title('Bottom temperature anomaly \n Winter')
             # ax2.set_extent([-135, -75, -76, -69], crs=ccrs.PlateCarree()) # PIG-Thwaites region
             ax2.set_extent([LonMin, LonMax, LatMin, LatMax], crs=PROJN) # Getz
             x_left, x_right = ax2.get_xlim()
@@ -621,7 +618,6 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
-            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -631,10 +627,10 @@ if __name__== '__main__':
             cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
                            ma.masked_where(contour_masked_above_CF_4km == -1000, win_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
-            ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
-                       win_U[slayer[dd],::5,::5],
-                       win_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
-            ax2.set_title('Sfc heat flux anomaly \n Winter')
+            #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
+            #           win_U[slayer[dd],::5,::5],
+            #           win_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
+            ax2.set_title('Surface heat flux \n Winter')
             ax2.set_extent([LonMin, LonMax, LatMin, LatMax], crs=PROJN) # Getz
             x_left, x_right = ax2.get_xlim()
             y_low, y_high = ax2.get_ylim()
@@ -643,7 +639,6 @@ if __name__== '__main__':
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
             gl.right_labels=False   # suppress right labels
-            gl.bottom_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -692,7 +687,7 @@ if __name__== '__main__':
             #cbar_ax1.set_ylabel('Temperature-Salinity diagram; Depth (m)')#, labelpad=-35)
             cbar_ax1 = fig.add_axes([0.735, 0.525,  0.16, 0.01])
             fig.colorbar(c, cax=cbar_ax1, orientation='horizontal')
-            cbar_ax1.set_xlabel('Temperature-Salinity diagram; Depth (m)')
+            cbar_ax1.set_xlabel('TS-diagram; Depth (m)')
 
-            name_fig='waom4_MapsT+SHF_Full-season_' + pname[dd] + '_' + Pname +'_newTS.png'
+            name_fig='waom4_MapsT+SHF_Full-season_' + pname[dd] + '_' + Pname +'_newTS_noVel.png'
             plt.savefig(fig_path + name_fig, dpi=600, bbox_inches='tight')
