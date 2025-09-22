@@ -38,14 +38,14 @@ if __name__== '__main__':
     client = Client(threads_per_worker=1, memory_limit=0, silence_logs=logging.ERROR)
     print(client)
 
-    fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/OHB_shelf/'
+    fig_path = '/g/data/gv90/fbd581/ROMS/postprocessing/figs/OHB_shelf/'
 
     # load waom4 3D temp field to plot some maps
-    # path_ECCO2_4km = '/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_01-20yr/ocean_avg_00*.nc'
+    # path_ECCO2_4km = '/g/data/gv90/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_01-20yr/ocean_avg_00*.nc'
 
-    # ds = xr.open_mfdataset(paths='/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc')#, chunks={'eta_rho': '200MB'}, parallel=True, decode_times=False)
-    # ds = xr.open_mfdataset(paths='/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_01-20yr/ocean_avg_00*.nc~')#, chunks={'eta_rho': '200MB'}, parallel=True, decode_times=False)
-    ds = xr.open_mfdataset(paths='/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_01-20yr/ocean_avg_0010.nc')#, chunks={'eta_rho': '200MB'}, parallel=True, decode_times=False)
+    # ds = xr.open_mfdataset(paths='/g/data/gv90/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc')#, chunks={'eta_rho': '200MB'}, parallel=True, decode_times=False)
+    # ds = xr.open_mfdataset(paths='/g/data/gv90/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_01-20yr/ocean_avg_00*.nc~')#, chunks={'eta_rho': '200MB'}, parallel=True, decode_times=False)
+    ds = xr.open_mfdataset(paths='/g/data/gv90/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_01-20yr/ocean_avg_0010.nc')#, chunks={'eta_rho': '200MB'}, parallel=True, decode_times=False)
     salt3d_4km= ds.salt
     temp3d_4km= ds.temp
     u3d_4km= ds.variables["u"]
@@ -62,7 +62,7 @@ if __name__== '__main__':
     ds.close()
 
      # read grid file for lon/lat coordinates
-    dg = xr.open_dataset("/g/data3/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
+    dg = xr.open_dataset("/g/data3/gv90/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
     angle_4km= dg.variables["angle"]
     lat_rho_4km= dg.variables["lat_rho"]
     lon_rho_4km = dg.variables["lon_rho"]
@@ -82,7 +82,7 @@ if __name__== '__main__':
     area_sum_4km = area_4km.sum('eta_rho').sum('xi_rho')
 
     # load along 1500m and CF WAOM4 variables:
-    tmp_files_dir = '/g/data3/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
+    tmp_files_dir = '/g/data3/gv90/fbd581/ROMS/postprocessing/cross_contour_tmp/'
 
     expt = 'WAOM4'
 
@@ -140,7 +140,7 @@ if __name__== '__main__':
     [dist_along_axis_4km_CF, Zaxis_4km_CF] = np.meshgrid(dist_along_4km_CF, np.arange(0,31))
 
     ## load contours for plotting on top of Maps:
-    files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
+    files_path = '/g/data/gv90/fbd581/ROMS/postprocessing/cross_contour_tmp/'
     contour_masked_above_4km = np.load(files_path + 'WAOM4_contour_masked_above_1500m', allow_pickle=True)
     contour_masked_above_CF_4km = np.load(files_path + 'WAOM4_contour_masked_above_CF', allow_pickle=True)
 
@@ -174,7 +174,7 @@ if __name__== '__main__':
     # Tf = -1.95 # degC
     Tf =  -3.534879684448242
 
-    dm = xr.open_dataset('/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/WAOM4_masked_lonlatBins_v2.nc')
+    dm = xr.open_dataset('/g/data/gv90/fbd581/ROMS/postprocessing/cross_contour_tmp/WAOM4_masked_lonlatBins_v2.nc')
     mask_LonBins_4km = dm.variables['__xarray_dataarray_variable__']
     dm.close()
 
@@ -372,15 +372,16 @@ if __name__== '__main__':
     # sind_subreg = [7, 14, 24, 34, 60, 75, 104, 110, 114, 124, 135]
     # eind_subreg = [13, 19, 27, 41, 66, 79, 108, 113, 118, 129, 139]
     # - fix after inspecting each sub-regions (10/10/24):
-    sind_subreg = [8, 14, 22, 32, 49, 75, 99, 108, 114, 124, 135, 0]
-    eind_subreg = [12, 21, 27, 37, 67, 80, 105, 113, 118, 129, 140, 6]
+    #sind_subreg = [8, 14, 22, 32, 49, 75, 99, 108, 114, 124, 135, 0]
+    #eind_subreg = [12, 21, 27, 37, 67, 80, 105, 113, 118, 129, 140, 6]
 
-    max_BM = [3, 2, 1, 2.5, 1, 1, 1,
-              3.8, 2, 2, 1, 1]        # max ylim for basal melting plot (vary b/w regions)
+    # new attempt responding concern from reviewer #1: (on 25.4.2025)
+    sind_subreg = [8, 14, 22, 32, 49, 68, 82, 99, 108, 114, 124, 135, 0]
+    eind_subreg = [12, 21, 27, 39, 67, 78, 91, 107, 113, 118, 129, 141, 6]
 
     names_subreg = ['Sulzberger','Getz','Thwaites-PIG','Bellingshausen','FRIS',
-                   'Fimbul','Amery','Shackleton','Totten','Mertz','Ross1','Ross2']
-    max_BM = [3, 2, 1, 2.5, 1, 1, 1,
+               'Brunt-Fimbul','Queen Maud Land','Amery-West','Shackleton','Totten','Mertz','Ross','Ross2']
+    max_BM = [3, 2, 1, 2.5, 1, 1, 1, 1,
               3.8, 2, 2, 1, 1]        # max ylim for basal melting plot (vary b/w regions)
 
     Melt_fac=365.25*86400
@@ -397,7 +398,8 @@ if __name__== '__main__':
     [-120, -90, -76, -69],              # PIG-Thwaites
     [-100, -65, -75, -67],            # Bellingshausen
     [-85, -27, -84, -71],            # FRIS
-    [-15, 15, -73.5, -69],              # Fimbul
+    [-15, 15, -73.5, -69],              # Brunt-Fimbul
+    [10, 50, -74, -66],              # Queen Maud Land
     [65, 85, -74, -65],                 # Amery
     [80, 110, -68.1, -63],              # Shackleton
     [110, 135, -68, -63.5],             # Totten
@@ -422,7 +424,8 @@ if __name__== '__main__':
         # names_subreg = ['Sulzberger','Getz','Thwaites-PIG','Bellingshausen','FRIS',
                        # 'Fimbul','Amery','Shackleton','Totten','Mertz','Ross1','Ross2']
 
-        for rr in range(0,11):
+#        for rr in range(0,12):
+        for rr in range(11,12):
             Pname = names_subreg[rr]
 
             # define 2d Map vars for plottins: annual, summer month, winter month
@@ -439,6 +442,8 @@ if __name__== '__main__':
             sum_U = np.nanmean(u_rho_i[sum_MM,:,:],axis=0)
             sum_V = np.nanmean(v_rho_i[sum_MM,:,:],axis=0)
             sum_melt = melt_4km.isel(ocean_time=sum_MM).mean('ocean_time')*Melt_fac
+            sum_melt_anom = sum_melt - annual_melt
+
 
             win_Ta = (temp3d_4km.isel(ocean_time=win_MM).mean('ocean_time')+273.15) - (temp3d_4km.mean('ocean_time')+273.15) # Jul - Anual (- mean winter is colder...)
             win_T = (temp3d_4km.isel(ocean_time=win_MM)).mean('ocean_time')
@@ -447,6 +452,7 @@ if __name__== '__main__':
             win_U = np.nanmean(u_rho_i[win_MM,:,:],axis=0)
             win_V = np.nanmean(v_rho_i[win_MM,:,:],axis=0)
             win_melt = melt_4km.isel(ocean_time=win_MM).mean('ocean_time')*Melt_fac
+            win_melt_anom = win_melt - annual_melt
 
             # shflux
             annual_shf = shflux_4km.mean('ocean_time')
@@ -528,7 +534,7 @@ if __name__== '__main__':
 
 
             # if Ross, need to use proj2!
-            if rr>=10:
+            if rr>=11:
                 PROJ=proj2
                 PROJV=proj_v2
             else:
@@ -555,6 +561,7 @@ if __name__== '__main__':
             ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
+            gl.bottom_labels=False   # suppress bot labels
             gl.right_labels=False   # suppress right labels
             gl.left_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
@@ -563,7 +570,7 @@ if __name__== '__main__':
             ax2 = fig.add_subplot(2,4,2, projection=PROJ) # jan, TEMP ANOM
             cta=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,sum_Ta.isel(s_rho=slayer[dd]),
                            vmin=-anomlim[dd], vmax=anomlim[dd] ,cmap='twilight_shifted', transform=PROJN)
-            cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
+            cm=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
                            ma.masked_where(contour_masked_above_CF_4km == -1000, sum_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
             #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],sum_U[slayer[dd],::5,::5],sum_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
@@ -575,7 +582,9 @@ if __name__== '__main__':
             ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
+            gl.bottom_labels=False   # suppress bot labels
             gl.right_labels=False   # suppress right labels
+            gl.left_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -583,8 +592,8 @@ if __name__== '__main__':
             cts=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,sum_shf,
                            vmin=-100, vmax=100 ,cmap=cmocean.cm.curl, transform=PROJN)
             cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
-                           ma.masked_where(contour_masked_above_CF_4km == -1000, sum_melt),
-                           transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
+                           ma.masked_where(contour_masked_above_CF_4km == -1000, sum_melt_anom),
+                           transform=PROJN, vmin=-5, vmax=5, cmap='bwr') #, cmap=cmocean.cm.balance
             #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],sum_U[slayer[dd],::5,::5],sum_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
             ax2.set_title('Surface heat flux \n Summer')
             # ax2.set_extent([-135, -75, -76, -69], crs=ccrs.PlateCarree()) # PIG-Thwaites region
@@ -595,14 +604,16 @@ if __name__== '__main__':
             ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
+            gl.bottom_labels=False   # suppress bot labels
             gl.right_labels=False   # suppress right labels
+            gl.left_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
             ax2 = fig.add_subplot(2,4,6, projection=PROJ) # july temp anom
             cta=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,win_Ta.isel(s_rho=slayer[dd]),
                            vmin=-anomlim[dd], vmax=anomlim[dd] ,cmap='twilight_shifted', transform=PROJN)
-            cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
+            cm=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
                            ma.masked_where(contour_masked_above_CF_4km == -1000, win_melt),
                            transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
             #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
@@ -617,7 +628,9 @@ if __name__== '__main__':
             ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
+            gl.bottom_labels=False   # suppress bot labels
             gl.right_labels=False   # suppress right labels
+            gl.left_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -625,8 +638,8 @@ if __name__== '__main__':
             cts=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,win_shf,
                            vmin=-100, vmax=100 ,cmap=cmocean.cm.curl, transform=PROJN)
             cma=ax2.pcolormesh(lon_rho_4km,lat_rho_4km,
-                           ma.masked_where(contour_masked_above_CF_4km == -1000, win_melt),
-                           transform=PROJN, vmin=-8, vmax=8, cmap='bwr') #, cmap=cmocean.cm.balance
+                           ma.masked_where(contour_masked_above_CF_4km == -1000, win_melt_anom),
+                           transform=PROJN, vmin=-5, vmax=5, cmap='bwr') #, cmap=cmocean.cm.balance
             #ax2.quiver(lon_rho_4km[::5,::5],lat_rho_4km[::5,::5],
             #           win_U[slayer[dd],::5,::5],
             #           win_V[slayer[dd],::5,::5],scale=2,transform=PROJV)
@@ -638,7 +651,9 @@ if __name__== '__main__':
             ax2.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
             gl=ax2.gridlines(draw_labels=True,linewidth=.1)
             gl.top_labels=False   # suppress top labels
+            gl.bottom_labels=False   # suppress bot labels
             gl.right_labels=False   # suppress right labels
+            gl.left_labels=False
             plt.scatter(lon_along_4km,lat_along_4km, s=.8, alpha=0.2, color='gold',label='1500m isobath', transform=PROJN);
             ax2.add_feature(cfeature.LAND, zorder=3, facecolor='darkgray',edgecolor='white')
 
@@ -678,13 +693,14 @@ if __name__== '__main__':
             fig.colorbar(cta, cax=cbar_ax2, orientation='horizontal')
             cbar_ax2.set_xlabel('Temperature anomaly ($^{\circ}$C)')#, labelpad=-35)
 
-            cbar_ax3 = fig.add_axes([0.53, 0.525,  0.16, 0.01])
+            cbar_ax3 = fig.add_axes([0.53, 0.555,  0.16, 0.01])
             fig.colorbar(cts, cax=cbar_ax3, orientation='horizontal')
             cbar_ax3.set_xlabel('Surface heat flux (W m$^{-2}$)')#, labelpad=-35)
 
-            #cbar_ax1 = fig.add_axes([0.912, 0.2,  0.01, 0.6])
-            #fig.colorbar(c, cax=cbar_ax1, orientation='vertical')
-            #cbar_ax1.set_ylabel('Temperature-Salinity diagram; Depth (m)')#, labelpad=-35)
+            cbar_ax3b = fig.add_axes([0.53, 0.480,  0.16, 0.01]) 
+            fig.colorbar(cma, cax=cbar_ax3b, orientation='horizontal')
+            cbar_ax3b.set_xlabel('Melt rate anomaly (m/yr)')#, labelpad=-35)
+
             cbar_ax1 = fig.add_axes([0.735, 0.525,  0.16, 0.01])
             fig.colorbar(c, cax=cbar_ax1, orientation='horizontal')
             cbar_ax1.set_xlabel('TS-diagram; Depth (m)')

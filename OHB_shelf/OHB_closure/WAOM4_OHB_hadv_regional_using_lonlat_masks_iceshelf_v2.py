@@ -48,13 +48,13 @@ if __name__== '__main__':
     print(client)
     
 
-    fig_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/figs/OHB_shelf/'
+    fig_path = '/g/data/gv90/fbd581/ROMS/postprocessing/figs/OHB_shelf/'
 
     # using xr.open_mfdataset
     
     vars2drop = ["ubar","vbar","w","Hsbl","Hbbl","swrad"]
     
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
+    ds = xr.open_mfdataset(paths="/g/data/gv90/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_avg_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False) # , concat_dim="ocean_time"
 
     m = ds.variables["m"]
     time_avg = ds.variables["ocean_time"] 
@@ -75,7 +75,7 @@ if __name__== '__main__':
     Zo_w = (ds.hc * ds.s_w + ds.Cs_w * hwater) / (ds.hc + hwater)
     z_w = ds.zeta + (ds.zeta + hwater) * Zo_w 
     
-    dg = xr.open_dataset("/g/data/hh5/tmp/access-om/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
+    dg = xr.open_dataset("/g/data/gv90/fbd581/ROMS/waom4_frc/waom4extend_grd.nc")
     
     lat_rho = dg.variables["lat_rho"]
     lon_rho = dg.variables["lon_rho"]
@@ -102,7 +102,7 @@ if __name__== '__main__':
         # load horizontal diffusion of heat calculated online:
     	# float temp_hdiff(ocean_time, s_rho, eta_rho, xi_rho) ;
 
-    ds = xr.open_mfdataset(paths="/g/data/hh5/tmp/access-om/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
+    ds = xr.open_mfdataset(paths="/g/data/gv90/fbd581/ROMS/OUTPUT/waom4extend_shflim_S_0.25Q/output_yr10_diag_daily/ocean_dia_00*.nc" , chunks={'eta_rho': '200MB'}, parallel=bool, drop_variables=vars2drop, decode_times=False)
     temp_hdiff = ds.temp_hdiff
     temp_vdiff = ds.temp_vdiff
     temp_hadv = ds.temp_hadv
@@ -131,7 +131,7 @@ if __name__== '__main__':
     RHS_budget = heat_hadv_Adz + heat_vadv_Adz + heat_hdiff_Adz + heat_vdiff_Adz
 
     # load contour (1500m/calving-front):
-    files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
+    files_path = '/g/data/gv90/fbd581/ROMS/postprocessing/cross_contour_tmp/'
     contour_masked_above = np.load(files_path + 'WAOM4_contour_masked_above_1500m', allow_pickle=True)
     contour_masked_above_CF = np.load(files_path + 'WAOM4_contour_masked_above_CF', allow_pickle=True)
 
@@ -149,7 +149,7 @@ if __name__== '__main__':
 
     # load masks
 
-    dm = xr.open_dataset('/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/WAOM4_masked_lonlatBins_v2.nc')
+    dm = xr.open_dataset('/g/data/gv90/fbd581/ROMS/postprocessing/cross_contour_tmp/WAOM4_masked_lonlatBins_v2.nc')
     mask_LonBins = dm.variables['__xarray_dataarray_variable__']
     dm.close()
 
@@ -212,6 +212,6 @@ if __name__== '__main__':
     coordinatesC=dict(lon_bins=lonlat_bin_midpts, ocean_time=months)
     temp_hadv_int_xr = xr.DataArray(temp_hadv_int, coords = coordinatesC, dims = ['lon_bins','ocean_time'])
 
-    files_path = '/g/data/hh5/tmp/access-om/fbd581/ROMS/postprocessing/cross_contour_tmp/'
+    files_path = '/g/data/gv90/fbd581/ROMS/postprocessing/cross_contour_tmp/'
     temp_hadv_int_xr.to_netcdf(files_path + 'WAOM4_OHB_lonlatbins-v2_temp_hadv_vint_daily_iceshelf', mode='w', format="NETCDF4")
 
