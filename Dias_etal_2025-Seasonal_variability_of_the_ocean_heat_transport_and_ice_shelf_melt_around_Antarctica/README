@@ -1,0 +1,13 @@
+- These python notebooks and scripts create the longitudinal-latidinal framework used for the ocean heat budget in Dias et al. (2025, The Cryosphere). 
+
+1) the bins are defined in the following notebook:
+WAOM10extend_shflim_S_0.25Q_OHB_shelf_budget_closure.ipynb, where WAOM10 refer to the 10km setup. It also has similar script for the 4 and 2 km setups (WAOM4 and WAOM2).
+
+2) The vertical- and horizontal-integration of the ocean heat budget terms is done in the following script:
+WAOM4_OHB_hadv_regional_using_lonlat_masks_iceshelf_v2.py, where 'hadv' refers to horizontal advection and can be replaced by vadv, hdiff, vdiff terms. Sulfixes 'yr11' and 'yr12' use extended simulation to obtain daily diagnostics in subsequent years.
+
+3) Final calculations and plotting figures (1, 2, 3, 6, and some of the appendix) are done in the following notebook:
+WAOM10x4x4NTx2_OHB_regional_using_lonlat_masks_years10-12_final.ipynb
+
+4) Figures containing maps uses the following script:
+WAOM4_run_maps_Figure4_newTS_bottom_v2_yr10-12.py
